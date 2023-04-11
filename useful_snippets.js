@@ -27,3 +27,12 @@ function searchByAnything(str) {
   } catch (error) {}
   return r;
 }
+function findModulesByName(name) {
+  return BdApi.findAllModules(
+    (e) =>
+      e &&
+      Object.keys(e).some(
+        (k) => k.toLowerCase().indexOf(name.toLowerCase()) > -1
+      )
+  );
+}
