@@ -97,7 +97,6 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     'toggleLocalMute',
     'setLocalVolume'
   );
-  // BdApi.findModuleByProps('toggleLocalMute').toggleLocalMute("1062116752286298215")
 
   return class MusicBotHelper extends Plugin {
     constructor() {
@@ -116,11 +115,13 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       this.keyBindHandler = this.keyBindHandler.bind(this);
     }
 
+    ///-----Audio actions / Bot interactions-----///
     muteClientSide() {
       const activeBotId = this.getCurrentlyActiveBotId();
       DisAudioCtl.toggleLocalMute(activeBotId);
     }
 
+    ///-----Misc-----///
     keyBindHandler(e) {
       if (e.ctrlKey && e.altKey && e.code == 'KeyK') {
         this.muteClientSide();
