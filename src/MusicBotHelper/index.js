@@ -38,6 +38,7 @@ module.exports = (Plugin, Library) => {
 
       //misc
       this.keyBindHandler = this.keyBindHandler.bind(this);
+      this.createFakeAudioPlayer = this.createFakeAudioPlayer.bind(this);
     }
 
     ///-----Audio actions / Bot interactions-----///
@@ -48,14 +49,29 @@ module.exports = (Plugin, Library) => {
 
     ///-----Misc-----///
     keyBindHandler(e) {
-      if (e.ctrlKey && e.altKey && e.code == 'KeyK') {
-        this.muteClientSide();
+      if (!e.ctrlKey && !e.altKey) return;
+      switch (e.code) {
+        case 'KeyK':
+          this.muteClientSide();
+          break;
+
+        case 'KeyO':
+          this.createFakeAudioPlayer();
+          break;
+
+        default:
+          return;
       }
+    }
+
+    createFakeAudioPlayer() {
+      Logger.info('creating fake audio player');
     }
 
     onStart() {
       Logger.info('Plugin enabled!');
-
+      Logger.info();
+      this.createFakeAudioPlayer();
       document.addEventListener('keydown', this.keyBindHandler);
     }
 
