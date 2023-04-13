@@ -1,7 +1,7 @@
 /**
  * @name MusicBotHelper
  * @description MusicBotHelper
- * @version 0.0.1
+ * @version 0.0.3
  * @author NR
  * @source https://github.com/NatanielRegula/bd-voice-announcer
  * @donate paypal.me/NatanielRegula
@@ -36,7 +36,7 @@ const config = {
     author: "NR",
     authorId: "",
     authorLink: "",
-    version: "0.0.1",
+    version: "0.0.3",
     description: "MusicBotHelper",
     website: "",
     source: "https://github.com/NatanielRegula/bd-voice-announcer",
@@ -44,6 +44,13 @@ const config = {
     donate: "paypal.me/NatanielRegula",
     invite: "",
     changelog: [
+        {
+            title: "0.0.3",
+            type: "fixed",
+            items: [
+                "fixed bugs"
+            ]
+        },
         {
             title: "0.0.2",
             type: "improved",
