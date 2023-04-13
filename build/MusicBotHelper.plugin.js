@@ -148,7 +148,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       const botName = DisUserStore.getUser(activeBotId).username;
 
       if (DisMediaInfo.isLocalMute(activeBotId)) {
-        BdApi.showToast(`⏸️ ${botName} PAUSED (For everyone)`);
+        BdApi.showToast(`⏸️ ${botName} PAUSED (Just for you)`);
       } else {
         BdApi.showToast(`▶️ ${botName} RESUMED (Just for you)`);
       }
