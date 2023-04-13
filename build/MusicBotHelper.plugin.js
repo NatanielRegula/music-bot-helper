@@ -45,10 +45,17 @@ const config = {
     invite: "",
     changelog: [
         {
+            title: "0.0.4",
+            type: "improved",
+            items: [
+                "Improved toast messages."
+            ]
+        },
+        {
             title: "0.0.3",
             type: "fixed",
             items: [
-                "fixed bugs"
+                "Fixed bugs"
             ]
         },
         {
