@@ -86,7 +86,7 @@ module.exports = (Plugin, Library) => {
     ///-----Misc-----///
     /**@returns */
     keyBindHandler(e) {
-      if (!e.ctrlKey && !e.altKey) return;
+      if (!e.ctrlKey || !e.altKey) return;
       switch (e.code) {
         case 'KeyK':
           this.muteClientSide();
