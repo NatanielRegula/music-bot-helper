@@ -121,6 +121,8 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     ///-----Audio actions / Bot interactions-----///
     muteClientSide() {
       const activeBotId = this.getCurrentlyActiveBotId();
+      if (activeBotId.length == 0) return;
+
       DisAudioCtl.toggleLocalMute(activeBotId);
       // Logger.info(DisUserStore.getUser(activeBotId));
 
@@ -152,6 +154,45 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 
     createFakeAudioPlayer() {
       Logger.info('creating fake audio player');
+      // // create an audio context
+      // const audioContext = new AudioContext();
+
+      // // set the duration of the audio file
+      // const duration = 10;
+
+      // // set the sample rate and number of channels
+      // const sampleRate = audioContext.sampleRate;
+      // const numChannels = 1;
+
+      // // calculate the total number of samples
+      // const numSamples = duration * sampleRate;
+
+      // // create a buffer for the audio data
+      // const audioBuffer = audioContext.createBuffer(
+      //   numChannels,
+      //   numSamples,
+      //   sampleRate
+      // );
+
+      // // get the audio data for the buffer
+      // const audioData = audioBuffer.getChannelData(0);
+
+      // // fill the buffer with random audio data
+      // for (let i = 0; i < numSamples; i++) {
+      //   audioData[i] = Math.random() * 2 - 1;
+      // }
+
+      // // encode the audio data as Base64
+      // const encoder = new TextEncoder();
+      // const base64Data = btoa(encoder.encode(audioData.toString()));
+      // const src = `data:audio/wav;base64,${base64Data}`;
+
+      // // create an audio element with the Base64 data as the source
+      // console.log(base64Data);
+      // const audio = new Audio(src);
+      // audio.controls = true; // enable the audio controls in the browser
+      // document.getElementsByClassName('panels-3wFtMD')[0].append(audio);
+      // audio.play();
     }
 
     onStart() {
@@ -184,14 +225,19 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 
       return currentVoiceChannelUsersIds;
     }
+
+    /**@returns {string} */
     getCurrentlyActiveBotId() {
       //this will in the future allow to switch between multiple bots in vc
       //for now it just gives the first form the list
-      return this.getMusicBotsInCurrentVoiceChat()[0];
+      const selectedBots = this.getMusicBotsInCurrentVoiceChat();
+      if (selectedBots.length == 0) return '';
+      return selectedBots[0];
     }
 
     getMusicBotsInCurrentVoiceChat() {
       const currentVoiceChannelUsersIds = this.getCurrentVoiceChannelUsersIds();
+
       const detectedBotsIds = [];
       currentVoiceChannelUsersIds.forEach((userId) => {
         if (this.getIsUserABot(userId)) {
