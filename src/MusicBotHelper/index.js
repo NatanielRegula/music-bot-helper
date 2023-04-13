@@ -17,6 +17,8 @@ module.exports = (Plugin, Library) => {
   );
 
   const DisUserStore = DiscordModules.UserStore;
+  const DisMediaInfo = DiscordModules.MediaInfo;
+
   const DisSelectedChannelStore = DiscordModules.SelectedChannelStore;
   const DisAudioCtl = WebpackModules.getByProps(
     'toggleLocalMute',
@@ -45,6 +47,15 @@ module.exports = (Plugin, Library) => {
     muteClientSide() {
       const activeBotId = this.getCurrentlyActiveBotId();
       DisAudioCtl.toggleLocalMute(activeBotId);
+      // Logger.info(DisUserStore.getUser(activeBotId));
+
+      const botName = DisUserStore.getUser(activeBotId).username;
+
+      if (DisMediaInfo.isLocalMute(activeBotId)) {
+        BdApi.showToast(`⏸️ ${botName} paused locally`);
+      } else {
+        BdApi.showToast(`▶️ ${botName} resumed locally`);
+      }
     }
 
     ///-----Misc-----///

@@ -14,11 +14,12 @@
     "invite": "",
     "changelog": [
         {
-            "title": "0.0.1",
+            "title": "0.0.2",
             "type": "improved",
             "items": [
-                "initial"
+                "Added toast message when bot muted or unmuted with the keybind"
             ]
         }
+        
     ]
 }

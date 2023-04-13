@@ -45,10 +45,10 @@ const config = {
     invite: "",
     changelog: [
         {
-            title: "0.0.1",
+            title: "0.0.2",
             type: "improved",
             items: [
-                "initial"
+                "Added toast message when bot muted or unmuted with the keybind"
             ]
         }
     ]
@@ -92,6 +92,8 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
   );
 
   const DisUserStore = DiscordModules.UserStore;
+  const DisMediaInfo = DiscordModules.MediaInfo;
+
   const DisSelectedChannelStore = DiscordModules.SelectedChannelStore;
   const DisAudioCtl = WebpackModules.getByProps(
     'toggleLocalMute',
@@ -120,6 +122,15 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     muteClientSide() {
       const activeBotId = this.getCurrentlyActiveBotId();
       DisAudioCtl.toggleLocalMute(activeBotId);
+      // Logger.info(DisUserStore.getUser(activeBotId));
+
+      const botName = DisUserStore.getUser(activeBotId).username;
+
+      if (DisMediaInfo.isLocalMute(activeBotId)) {
+        BdApi.showToast(`⏸️ ${botName} paused locally`);
+      } else {
+        BdApi.showToast(`▶️ ${botName} resumed locally`);
+      }
     }
 
     ///-----Misc-----///
