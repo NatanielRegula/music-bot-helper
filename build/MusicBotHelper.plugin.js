@@ -85,10 +85,13 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
   const { Logger, Utilities, WebpackModules, DiscordModules } = Library;
 
   const Dispatcher = WebpackModules.getByProps('dispatch', 'subscribe');
-
   const DisVoiceStateStore = WebpackModules.getByProps(
     'getVoiceStateForUser',
     'getVoiceStatesForChannel'
+  );
+  const DisMessageStore = ZLibrary.WebpackModules.getByProps(
+    'sendMessage',
+    'sendBotMessage'
   );
 
   const DisUserStore = DiscordModules.UserStore;
@@ -112,6 +115,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 
       //audio actions
       this.muteClientSide = this.muteClientSide.bind(this);
+      this.sendMessageInBotChannel = this.sendMessageInBotChannel.bind(this);
 
       //misc
       this.keyBindHandler = this.keyBindHandler.bind(this);
@@ -134,6 +138,24 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       } else {
         BdApi.showToast(`▶️ ${botName} resumed locally`);
       }
+    }
+
+    /**
+     * @param {string} message
+     * @returns {boolean}
+     */
+    sendMessageInBotChannel(message) {
+      //get this from the user using dropdown menu
+      const botChannelId = '1028616633712922667';
+
+      DisMessageStore.sendMessage(botChannelId, {
+        content: message,
+        tts: false,
+        invalidEmojis: [],
+        validNonShortcutEmojis: [],
+      });
+
+      return true;
     }
 
     ///-----Misc-----///
