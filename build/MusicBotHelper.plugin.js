@@ -126,6 +126,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       DisAudioCtl.toggleLocalMute(activeBotId);
       // Logger.info(DisUserStore.getUser(activeBotId));
 
+      /**@type {string} */
       const botName = DisUserStore.getUser(activeBotId).username;
 
       if (DisMediaInfo.isLocalMute(activeBotId)) {
@@ -136,6 +137,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     }
 
     ///-----Misc-----///
+    /**@returns */
     keyBindHandler(e) {
       if (!e.ctrlKey && !e.altKey) return;
       switch (e.code) {
@@ -208,11 +210,13 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     }
 
     ///-----Bot Detection-----///
+    /**@returns {boolean} */
     getIsUserABot(userId) {
       const userData = DisUserStore.getUser(userId);
       return userData.bot;
     }
 
+    /**@returns {Array<string>} */
     getCurrentVoiceChannelUsersIds() {
       const voiceStatesForCurrentVoiceChannelObject =
         DisVoiceStateStore.getVoiceStatesForChannel(
@@ -235,6 +239,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       return selectedBots[0];
     }
 
+    /**@returns {Array<string>} */
     getMusicBotsInCurrentVoiceChat() {
       const currentVoiceChannelUsersIds = this.getCurrentVoiceChannelUsersIds();
 
