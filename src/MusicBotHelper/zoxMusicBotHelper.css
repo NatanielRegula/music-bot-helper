@@ -11,3 +11,15 @@
 .playbackContainer .botUsername {
   grid-area: botUsername;
 }
+.playbackContainer .secondaryButtonsContainer {
+  grid-area: secondaryButtons;
+  /* display: flex; */
+  /* gap: 2rem; */
+}
+
+/* .playbackContainer .secondaryButtonsContainer {
+  grid-area: secondaryButtons;
+  display: grid;
+  padding: 4px;
+  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+} */

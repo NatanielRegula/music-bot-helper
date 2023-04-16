@@ -137,15 +137,6 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     ];
   }
 
-  // const Bar = Webpack.getModule(
-  //   Webpack.Filters.byProps(
-  //     'canGoLive',
-  //     'canUseSoundboard',
-  //     'channel',
-  //     'isPrivateChannelWithEnabledActivities'
-  //   )
-  // );
-
   const [HeaderBarContainer, key] = getModuleAndKey(
     (m, _, __) => {
       // Logger.info(i);
@@ -154,60 +145,52 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     { searchExports: true }
   );
 
+  const DisActionButtonsCssClass =
+    BdApi.findModuleByProps('actionButtons').actionButtons;
+
   class PlaybackPanel extends React.Component {
     render() {
       const { songTitle, botUsername } = this.props;
 
+      // return React.createElement('div', { class: 'playbackContainer' });
       return React.createElement(
         'div',
         { class: 'playbackContainer' },
         React.createElement('span', { class: 'songTitle' }, songTitle),
-        React.createElement('span', { class: 'botUsername' }, botUsername)
+        React.createElement('span', { class: 'botUsername' }, botUsername),
+
+        React.createElement(
+          'div',
+          { class: `secondaryButtonsContainer ${DisActionButtonsCssClass}` },
+          React.createElement(DisIconButton, {
+            onClick: () => {
+              Logger.log('clicked');
+            },
+            icon: ListIcon({ fill: 'currentColor' }),
+          }),
+          React.createElement(DisIconButton, {
+            onClick: () => {
+              Logger.log('clicked');
+            },
+            icon: ListIcon({ fill: 'currentColor' }),
+          }),
+          React.createElement(DisIconButton, {
+            onClick: () => {
+              Logger.log('clicked');
+            },
+            icon: ListIcon({ fill: 'currentColor' }),
+          }),
+          React.createElement(DisIconButton, {
+            onClick: () => {
+              Logger.log('clicked');
+            },
+            icon: ListIcon({ fill: 'currentColor' }),
+          })
+        )
       );
     }
   }
 
-  // M = e.style
-  // , w = e.wrapperClassName
-  // , U = e.className
-  // , G = e.innerClassName
-  // , B = e.onClick
-  // , V = e.onDoubleClick
-  // , j = e.onMouseDown
-  // , F = e.onMouseUp
-  // , H = e.onMouseEnter
-  // , Y = e.onMouseLeave
-  // , Z = e.onKeyDown
-  // , W = e.children
-  // , K = e.rel
-  // , z = e.buttonRef
-  // , q = e.focusProps
-  // , X = e["aria-label"]
-  // , Q = e.submittingStartedLabel
-  // , J = e.submittingFinishedLabel
-  // , Q = e.submittingStartedLabel
-  // , J = e.submittingFinishedLabel
-  //   Button
-  // :
-  // (...)
-  // ButtonBorderColors
-  // :
-  // (...)
-  // ButtonColors
-  // :
-  // (...)
-  // ButtonHovers
-  // :
-  // (...)
-  // ButtonLink
-  // :
-  // (...)
-  // ButtonLooks
-  // :
-  // (...)
-  // ButtonSizes
-  // :
-  // (...)
   const DisComponents = BdApi.findModuleByProps('AnimatedAvatar');
   const DisOriginalButton = DisComponents.Button;
   // const DisOriginalButtonSizes = ;
@@ -248,6 +231,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
           color: DisComponents.ButtonColors.TRANSPARENT,
           fullWidth: true,
           onClick: onClick,
+          grow: true,
         },
         icon
       );
@@ -290,6 +274,18 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 .playbackContainer .botUsername {
   grid-area: botUsername;
 }
+.playbackContainer .secondaryButtonsContainer {
+  grid-area: secondaryButtons;
+  /* display: flex; */
+  /* gap: 2rem; */
+}
+
+/* .playbackContainer .secondaryButtonsContainer {
+  grid-area: secondaryButtons;
+  display: grid;
+  padding: 4px;
+  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+} */
 `;
     }
 
@@ -380,13 +376,22 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       //   props.children.props.toolbar.unshift(this.playbackUiReact);
       // });
 
+      // BdApi.showConfirmationModal(
+      //   'Setup AudioBotHelper',
+
+      //   {
+      //     confirmText: 'Save',
+      //     cancelText: 'Cancel',
+      //     // onConfirm: () => console.log('allalalalalalallal'),
+      //     // onCancel: () => window.alert('two'),
+      //   }
+      // );
+
       BdApi.showConfirmationModal(
         'Setup AudioBotHelper',
-        React.createElement(DisIconButton, {
-          onClick: () => {
-            Logger.log('clicked');
-          },
-          icon: ListIcon({ fill: 'currentColor' }),
+        React.createElement(PlaybackPanel, {
+          songTitle: 'caca',
+          botUsername: 'cacaa',
         }),
 
         {
@@ -396,21 +401,6 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
           // onCancel: () => window.alert('two'),
         }
       );
-
-      // BdApi.showConfirmationModal(
-      //   'Setup AudioBotHelper',
-      //   React.createElement(PlaybackPanel, {
-      //     songTitle: caca,
-      //     botUsername: cacaa,
-      //   }),
-
-      //   {
-      //     confirmText: 'Save',
-      //     cancelText: 'Cancel',
-      //     // onConfirm: () => console.log('allalalalalalallal'),
-      //     // onCancel: () => window.alert('two'),
-      //   }
-      // );
     }
 
     createFakeAudioPlayer() {
