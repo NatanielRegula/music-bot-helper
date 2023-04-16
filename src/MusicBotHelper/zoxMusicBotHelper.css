@@ -1,0 +1,13 @@
+.playbackContainer {
+  background-color: var(--background-secondary-alt, #232428);
+  color: var(--header-primary, #f2f3f5);
+  width: 100%;
+  display: grid;
+  grid-template-areas: 'songTitle songTitle primaryButtons' 'botUsername botUsername primaryButtons' 'secondaryButtons secondaryButtons secondaryButtons';
+}
+.playbackContainer .songTitle {
+  grid-area: songTitle;
+}
+.playbackContainer .botUsername {
+  grid-area: botUsername;
+}

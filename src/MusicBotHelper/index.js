@@ -7,7 +7,15 @@
  */
 
 module.exports = (Plugin, Library) => {
-  const { Logger, Utilities, WebpackModules, DiscordModules } = Library;
+  const { UI, React, Patcher, Webpack } = new BdApi('MusicBotHelper');
+  const {
+    Logger,
+    Utilities,
+    WebpackModules,
+    DiscordModules,
+    ReactComponents,
+    PluginUtilities,
+  } = Library;
 
   const Dispatcher = WebpackModules.getByProps('dispatch', 'subscribe');
   const DisVoiceStateStore = WebpackModules.getByProps(
@@ -28,6 +36,68 @@ module.exports = (Plugin, Library) => {
     'setLocalVolume'
   );
 
+  function getModuleAndKey(filter) {
+    let module;
+    const target = Webpack.getModule(
+      (entry, m) => (filter(entry) ? (module = m) : false),
+      { searchExports: true }
+    );
+    return [
+      module.exports,
+      Object.keys(module.exports).find((k) => module.exports[k] === target),
+    ];
+  }
+
+  const [HeaderBarContainer, key] = getModuleAndKey(
+    (m, _, __) => {
+      // Logger.info(i);
+      return m.Caret && m.Divider;
+    },
+    { searchExports: true }
+  );
+
+  class PlaybackPanel extends React.Component {
+    render() {
+      const { songTitle, botUsername } = this.props;
+
+      return React.createElement(
+        'div',
+        { class: 'playbackContainer' },
+        React.createElement('span', { class: 'songTitle' }, songTitle),
+        React.createElement('span', { class: 'botUsername' }, botUsername)
+      );
+    }
+  }
+
+  const DisComponents = BdApi.findModuleByProps('AnimatedAvatar');
+  const DisOriginalButton = DisComponents.Button;
+  // const DisOriginalButtonSizes = ;
+  // const DisOriginalButton = ReactComponents.getComponent(
+  //   'Mre',
+  //   '.button-1EGGcP'
+  // );
+
+  const ListIcon = require('ListIcon.jsx.js');
+
+  class DisIconButton extends React.Component {
+    render() {
+      const { onClick, icon } = this.props;
+
+      return React.createElement(
+        DisOriginalButton,
+        {
+          submittingStartedLabel: 'sa',
+          size: DisComponents.ButtonSizes.SMALL,
+          look: DisComponents.ButtonLooks.FILLED,
+          color: DisComponents.ButtonColors.TRANSPARENT,
+          fullWidth: true,
+          onClick: onClick,
+        },
+        icon
+      );
+    }
+  }
+
   return class MusicBotHelper extends Plugin {
     constructor() {
       super();
@@ -45,6 +115,10 @@ module.exports = (Plugin, Library) => {
       //misc
       this.keyBindHandler = this.keyBindHandler.bind(this);
       this.createFakeAudioPlayer = this.createFakeAudioPlayer.bind(this);
+      this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
+
+      this.playbackUiReact = require('test.js');
+      this.playbackUiCss = require('zoxMusicBotHelper.css');
     }
 
     ///-----Audio actions / Bot interactions-----///
@@ -85,7 +159,7 @@ module.exports = (Plugin, Library) => {
 
     ///-----Misc-----///
     /**@returns */
-    keyBindHandler(e) {
+    async keyBindHandler(e) {
       if (!e.ctrlKey || !e.altKey) return;
       switch (e.code) {
         case 'KeyK':
@@ -95,10 +169,76 @@ module.exports = (Plugin, Library) => {
         case 'KeyO':
           this.createFakeAudioPlayer();
           break;
+        case 'KeyL':
+          await this.patchPlaybackUi();
+          break;
 
         default:
           return;
       }
+    }
+
+    async patchPlaybackUi() {
+      // this.playbackUiReact = React.createElement(
+      //   'div',
+      //   { class: 'playbackContainer' },
+      //   React.createElement(
+      //     'span',
+      //     { class: 'songTitle' },
+      //     'Title of the song thats playing'
+      //   ),
+      //   React.createElement('span', { class: 'botUsername' }, 'DJ Hobo')
+      // );
+
+      // let buttons = await ReactComponents.getComponentByName(
+      //   'Account',
+      //   '.container-3baos1'
+      // );
+      // Logger.log(buttons);
+      // Logger.log(this.playbackUiReact);
+
+      // window.lamlam = HeaderBarContainer;
+      // Logger.log(HeaderBarContainer);
+
+      // document
+      //   .getElementsByClassName('panels-3wFtMD')[0]
+      //   .append(this.playbackUiReact);
+
+      // Patcher.after(Bar, 'guild-channels', (_, __, { props }) => {
+      //   props.children.props.toolbar.unshift(this.playbackUiReact);
+      // });
+
+      BdApi.showConfirmationModal(
+        'Setup AudioBotHelper',
+        React.createElement(DisIconButton, {
+          onClick: () => {
+            Logger.log('clicked');
+          },
+          icon: ListIcon({ fill: 'currentColor' }),
+        }),
+
+        {
+          confirmText: 'Save',
+          cancelText: 'Cancel',
+          // onConfirm: () => console.log('allalalalalalallal'),
+          // onCancel: () => window.alert('two'),
+        }
+      );
+
+      // BdApi.showConfirmationModal(
+      //   'Setup AudioBotHelper',
+      //   React.createElement(PlaybackPanel, {
+      //     songTitle: caca,
+      //     botUsername: cacaa,
+      //   }),
+
+      //   {
+      //     confirmText: 'Save',
+      //     cancelText: 'Cancel',
+      //     // onConfirm: () => console.log('allalalalalalallal'),
+      //     // onCancel: () => window.alert('two'),
+      //   }
+      // );
     }
 
     createFakeAudioPlayer() {
@@ -146,14 +286,18 @@ module.exports = (Plugin, Library) => {
 
     onStart() {
       Logger.info('Plugin enabled!');
-      Logger.info();
+      // Logger.info(this.getName());
       this.createFakeAudioPlayer();
       document.addEventListener('keydown', this.keyBindHandler);
+
+      PluginUtilities.addStyle(this.getName(), this.playbackUiCss);
     }
 
     onStop() {
       Logger.info('Plugin disabled!');
       document.removeEventListener('keydown', this.keyBindHandler);
+      Patcher.unpatchAll();
+      PluginUtilities.removeStyle(this.getName());
     }
 
     ///-----Bot Detection-----///

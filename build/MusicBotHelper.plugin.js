@@ -96,7 +96,15 @@ if (!global.ZeresPluginLibrary) {
  
 module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
      const plugin = (Plugin, Library) => {
-  const { Logger, Utilities, WebpackModules, DiscordModules } = Library;
+  const { UI, React, Patcher, Webpack } = new BdApi('MusicBotHelper');
+  const {
+    Logger,
+    Utilities,
+    WebpackModules,
+    DiscordModules,
+    ReactComponents,
+    PluginUtilities,
+  } = Library;
 
   const Dispatcher = WebpackModules.getByProps('dispatch', 'subscribe');
   const DisVoiceStateStore = WebpackModules.getByProps(
@@ -117,6 +125,135 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     'setLocalVolume'
   );
 
+  function getModuleAndKey(filter) {
+    let module;
+    const target = Webpack.getModule(
+      (entry, m) => (filter(entry) ? (module = m) : false),
+      { searchExports: true }
+    );
+    return [
+      module.exports,
+      Object.keys(module.exports).find((k) => module.exports[k] === target),
+    ];
+  }
+
+  // const Bar = Webpack.getModule(
+  //   Webpack.Filters.byProps(
+  //     'canGoLive',
+  //     'canUseSoundboard',
+  //     'channel',
+  //     'isPrivateChannelWithEnabledActivities'
+  //   )
+  // );
+
+  const [HeaderBarContainer, key] = getModuleAndKey(
+    (m, _, __) => {
+      // Logger.info(i);
+      return m.Caret && m.Divider;
+    },
+    { searchExports: true }
+  );
+
+  class PlaybackPanel extends React.Component {
+    render() {
+      const { songTitle, botUsername } = this.props;
+
+      return React.createElement(
+        'div',
+        { class: 'playbackContainer' },
+        React.createElement('span', { class: 'songTitle' }, songTitle),
+        React.createElement('span', { class: 'botUsername' }, botUsername)
+      );
+    }
+  }
+
+  // M = e.style
+  // , w = e.wrapperClassName
+  // , U = e.className
+  // , G = e.innerClassName
+  // , B = e.onClick
+  // , V = e.onDoubleClick
+  // , j = e.onMouseDown
+  // , F = e.onMouseUp
+  // , H = e.onMouseEnter
+  // , Y = e.onMouseLeave
+  // , Z = e.onKeyDown
+  // , W = e.children
+  // , K = e.rel
+  // , z = e.buttonRef
+  // , q = e.focusProps
+  // , X = e["aria-label"]
+  // , Q = e.submittingStartedLabel
+  // , J = e.submittingFinishedLabel
+  // , Q = e.submittingStartedLabel
+  // , J = e.submittingFinishedLabel
+  //   Button
+  // :
+  // (...)
+  // ButtonBorderColors
+  // :
+  // (...)
+  // ButtonColors
+  // :
+  // (...)
+  // ButtonHovers
+  // :
+  // (...)
+  // ButtonLink
+  // :
+  // (...)
+  // ButtonLooks
+  // :
+  // (...)
+  // ButtonSizes
+  // :
+  // (...)
+  const DisComponents = BdApi.findModuleByProps('AnimatedAvatar');
+  const DisOriginalButton = DisComponents.Button;
+  // const DisOriginalButtonSizes = ;
+  // const DisOriginalButton = ReactComponents.getComponent(
+  //   'Mre',
+  //   '.button-1EGGcP'
+  // );
+
+  const ListIcon = (() => {return function ListIcon(props) {
+  return React.createElement(
+    'svg',
+    {
+      ...{
+        width: 13,
+        height: 10,
+        fill: 'none',
+        xmlns: 'http://www.w3.org/2000/svg',
+      },
+      ...props,
+    },
+    React.createElement('path', {
+      d: 'M.714 2.857a.692.692 0 01-.509-.206A.688.688 0 010 2.143V.714C0 .512.069.342.206.205A.688.688 0 01.714 0h1.429c.202 0 .372.069.51.206a.688.688 0 01.204.508v1.429a.692.692 0 01-.206.51.688.688 0 01-.508.204H.714zm3.572 0a.692.692 0 01-.51-.206.688.688 0 01-.205-.508V.714c0-.202.069-.372.206-.509A.688.688 0 014.286 0h7.857c.202 0 .372.069.51.206a.688.688 0 01.204.508v1.429a.691.691 0 01-.206.51.688.688 0 01-.508.204H4.286zm0 3.572a.692.692 0 01-.51-.206.688.688 0 01-.205-.509V4.286c0-.203.069-.372.206-.51a.688.688 0 01.509-.205h7.857c.202 0 .372.069.51.206a.688.688 0 01.204.509v1.428a.691.691 0 01-.206.51.688.688 0 01-.508.205H4.286zm-3.572 0a.692.692 0 01-.509-.206A.688.688 0 010 5.714V4.286c0-.203.069-.372.206-.51a.688.688 0 01.508-.205h1.429c.202 0 .372.069.51.206a.688.688 0 01.204.509v1.428a.692.692 0 01-.206.51.688.688 0 01-.508.205H.714zM4.286 10a.692.692 0 01-.51-.206.688.688 0 01-.205-.508V7.857c0-.202.069-.372.206-.51a.688.688 0 01.509-.204h7.857c.202 0 .372.068.51.206a.688.688 0 01.204.508v1.429a.691.691 0 01-.206.509.688.688 0 01-.508.205H4.286zM.714 10a.692.692 0 01-.509-.206A.688.688 0 010 9.286V7.857c0-.202.069-.372.206-.51a.688.688 0 01.508-.204h1.429c.202 0 .372.068.51.206a.688.688 0 01.204.508v1.429a.692.692 0 01-.206.509.688.688 0 01-.508.205H.714z',
+    })
+  );
+}
+})();
+
+  class DisIconButton extends React.Component {
+    render() {
+      const { onClick, icon } = this.props;
+
+      return React.createElement(
+        DisOriginalButton,
+        {
+          submittingStartedLabel: 'sa',
+          size: DisComponents.ButtonSizes.SMALL,
+          look: DisComponents.ButtonLooks.FILLED,
+          color: DisComponents.ButtonColors.TRANSPARENT,
+          fullWidth: true,
+          onClick: onClick,
+        },
+        icon
+      );
+    }
+  }
+
   return class MusicBotHelper extends Plugin {
     constructor() {
       super();
@@ -134,6 +271,26 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       //misc
       this.keyBindHandler = this.keyBindHandler.bind(this);
       this.createFakeAudioPlayer = this.createFakeAudioPlayer.bind(this);
+      this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
+
+      this.playbackUiReact = (() => {return // const { UI, React } = window.BdApi;
+
+// export default MyComponent = () => <div className="foo">Hello world!</div>;
+})();
+      this.playbackUiCss = `.playbackContainer {
+  background-color: var(--background-secondary-alt, #232428);
+  color: var(--header-primary, #f2f3f5);
+  width: 100%;
+  display: grid;
+  grid-template-areas: 'songTitle songTitle primaryButtons' 'botUsername botUsername primaryButtons' 'secondaryButtons secondaryButtons secondaryButtons';
+}
+.playbackContainer .songTitle {
+  grid-area: songTitle;
+}
+.playbackContainer .botUsername {
+  grid-area: botUsername;
+}
+`;
     }
 
     ///-----Audio actions / Bot interactions-----///
@@ -174,7 +331,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 
     ///-----Misc-----///
     /**@returns */
-    keyBindHandler(e) {
+    async keyBindHandler(e) {
       if (!e.ctrlKey || !e.altKey) return;
       switch (e.code) {
         case 'KeyK':
@@ -184,10 +341,76 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
         case 'KeyO':
           this.createFakeAudioPlayer();
           break;
+        case 'KeyL':
+          await this.patchPlaybackUi();
+          break;
 
         default:
           return;
       }
+    }
+
+    async patchPlaybackUi() {
+      // this.playbackUiReact = React.createElement(
+      //   'div',
+      //   { class: 'playbackContainer' },
+      //   React.createElement(
+      //     'span',
+      //     { class: 'songTitle' },
+      //     'Title of the song thats playing'
+      //   ),
+      //   React.createElement('span', { class: 'botUsername' }, 'DJ Hobo')
+      // );
+
+      // let buttons = await ReactComponents.getComponentByName(
+      //   'Account',
+      //   '.container-3baos1'
+      // );
+      // Logger.log(buttons);
+      // Logger.log(this.playbackUiReact);
+
+      // window.lamlam = HeaderBarContainer;
+      // Logger.log(HeaderBarContainer);
+
+      // document
+      //   .getElementsByClassName('panels-3wFtMD')[0]
+      //   .append(this.playbackUiReact);
+
+      // Patcher.after(Bar, 'guild-channels', (_, __, { props }) => {
+      //   props.children.props.toolbar.unshift(this.playbackUiReact);
+      // });
+
+      BdApi.showConfirmationModal(
+        'Setup AudioBotHelper',
+        React.createElement(DisIconButton, {
+          onClick: () => {
+            Logger.log('clicked');
+          },
+          icon: ListIcon({ fill: 'currentColor' }),
+        }),
+
+        {
+          confirmText: 'Save',
+          cancelText: 'Cancel',
+          // onConfirm: () => console.log('allalalalalalallal'),
+          // onCancel: () => window.alert('two'),
+        }
+      );
+
+      // BdApi.showConfirmationModal(
+      //   'Setup AudioBotHelper',
+      //   React.createElement(PlaybackPanel, {
+      //     songTitle: caca,
+      //     botUsername: cacaa,
+      //   }),
+
+      //   {
+      //     confirmText: 'Save',
+      //     cancelText: 'Cancel',
+      //     // onConfirm: () => console.log('allalalalalalallal'),
+      //     // onCancel: () => window.alert('two'),
+      //   }
+      // );
     }
 
     createFakeAudioPlayer() {
@@ -235,14 +458,18 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 
     onStart() {
       Logger.info('Plugin enabled!');
-      Logger.info();
+      // Logger.info(this.getName());
       this.createFakeAudioPlayer();
       document.addEventListener('keydown', this.keyBindHandler);
+
+      PluginUtilities.addStyle(this.getName(), this.playbackUiCss);
     }
 
     onStop() {
       Logger.info('Plugin disabled!');
       document.removeEventListener('keydown', this.keyBindHandler);
+      Patcher.unpatchAll();
+      PluginUtilities.removeStyle(this.getName());
     }
 
     ///-----Bot Detection-----///

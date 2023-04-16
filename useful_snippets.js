@@ -36,3 +36,9 @@ function findModulesByName(name) {
       )
   );
 }
+
+function findModulesByKeyword(name) {
+  return BdApi.findAllModules((m) =>
+    Object.keys(m).some((k) => k.toLowerCase().includes('sound'))
+  );
+}
