@@ -36,6 +36,14 @@ module.exports = (Plugin, Library) => {
     'setLocalVolume'
   );
 
+  //ui
+  const DisComponents = BdApi.findModuleByProps('AnimatedAvatar');
+  const DisPanelCssClasses = BdApi.findModuleByProps('actionButtons');
+  const DisOriginalButton = DisComponents.Button;
+
+  const ListIcon = require('ListIcon.jsx.js');
+  const AddIcon = require('AddIcon.jsx.js');
+
   function getModuleAndKey(filter) {
     let module;
     const target = Webpack.getModule(
@@ -56,9 +64,6 @@ module.exports = (Plugin, Library) => {
     { searchExports: true }
   );
 
-  const DisActionButtonsCssClass =
-    BdApi.findModuleByProps('actionButtons').actionButtons;
-
   class PlaybackPanel extends React.Component {
     render() {
       const { songTitle, botUsername } = this.props;
@@ -69,48 +74,51 @@ module.exports = (Plugin, Library) => {
         { class: 'playbackContainer' },
         React.createElement('span', { class: 'songTitle' }, songTitle),
         React.createElement('span', { class: 'botUsername' }, botUsername),
+        React.createElement(
+          DisComponents.Text,
+          {
+            // S: 'aaaaaaa',
+            // onClick: () => {
+            //   Logger.log('clicked');
+            // },
+            // icon: ListIcon({ fill: 'currentColor' }),
+          },
+          'aaaaaaa'
+        ),
 
         React.createElement(
           'div',
-          { class: `secondaryButtonsContainer ${DisActionButtonsCssClass}` },
+          {
+            class: `secondaryButtonsContainer ${DisPanelCssClasses.actionButtons}`,
+          },
           React.createElement(DisIconButton, {
             onClick: () => {
               Logger.log('clicked');
             },
-            icon: ListIcon({ fill: 'currentColor' }),
+            icon: ListIcon({ fill: 'currentColor', width: '15' }),
           }),
           React.createElement(DisIconButton, {
             onClick: () => {
               Logger.log('clicked');
             },
-            icon: ListIcon({ fill: 'currentColor' }),
+            icon: AddIcon({ fill: 'currentColor', width: '15' }),
           }),
           React.createElement(DisIconButton, {
             onClick: () => {
               Logger.log('clicked');
             },
-            icon: ListIcon({ fill: 'currentColor' }),
+            icon: ListIcon({ fill: 'currentColor', width: '15' }),
           }),
           React.createElement(DisIconButton, {
             onClick: () => {
               Logger.log('clicked');
             },
-            icon: ListIcon({ fill: 'currentColor' }),
+            icon: ListIcon({ fill: 'currentColor', width: '15' }),
           })
         )
       );
     }
   }
-
-  const DisComponents = BdApi.findModuleByProps('AnimatedAvatar');
-  const DisOriginalButton = DisComponents.Button;
-  // const DisOriginalButtonSizes = ;
-  // const DisOriginalButton = ReactComponents.getComponent(
-  //   'Mre',
-  //   '.button-1EGGcP'
-  // );
-
-  const ListIcon = require('ListIcon.jsx.js');
 
   class DisIconButton extends React.Component {
     render() {
