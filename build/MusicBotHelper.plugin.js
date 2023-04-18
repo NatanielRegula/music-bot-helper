@@ -181,6 +181,17 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
   );
 }
 })();
+  const FormInputDescription = (() => {return function FormInputDescription(props) {
+  return React.createElement(
+    DisComponents.FormText,
+    {
+      type: DisComponents.FormTextTypes.DESCRIPTION,
+      //   class: `settingsDescriptionText`,
+    },
+    props.value
+  );
+}
+})();
 
   function getModuleAndKey(filter) {
     let module;
@@ -314,26 +325,57 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       );
     }
   }
+
   function SetupDialog(props) {
     const [value, setValue] = React.useState('');
     // const { songTitle, botUsername } = this.props;
     // return React.createElement('div', { class: 'playbackContainer' });
-    // return
-    return React.createElement(
-      DisComponents.FormLabel,
-      {
-        Label: 'Select Bot Text Channel',
-      },
-      React.createElement(DisComponents.SearchableSelect, {
-        label: 'Select Bot Text Channel',
-        value: value,
-        options: props.textChannelsInGuild,
 
-        clearable: true,
+    return React.createElement(
+      'div',
+      {
+        class: `setupDialogContainer`,
+      },
+
+      React.createElement(
+        DisComponents.FormSection,
+        {
+          class: `column`,
+          title: 'Server specific',
+        },
+        React.createElement(
+          DisComponents.FormLabel,
+          {
+            disabled: false,
+          },
+          'Select Bot Text Channel'
+        ),
+        React.createElement(DisComponents.SearchableSelect, {
+          value: value,
+          options: props.textChannelsInGuild,
+
+          clearable: true,
+          placeholder: 'Select Bot Text Channel',
+          onChange: (/**@type {string?} */ newSelectedOptionValue) => {
+            Logger.log(newSelectedOptionValue);
+            setValue(newSelectedOptionValue);
+          },
+        }),
+        FormInputDescription({
+          value:
+            'Select the text channel used by the members of your community to send commands to the bot',
+        })
+
+        // React.createElement(
+        //   'div',
+        //   {},
+        // )
+      ),
+      React.createElement(DisComponents.TextInput, {
         placeholder: 'Select Bot Text Channel',
-        onChange: (/**@type {string?} */ newSelectedOptionValue) => {
-          Logger.log(newSelectedOptionValue);
-          setValue(newSelectedOptionValue);
+        label: 'Select Bot Text Channel',
+        onChange: (/**@type {string?} */ newValue) => {
+          Logger.log(newValue);
         },
       })
     );
@@ -405,6 +447,23 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
   grid-area: secondaryButtons;
   /* display: flex; */
   /* gap: 2rem; */
+}
+
+.setupDialogContainer {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.setupDialogContainer .column {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.settingsDescriptionText {
+  text-transform: initial;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 /* .playbackContainer .secondaryButtonsContainer {
@@ -523,6 +582,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
         //   songTitle: 'caca',
         //   botUsername: 'cacaa',
         // }),
+
         React.createElement(SetupDialog, {
           textChannelsInGuild: Object.values(
             objectMap(this.getAllTextChannelsInSelectedGuild(), (v, _, __) => {
@@ -530,6 +590,25 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
             })
           ),
         }),
+
+        // React.createElement(DisComponents.KeyCombo, {
+        //   shortcut: 'CTRL + ALT + k',
+        // }),
+
+        // React.createElement(DisComponents.Combobox, {
+        //   // shortcut: 'CTRL + ALT + k',
+        //   placeholder: 'ssss',
+        //   onChange: () => console.log('allalalalalalallal'),
+        //   value: '',
+        //   children: () => ['aaa', 'bbb', 'ccc'],
+        // }),
+        // React.createElement(BdApi.findModuleByProps('Editor').Editor, {
+        //   // shortcut: 'CTRL + ALT + k',
+        //   // placeholder: 'ssss',
+        //   // onChange: () => console.log('allalalalalalallal'),
+        //   // value: '',
+        //   // children: () => ['aaa', 'bbb', 'ccc'],
+        // }),
 
         {
           confirmText: 'Save',

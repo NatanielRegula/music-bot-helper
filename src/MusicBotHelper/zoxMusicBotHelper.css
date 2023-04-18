@@ -17,6 +17,23 @@
   /* gap: 2rem; */
 }
 
+.setupDialogContainer {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.setupDialogContainer .column {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.settingsDescriptionText {
+  text-transform: initial;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 /* .playbackContainer .secondaryButtonsContainer {
   grid-area: secondaryButtons;
   display: grid;
