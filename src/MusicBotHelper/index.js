@@ -26,15 +26,17 @@ module.exports = (Plugin, Library) => {
     'sendMessage',
     'sendBotMessage'
   );
+
+  //guild info
   const DisSelectedGuildStore = BdApi.findModuleByProps(
     'getGuildId',
     'getLastSelectedGuildId'
   );
-
   const DisGuildChannelStore = BdApi.findModuleByProps(
     'getChannels',
     'hasChannels'
   );
+  const DisGuildStore = DiscordModules.GuildStore;
 
   const DisUserStore = DiscordModules.UserStore;
   const DisMediaInfo = DiscordModules.MediaInfo;
@@ -254,6 +256,7 @@ module.exports = (Plugin, Library) => {
       this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
       this.getAllTextChannelsInSelectedGuild =
         this.getAllTextChannelsInSelectedGuild.bind(this);
+      this.getSelectedGuildName = this.getSelectedGuildName.bind(this);
 
       this.playbackUiReact = require('test.js');
       this.playbackUiCss = require('zoxMusicBotHelper.css');
@@ -361,7 +364,7 @@ module.exports = (Plugin, Library) => {
       // );
 
       BdApi.showConfirmationModal(
-        'Setup AudioBotHelper',
+        `Setup ${this.getName()} for ${this.getSelectedGuildName()}`,
         // React.createElement(PlaybackPanel, {
         //   songTitle: 'caca',
         //   botUsername: 'cacaa',
@@ -389,7 +392,7 @@ module.exports = (Plugin, Library) => {
       1062051345336639630: {id: '1062051345336639630', name: '✋︱welcome-goodbye'}
       1062051345336639631: {id: '1062051345336639631', name: '📔︱rules'}
     }
-    @returns {Map<string,Map<string,any>>}
+    @returns {Map<string,Map<string,any>>?}
      */
     getAllTextChannelsInSelectedGuild() {
       /**@type {string?} */
@@ -403,6 +406,20 @@ module.exports = (Plugin, Library) => {
       if (!textChannelsInGuild) return;
 
       return textChannelsInGuild;
+    }
+
+    /**@returns {string?} */
+    getSelectedGuildName() {
+      /**@type {string?} */
+      const selectedGuildId = DisSelectedGuildStore.getLastSelectedGuildId();
+      if (!selectedGuildId) return;
+
+      /**@type {string?} */
+      const selectedGuildName = DisGuildStore.getGuild(selectedGuildId).name;
+
+      if (!selectedGuildName) return;
+
+      return selectedGuildName;
     }
 
     createFakeAudioPlayer() {

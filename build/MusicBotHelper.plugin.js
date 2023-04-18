@@ -115,15 +115,17 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     'sendMessage',
     'sendBotMessage'
   );
+
+  //guild info
   const DisSelectedGuildStore = BdApi.findModuleByProps(
     'getGuildId',
     'getLastSelectedGuildId'
   );
-
   const DisGuildChannelStore = BdApi.findModuleByProps(
     'getChannels',
     'hasChannels'
   );
+  const DisGuildStore = DiscordModules.GuildStore;
 
   const DisUserStore = DiscordModules.UserStore;
   const DisMediaInfo = DiscordModules.MediaInfo;
@@ -377,6 +379,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
       this.getAllTextChannelsInSelectedGuild =
         this.getAllTextChannelsInSelectedGuild.bind(this);
+      this.getSelectedGuildName = this.getSelectedGuildName.bind(this);
 
       this.playbackUiReact = (() => {return // const { UI, React } = window.BdApi;
 
@@ -384,7 +387,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 })();
       this.playbackUiCss = `.playbackContainer {
   background-color: var(--background-secondary-alt, #232428);
-  /* color: var(--header-primary, #f2f3f5); */
+  color: var(--header-primary, #f2f3f5);
   width: 100%;
   display: grid;
   grid-template-areas: 'songTitle songTitle primaryButtons' 'botUsername botUsername primaryButtons' 'secondaryButtons secondaryButtons secondaryButtons';
@@ -512,7 +515,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       // );
 
       BdApi.showConfirmationModal(
-        'Setup AudioBotHelper',
+        `Setup ${this.getName()} for ${this.getSelectedGuildName()}`,
         // React.createElement(PlaybackPanel, {
         //   songTitle: 'caca',
         //   botUsername: 'cacaa',
@@ -540,7 +543,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       1062051345336639630: {id: '1062051345336639630', name: '✋︱welcome-goodbye'}
       1062051345336639631: {id: '1062051345336639631', name: '📔︱rules'}
     }
-    @returns {Map<string,Map<string,any>>}
+    @returns {Map<string,Map<string,any>>?}
      */
     getAllTextChannelsInSelectedGuild() {
       /**@type {string?} */
@@ -554,6 +557,20 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       if (!textChannelsInGuild) return;
 
       return textChannelsInGuild;
+    }
+
+    /**@returns {string?} */
+    getSelectedGuildName() {
+      /**@type {string?} */
+      const selectedGuildId = DisSelectedGuildStore.getLastSelectedGuildId();
+      if (!selectedGuildId) return;
+
+      /**@type {string?} */
+      const selectedGuildName = DisGuildStore.getGuild(selectedGuildId).name;
+
+      if (!selectedGuildName) return;
+
+      return selectedGuildName;
     }
 
     createFakeAudioPlayer() {
