@@ -2,7 +2,7 @@
 	"scripts": {
 		"build": "zpl build",
 		"init": "zpl init",
-		"watch": "while inotifywait -e close_write src/MusicBotHelper/*; do zpl build MusicBotHelper; done"
+		"watch": "while inotifywait -e close_write src/ZoxMusicBotHelper/*; do zpl build ZoxMusicBotHelper; done"
 	},
 	"devDependencies": {
 		"zerespluginlibrary": "^2.0.6"

@@ -1,8 +1,8 @@
-# Voice Announcer for [BD](https://github.com/BetterDiscord/BetterDiscord)
+# zoxMusicBotHelper for [BD](https://github.com/BetterDiscord/BetterDiscord)
 
 ## What does it do?
 
-When the user switches between muted and unmuted the plugin will announce the currently set mode via audio notification.
+It allows you to control a music bot that's in your vc.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ When the user switches between muted and unmuted the plugin will announce the cu
 
 ```bash
 pnpm install
-pnpm run build MusicBotHelper
+pnpm run build ZoxMusicBotHelper
 ```
 
 ## Live-update while developing (Linux / Bash)
