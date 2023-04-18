@@ -204,7 +204,7 @@ module.exports = (Plugin, Library) => {
       React.createElement(DisComponents.SearchableSelect, {
         label: 'Select Bot Text Channel',
         value: value,
-        options: props.options,
+        options: props.textChannelsInGuild,
 
         clearable: true,
         placeholder: 'Select Bot Text Channel',
@@ -373,7 +373,7 @@ module.exports = (Plugin, Library) => {
         //   botUsername: 'cacaa',
         // }),
         React.createElement(SetupDialog, {
-          options: Object.values(
+          textChannelsInGuild: Object.values(
             objectMap(this.getAllTextChannelsInSelectedGuild(), (v, _, __) => {
               return { value: v.id, label: v.name };
             })
