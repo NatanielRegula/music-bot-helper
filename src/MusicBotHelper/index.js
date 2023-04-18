@@ -26,6 +26,15 @@ module.exports = (Plugin, Library) => {
     'sendMessage',
     'sendBotMessage'
   );
+  const DisSelectedGuildStore = BdApi.findModuleByProps(
+    'getGuildId',
+    'getLastSelectedGuildId'
+  );
+
+  const DisGuildChannelStore = BdApi.findModuleByProps(
+    'getChannels',
+    'hasChannels'
+  );
 
   const DisUserStore = DiscordModules.UserStore;
   const DisMediaInfo = DiscordModules.MediaInfo;
@@ -36,9 +45,13 @@ module.exports = (Plugin, Library) => {
     'setLocalVolume'
   );
 
-  //ui
+  //ui / react
   const DisComponents = BdApi.findModuleByProps('AnimatedAvatar');
-  const DisPanelCssClasses = BdApi.findModuleByProps('actionButtons');
+  // const { useState } = BdApi.;
+  const DisPanelCssClasses = {
+    ...BdApi.findModuleByProps('actionButtons'),
+    ...BdApi.findModuleByProps('micTestButton'),
+  };
   const DisOriginalButton = DisComponents.Button;
 
   const ListIcon = require('ListIcon.jsx.js');
@@ -56,6 +69,11 @@ module.exports = (Plugin, Library) => {
     ];
   }
 
+  const objectMap = (obj, fn) =>
+    Object.fromEntries(
+      Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)])
+    );
+
   const [HeaderBarContainer, key] = getModuleAndKey(
     (m, _, __) => {
       // Logger.info(i);
@@ -71,7 +89,7 @@ module.exports = (Plugin, Library) => {
       // return React.createElement('div', { class: 'playbackContainer' });
       return React.createElement(
         'div',
-        { class: 'playbackContainer' },
+        { class: `playbackContainer ${DisPanelCssClasses.container}` },
         React.createElement('span', { class: 'songTitle' }, songTitle),
         React.createElement('span', { class: 'botUsername' }, botUsername),
         React.createElement(
@@ -114,10 +132,86 @@ module.exports = (Plugin, Library) => {
               Logger.log('clicked');
             },
             icon: ListIcon({ fill: 'currentColor', width: '15' }),
-          })
+          }),
+          React.createElement(
+            'button',
+            {
+              'aria-expanded': 'false',
+              'aria-label': 'Open Soundboard',
+              type: 'button',
+              class:
+                'button-1EGGcP buttonColor-3bP3fX button-ejjZWC lookFilled-1H2Jvj colorBrand-2M3O3N sizeSmall-3R2P2p fullWidth-3M-YBR grow-2T4nbg button-1EGGcP buttonColor-3bP3fX',
+            },
+            React.createElement(
+              'div',
+              { class: 'contents-3NembX' },
+              React.createElement(
+                'svg',
+                {
+                  class: 'buttonIcon-2Zsrs2',
+                  'aria-hidden': 'true',
+                  role: 'img',
+                  fill: 'none',
+                  xmlns: 'http://www.w3.org/2000/svg',
+                  width: '24',
+                  height: '24',
+                  viewBox: '0 0 24 24',
+                },
+                React.createElement(
+                  'g',
+                  { 'clip-path': 'url(#clip0_414_20322)' },
+                  React.createElement('path', {
+                    d: 'M2 6.00299V18.003C2 19.107 2.895 20.003 4 20.003H5V4.00299H4C2.895 4.00299 2 4.89799 2 6.00299Z',
+                    fill: 'currentColor',
+                  }),
+                  React.createElement('path', {
+                    d: 'M20 4.00299H7V20.003H20C21.104 20.003 22 19.107 22 18.003V6.00299C22 4.89799 21.104 4.00299 20 4.00299ZM19 14.003C19 15.107 18.104 16.003 17 16.003C15.896 16.003 15 15.107 15 14.003C15 12.899 15.896 12.003 17 12.003V9.38999L13 10.724C13 10.724 13 14.984 13 15.003C13 16.107 12.104 17.003 11 17.003C9.896 17.003 9 16.107 9 15.003C9 13.899 9.896 13.003 11 13.003V10.003C11 9.57199 11.275 9.19099 11.684 9.05399L17.684 7.05399C17.989 6.95199 18.323 7.00299 18.585 7.19199C18.846 7.37899 19 7.68199 19 8.00299C19 8.00299 19 13.983 19 14.003Z',
+                    fill: 'currentColor',
+                  })
+                ),
+                React.createElement(
+                  'defs',
+                  null,
+                  React.createElement(
+                    'clipPath',
+                    { id: 'clip0_414_20322' },
+                    React.createElement('rect', {
+                      width: '24',
+                      height: '24',
+                      fill: 'white',
+                    })
+                  )
+                )
+              )
+            )
+          )
         )
       );
     }
+  }
+  function SetupDialog(props) {
+    const [value, setValue] = React.useState('');
+    // const { songTitle, botUsername } = this.props;
+    // return React.createElement('div', { class: 'playbackContainer' });
+    // return
+    return React.createElement(
+      DisComponents.FormLabel,
+      {
+        Label: 'Select Bot Text Channel',
+      },
+      React.createElement(DisComponents.SearchableSelect, {
+        label: 'Select Bot Text Channel',
+        value: value,
+        options: props.options,
+
+        clearable: true,
+        placeholder: 'Select Bot Text Channel',
+        onChange: (/**@type {string?} */ newSelectedOptionValue) => {
+          Logger.log(newSelectedOptionValue);
+          setValue(newSelectedOptionValue);
+        },
+      })
+    );
   }
 
   class DisIconButton extends React.Component {
@@ -158,6 +252,8 @@ module.exports = (Plugin, Library) => {
       this.keyBindHandler = this.keyBindHandler.bind(this);
       this.createFakeAudioPlayer = this.createFakeAudioPlayer.bind(this);
       this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
+      this.getAllTextChannelsInSelectedGuild =
+        this.getAllTextChannelsInSelectedGuild.bind(this);
 
       this.playbackUiReact = require('test.js');
       this.playbackUiCss = require('zoxMusicBotHelper.css');
@@ -260,12 +356,22 @@ module.exports = (Plugin, Library) => {
       //     // onCancel: () => window.alert('two'),
       //   }
       // );
+      // Logger.log(
+
+      // );
 
       BdApi.showConfirmationModal(
         'Setup AudioBotHelper',
-        React.createElement(PlaybackPanel, {
-          songTitle: 'caca',
-          botUsername: 'cacaa',
+        // React.createElement(PlaybackPanel, {
+        //   songTitle: 'caca',
+        //   botUsername: 'cacaa',
+        // }),
+        React.createElement(SetupDialog, {
+          options: Object.values(
+            objectMap(this.getAllTextChannelsInSelectedGuild(), (v, _, __) => {
+              return { value: v.id, label: v.name };
+            })
+          ),
         }),
 
         {
@@ -275,6 +381,28 @@ module.exports = (Plugin, Library) => {
           // onCancel: () => window.alert('two'),
         }
       );
+    }
+
+    /**
+     *returns object shaped like this
+     {
+      1062051345336639630: {id: '1062051345336639630', name: '✋︱welcome-goodbye'}
+      1062051345336639631: {id: '1062051345336639631', name: '📔︱rules'}
+    }
+    @returns {Map<string,Map<string,any>>}
+     */
+    getAllTextChannelsInSelectedGuild() {
+      /**@type {string?} */
+      const selectedGuildId = DisSelectedGuildStore.getLastSelectedGuildId();
+      if (!selectedGuildId) return;
+
+      /**@type {Map<string,Map<string,any>>?} */
+      const textChannelsInGuild =
+        DisGuildChannelStore.getTextChannelNameDisambiguations(selectedGuildId);
+
+      if (!textChannelsInGuild) return;
+
+      return textChannelsInGuild;
     }
 
     createFakeAudioPlayer() {
