@@ -1,6 +1,6 @@
 /**
  * @name ZoxMusicBotHelper
- * @description zoxMusicBotHelper
+ * @description zoxMusicBotHelper allows you to control a music bot that's in your vc.
  * @version 0.0.3
  * @author NR
  * @source https://github.com/NatanielRegula/bd-voice-announcer
@@ -37,7 +37,7 @@ const config = {
     authorId: "",
     authorLink: "",
     version: "0.0.3",
-    description: "zoxMusicBotHelper",
+    description: "zoxMusicBotHelper allows you to control a music bot that's in your vc.",
     website: "",
     source: "https://github.com/NatanielRegula/bd-voice-announcer",
     patreon: "",
