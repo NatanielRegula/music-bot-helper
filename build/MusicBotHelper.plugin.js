@@ -377,10 +377,13 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       this.keyBindHandler = this.keyBindHandler.bind(this);
       this.createFakeAudioPlayer = this.createFakeAudioPlayer.bind(this);
       this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
+
+      //Guild Info Getters / Guild Interactions
       this.getAllTextChannelsInSelectedGuild =
         this.getAllTextChannelsInSelectedGuild.bind(this);
       this.getSelectedGuildName = this.getSelectedGuildName.bind(this);
 
+      ///-----Additional imports-----///
       this.playbackUiReact = (() => {return // const { UI, React } = window.BdApi;
 
 // export default MyComponent = () => <div className="foo">Hello world!</div>;
@@ -537,42 +540,6 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       );
     }
 
-    /**
-     *returns object shaped like this
-     {
-      1062051345336639630: {id: '1062051345336639630', name: '✋︱welcome-goodbye'}
-      1062051345336639631: {id: '1062051345336639631', name: '📔︱rules'}
-    }
-    @returns {Map<string,Map<string,any>>?}
-     */
-    getAllTextChannelsInSelectedGuild() {
-      /**@type {string?} */
-      const selectedGuildId = DisSelectedGuildStore.getLastSelectedGuildId();
-      if (!selectedGuildId) return;
-
-      /**@type {Map<string,Map<string,any>>?} */
-      const textChannelsInGuild =
-        DisGuildChannelStore.getTextChannelNameDisambiguations(selectedGuildId);
-
-      if (!textChannelsInGuild) return;
-
-      return textChannelsInGuild;
-    }
-
-    /**@returns {string?} */
-    getSelectedGuildName() {
-      /**@type {string?} */
-      const selectedGuildId = DisSelectedGuildStore.getLastSelectedGuildId();
-      if (!selectedGuildId) return;
-
-      /**@type {string?} */
-      const selectedGuildName = DisGuildStore.getGuild(selectedGuildId).name;
-
-      if (!selectedGuildName) return;
-
-      return selectedGuildName;
-    }
-
     createFakeAudioPlayer() {
       Logger.info('creating fake audio player');
       // // create an audio context
@@ -630,6 +597,44 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       document.removeEventListener('keydown', this.keyBindHandler);
       Patcher.unpatchAll();
       PluginUtilities.removeStyle(this.getName());
+    }
+
+    ///-----Guild Info Getters / Guild Interactions-----///
+
+    /**
+     *returns object shaped like this
+     {
+      1062051345336639630: {id: '1062051345336639630', name: '✋︱welcome-goodbye'}
+      1062051345336639631: {id: '1062051345336639631', name: '📔︱rules'}
+    }
+    @returns {Map<string,Map<string,any>>?}
+     */
+    getAllTextChannelsInSelectedGuild() {
+      /**@type {string?} */
+      const selectedGuildId = DisSelectedGuildStore.getLastSelectedGuildId();
+      if (!selectedGuildId) return;
+
+      /**@type {Map<string,Map<string,any>>?} */
+      const textChannelsInGuild =
+        DisGuildChannelStore.getTextChannelNameDisambiguations(selectedGuildId);
+
+      if (!textChannelsInGuild) return;
+
+      return textChannelsInGuild;
+    }
+
+    /**@returns {string?} */
+    getSelectedGuildName() {
+      /**@type {string?} */
+      const selectedGuildId = DisSelectedGuildStore.getLastSelectedGuildId();
+      if (!selectedGuildId) return;
+
+      /**@type {string?} */
+      const selectedGuildName = DisGuildStore.getGuild(selectedGuildId).name;
+
+      if (!selectedGuildName) return;
+
+      return selectedGuildName;
     }
 
     ///-----Bot Detection-----///
