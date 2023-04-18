@@ -23,7 +23,7 @@
   flex-direction: column;
 }
 .setupDialogContainer .column {
-  gap: 0.5rem;
+  gap: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -32,6 +32,10 @@
   text-transform: initial;
   font-size: 14px;
   font-weight: 400;
+}
+
+.settingGroup *:not(:first-child) {
+  padding-bottom: 0.3rem;
 }
 
 /* .playbackContainer .secondaryButtonsContainer {

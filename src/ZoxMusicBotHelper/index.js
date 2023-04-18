@@ -193,8 +193,35 @@ module.exports = (Plugin, Library) => {
     }
   }
 
+  function SettingTextInputWrapper(props) {
+    return React.createElement(
+      'div',
+      {
+        class: `settingGroup`,
+      },
+      React.createElement(
+        DisComponents.FormLabel,
+        {
+          disabled: false,
+        },
+        props.label
+      ),
+      React.createElement(DisComponents.TextInput, {
+        placeholder: props.placeholder,
+        clearable: true,
+
+        onChange: props.onChange,
+      }),
+      FormInputDescription({
+        value: props.description,
+      })
+    );
+  }
+
   function SetupDialog(props) {
-    const [value, setValue] = React.useState('');
+    const [selectedTextChannel, setSelectedTextChannel] = React.useState('');
+    const [playFromLinkCommand, setPlayFromLinkCommand] = React.useState('');
+    // const [selectedTextChannel, setSelectedTextChannel] = React.useState('');
     // const { songTitle, botUsername } = this.props;
     // return React.createElement('div', { class: 'playbackContainer' });
 
@@ -207,44 +234,79 @@ module.exports = (Plugin, Library) => {
       React.createElement(
         DisComponents.FormSection,
         {
-          class: `column`,
           title: 'Server specific',
         },
         React.createElement(
-          DisComponents.FormLabel,
-          {
-            disabled: false,
-          },
-          'Select Bot Text Channel'
-        ),
-        React.createElement(DisComponents.SearchableSelect, {
-          value: value,
-          options: props.textChannelsInGuild,
+          'div',
+          { class: 'column' },
 
-          clearable: true,
-          placeholder: 'Select Bot Text Channel',
-          onChange: (/**@type {string?} */ newSelectedOptionValue) => {
-            Logger.log(newSelectedOptionValue);
-            setValue(newSelectedOptionValue);
-          },
-        }),
-        FormInputDescription({
-          value:
-            'Select the text channel used by the members of your community to send commands to the bot',
-        })
+          React.createElement(
+            'div',
+            { class: 'settingGroup' },
+            React.createElement(
+              DisComponents.FormLabel,
+              {
+                disabled: false,
+              },
+              'Select bot text channel'
+            ),
+            React.createElement(DisComponents.SearchableSelect, {
+              value: selectedTextChannel,
+              options: props.textChannelsInGuild,
 
-        // React.createElement(
-        //   'div',
-        //   {},
-        // )
+              clearable: true,
+              placeholder: 'eg. bot-commands',
+              onChange: (/**@type {string?} */ newSelectedOptionValue) =>
+                setSelectedTextChannel(newSelectedOptionValue),
+            }),
+            FormInputDescription({
+              value:
+                'Select the text channel used by the members of your community to send commands to the bot',
+            })
+          )
+        )
       ),
-      React.createElement(DisComponents.TextInput, {
-        placeholder: 'Select Bot Text Channel',
-        label: 'Select Bot Text Channel',
-        onChange: (/**@type {string?} */ newValue) => {
-          Logger.log(newValue);
+
+      React.createElement(
+        DisComponents.FormSection,
+        {
+          title: 'Bot specific',
         },
-      })
+        React.createElement(
+          'div',
+          { class: 'column' },
+          SettingTextInputWrapper({
+            label: 'Command used to play music form a link',
+            placeholder: 'eg. -p [url]',
+            description:
+              'Enter the command followed by [url] where [url] will be replaced by a link to the song',
+            onChange: (/**@type {string?} */ newSelectedOptionValue) =>
+              setPlayFromLinkCommand(newSelectedOptionValue),
+          }),
+          SettingTextInputWrapper({
+            label: 'Command used to play music form a search',
+            placeholder: 'eg. -p [search]',
+            description:
+              'Enter the command followed by [search] where [search] will be replaced by the search phrase',
+            onChange: (/**@type {string?} */ newSelectedOptionValue) =>
+              setPlayFromLinkCommand(newSelectedOptionValue),
+          }),
+          SettingTextInputWrapper({
+            label: 'Command used to pause the music',
+            placeholder: 'eg. -pause',
+            description: 'Enter the command used to pause the music',
+            onChange: (/**@type {string?} */ newSelectedOptionValue) =>
+              setPlayFromLinkCommand(newSelectedOptionValue),
+          }),
+          SettingTextInputWrapper({
+            label: 'Command used to resume the music after it was paused',
+            placeholder: 'eg. -play',
+            description: 'Enter the command used to resume the music',
+            onChange: (/**@type {string?} */ newSelectedOptionValue) =>
+              setPlayFromLinkCommand(newSelectedOptionValue),
+          })
+        )
+      )
     );
   }
 
