@@ -373,6 +373,7 @@ module.exports = (Plugin, Library) => {
                 'Are you sure you want to discard the changes?'
               ),
               {
+                danger: true,
                 confirmText: 'Yes, discard the changes',
                 cancelText: 'Save changes',
                 onConfirm: () => {},
