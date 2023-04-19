@@ -298,12 +298,23 @@ module.exports = (Plugin, Library) => {
         case 'KeyL':
           await this.openSetupDialog();
           break;
+        case 'KeyN':
+          await this.patchPlaybackUi();
+          break;
 
         default:
           return;
       }
     }
-    async patchPlaybackUi() {}
+    async patchPlaybackUi() {
+      BdApi.showConfirmationModal(
+        `Setup ${this.getName()} for ${this.getSelectedGuildName()}`,
+        React.createElement(PlaybackPanel, {
+          songTitle: 'testingData',
+          botUsername: 'testingData1',
+        })
+      );
+    }
 
     async openSetupDialog() {
       const activeBotId = this.getCurrentlyActiveBotId();
