@@ -353,13 +353,34 @@ module.exports = (Plugin, Library) => {
         {
           confirmText: 'Save',
           cancelText: 'Cancel',
-          onConfirm: () => Logger.info(mostUpToDateFormData),
+          onConfirm: () => {
+            ///save data here
+            Logger.info(mostUpToDateFormData);
+          },
           onCancel: () => {
             const hasDataChanged =
               JSON.stringify(mostUpToDateFormData) !==
               JSON.stringify(initialData);
 
-            Logger.info(hasDataChanged);
+            if (!hasDataChanged) return;
+
+            BdApi.showConfirmationModal(
+              `Changes will be lost!`,
+
+              React.createElement(
+                DisComponents.Text,
+                {},
+                'Are you sure you want to discard the changes?'
+              ),
+              {
+                confirmText: 'Yes, discard the changes',
+                cancelText: 'Save changes',
+                onConfirm: () => {},
+                onCancel: () => {
+                  ///save data here
+                },
+              }
+            );
           },
         }
       );
