@@ -192,6 +192,31 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
   );
 }
 })();
+  const SettingTextInputWrapper = (() => {return function SettingTextInputWrapper(props) {
+  return React.createElement(
+    'div',
+    {
+      class: `settingGroup`,
+    },
+    React.createElement(
+      DisComponents.FormLabel,
+      {
+        disabled: false,
+      },
+      props.label
+    ),
+    React.createElement(DisComponents.TextInput, {
+      placeholder: props.placeholder,
+      clearable: true,
+
+      onChange: props.onChange,
+    }),
+    FormInputDescription({
+      value: props.description,
+    })
+  );
+}
+})();
 
   function getModuleAndKey(filter) {
     let module;
@@ -324,31 +349,6 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
         )
       );
     }
-  }
-
-  function SettingTextInputWrapper(props) {
-    return React.createElement(
-      'div',
-      {
-        class: `settingGroup`,
-      },
-      React.createElement(
-        DisComponents.FormLabel,
-        {
-          disabled: false,
-        },
-        props.label
-      ),
-      React.createElement(DisComponents.TextInput, {
-        placeholder: props.placeholder,
-        clearable: true,
-
-        onChange: props.onChange,
-      }),
-      FormInputDescription({
-        value: props.description,
-      })
-    );
   }
 
   function SetupDialog(props) {
