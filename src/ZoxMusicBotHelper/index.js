@@ -235,6 +235,7 @@ module.exports = (Plugin, Library) => {
       this.keyBindHandler = this.keyBindHandler.bind(this);
       this.createFakeAudioPlayer = this.createFakeAudioPlayer.bind(this);
       this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
+      this.openSetupDialog = this.openSetupDialog.bind(this);
 
       //Guild Info Getters / Guild Interactions
       this.getAllTextChannelsInSelectedGuild =
@@ -295,15 +296,16 @@ module.exports = (Plugin, Library) => {
           this.createFakeAudioPlayer();
           break;
         case 'KeyL':
-          await this.patchPlaybackUi();
+          await this.openSetupDialog();
           break;
 
         default:
           return;
       }
     }
+    async patchPlaybackUi() {}
 
-    async patchPlaybackUi() {
+    async openSetupDialog() {
       const activeBotId = this.getCurrentlyActiveBotId();
       if (activeBotId.length == 0) return;
       /**@type {string} */
