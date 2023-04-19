@@ -197,9 +197,30 @@ module.exports = (Plugin, Library) => {
   function SetupDialog(props) {
     const [selectedTextChannel, setSelectedTextChannel] = React.useState('');
     const [playFromLinkCommand, setPlayFromLinkCommand] = React.useState('');
-    // const [selectedTextChannel, setSelectedTextChannel] = React.useState('');
-    // const { songTitle, botUsername } = this.props;
-    // return React.createElement('div', { class: 'playbackContainer' });
+    const [playFromSearchCommand, setPlayFromSearchCommand] =
+      React.useState('');
+    const [pauseCommand, setPauseCommand] = React.useState('');
+    const [resumeCommand, setResumeCommand] = React.useState('');
+
+    React.useEffect(() => {
+      props.getUpdate({
+        serverSpecific: {
+          selectedTextChannel: selectedTextChannel,
+        },
+        botSpecific: {
+          playFromLinkCommand: playFromLinkCommand,
+          playFromSearchCommand: playFromSearchCommand,
+          pauseCommand: pauseCommand,
+          resumeCommand: resumeCommand,
+        },
+      });
+    }, [
+      selectedTextChannel,
+      playFromLinkCommand,
+      playFromSearchCommand,
+      pauseCommand,
+      resumeCommand,
+    ]);
 
     return React.createElement(
       'div',
@@ -232,8 +253,9 @@ module.exports = (Plugin, Library) => {
 
               clearable: true,
               placeholder: 'eg. bot-commands',
-              onChange: (/**@type {string?} */ newSelectedOptionValue) =>
-                setSelectedTextChannel(newSelectedOptionValue),
+              onChange: (/**@type {string?} */ newSelectedOptionValue) => {
+                setSelectedTextChannel(newSelectedOptionValue);
+              },
             }),
             FormInputDescription({
               value:
@@ -256,30 +278,30 @@ module.exports = (Plugin, Library) => {
             placeholder: 'eg. -p [url]',
             description:
               'Enter the command followed by [url] where [url] will be replaced by a link to the song',
-            onChange: (/**@type {string?} */ newSelectedOptionValue) =>
-              setPlayFromLinkCommand(newSelectedOptionValue),
+            onChange: (/**@type {string?} */ newValue) =>
+              setPlayFromLinkCommand(newValue),
           }),
           SettingTextInputWrapper({
             label: 'Command used to play music form a search',
             placeholder: 'eg. -p [search]',
             description:
               'Enter the command followed by [search] where [search] will be replaced by the search phrase',
-            onChange: (/**@type {string?} */ newSelectedOptionValue) =>
-              setPlayFromLinkCommand(newSelectedOptionValue),
+            onChange: (/**@type {string?} */ newValue) =>
+              setPlayFromSearchCommand(newValue),
           }),
           SettingTextInputWrapper({
             label: 'Command used to pause the music',
             placeholder: 'eg. -pause',
             description: 'Enter the command used to pause the music',
-            onChange: (/**@type {string?} */ newSelectedOptionValue) =>
-              setPlayFromLinkCommand(newSelectedOptionValue),
+            onChange: (/**@type {string?} */ newValue) =>
+              setPauseCommand(newValue),
           }),
           SettingTextInputWrapper({
             label: 'Command used to resume the music after it was paused',
             placeholder: 'eg. -play',
             description: 'Enter the command used to resume the music',
-            onChange: (/**@type {string?} */ newSelectedOptionValue) =>
-              setPlayFromLinkCommand(newSelectedOptionValue),
+            onChange: (/**@type {string?} */ newValue) =>
+              setResumeCommand(newValue),
           })
         )
       )
@@ -393,60 +415,15 @@ module.exports = (Plugin, Library) => {
     }
 
     async patchPlaybackUi() {
-      // this.playbackUiReact = React.createElement(
-      //   'div',
-      //   { class: 'playbackContainer' },
-      //   React.createElement(
-      //     'span',
-      //     { class: 'songTitle' },
-      //     'Title of the song thats playing'
-      //   ),
-      //   React.createElement('span', { class: 'botUsername' }, 'DJ Hobo')
-      // );
-
-      // let buttons = await ReactComponents.getComponentByName(
-      //   'Account',
-      //   '.container-3baos1'
-      // );
-      // Logger.log(buttons);
-      // Logger.log(this.playbackUiReact);
-
-      // window.lamlam = HeaderBarContainer;
-      // Logger.log(HeaderBarContainer);
-
-      // document
-      //   .getElementsByClassName('panels-3wFtMD')[0]
-      //   .append(this.playbackUiReact);
-
-      // Patcher.after(Bar, 'guild-channels', (_, __, { props }) => {
-      //   props.children.props.toolbar.unshift(this.playbackUiReact);
-      // });
-
-      // BdApi.showConfirmationModal(
-      //   'Setup AudioBotHelper',
-
-      //   {
-      //     confirmText: 'Save',
-      //     cancelText: 'Cancel',
-      //     // onConfirm: () => console.log('allalalalalalallal'),
-      //     // onCancel: () => window.alert('two'),
-      //   }
-      // );
-      // Logger.log(
-
-      // );
       const activeBotId = this.getCurrentlyActiveBotId();
       if (activeBotId.length == 0) return;
       /**@type {string} */
       const botName = DisUserStore.getUser(activeBotId).username;
 
+      let mostUpToDateFormData = {};
+
       BdApi.showConfirmationModal(
         `Setup ${this.getName()} for ${this.getSelectedGuildName()}`,
-        // React.createElement(PlaybackPanel, {
-        //   songTitle: 'caca',
-        //   botUsername: 'cacaa',
-        // }),
-
         React.createElement(SetupDialog, {
           textChannelsInGuild: Object.values(
             objectMap(this.getAllTextChannelsInSelectedGuild(), (v, _, __) => {
@@ -455,6 +432,9 @@ module.exports = (Plugin, Library) => {
           ),
           botUsername: botName,
           serverName: this.getSelectedGuildName(),
+          getUpdate: (e) => {
+            mostUpToDateFormData = e;
+          },
         }),
 
         // React.createElement(DisComponents.KeyCombo, {
@@ -468,18 +448,10 @@ module.exports = (Plugin, Library) => {
         //   value: '',
         //   children: () => ['aaa', 'bbb', 'ccc'],
         // }),
-        // React.createElement(BdApi.findModuleByProps('Editor').Editor, {
-        //   // shortcut: 'CTRL + ALT + k',
-        //   // placeholder: 'ssss',
-        //   // onChange: () => console.log('allalalalalalallal'),
-        //   // value: '',
-        //   // children: () => ['aaa', 'bbb', 'ccc'],
-        // }),
-
         {
           confirmText: 'Save',
           cancelText: 'Cancel',
-          // onConfirm: () => console.log('allalalalalalallal'),
+          onConfirm: () => Logger.info(mostUpToDateFormData),
           // onCancel: () => window.alert('two'),
         }
       );
