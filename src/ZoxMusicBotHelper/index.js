@@ -306,7 +306,7 @@ module.exports = (Plugin, Library) => {
     }
     async patchPlaybackUi() {
       BdApi.showConfirmationModal(
-        `Setup ${this.getName()} for ${this.getSelectedGuildName()}`,
+        `Playback controls`,
         React.createElement(PlaybackPanel, {
           songTitle: 'testingData',
           botUsername: 'testingData1',
