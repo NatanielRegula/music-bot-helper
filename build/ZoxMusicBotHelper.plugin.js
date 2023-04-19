@@ -106,12 +106,12 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     PluginUtilities,
   } = Library;
 
-  const Dispatcher = WebpackModules.getByProps('dispatch', 'subscribe');
-  const DisVoiceStateStore = WebpackModules.getByProps(
+  const Dispatcher = BdApi.findModuleByProps('dispatch', 'subscribe');
+  const DisVoiceStateStore = BdApi.findModuleByProps(
     'getVoiceStateForUser',
     'getVoiceStatesForChannel'
   );
-  const DisMessageStore = ZLibrary.WebpackModules.getByProps(
+  const DisMessageStore = BdApi.findModuleByProps(
     'sendMessage',
     'sendBotMessage'
   );
@@ -131,7 +131,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
   const DisMediaInfo = DiscordModules.MediaInfo;
 
   const DisSelectedChannelStore = DiscordModules.SelectedChannelStore;
-  const DisAudioCtl = WebpackModules.getByProps(
+  const DisAudioCtl = BdApi.findModuleByProps(
     'toggleLocalMute',
     'setLocalVolume'
   );
