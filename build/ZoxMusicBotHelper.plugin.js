@@ -367,7 +367,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       React.createElement(
         DisComponents.FormSection,
         {
-          title: 'Server specific',
+          title: `Server specific (${props.serverName})`,
         },
         React.createElement(
           'div',
@@ -403,7 +403,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       React.createElement(
         DisComponents.FormSection,
         {
-          title: 'Bot specific',
+          title: `Bot specific (${props.botUsername})`,
         },
         React.createElement(
           'div',
@@ -641,6 +641,10 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       // Logger.log(
 
       // );
+      const activeBotId = this.getCurrentlyActiveBotId();
+      if (activeBotId.length == 0) return;
+      /**@type {string} */
+      const botName = DisUserStore.getUser(activeBotId).username;
 
       BdApi.showConfirmationModal(
         `Setup ${this.getName()} for ${this.getSelectedGuildName()}`,
@@ -655,6 +659,8 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
               return { value: v.id, label: v.name };
             })
           ),
+          botUsername: botName,
+          serverName: this.getSelectedGuildName(),
         }),
 
         // React.createElement(DisComponents.KeyCombo, {
