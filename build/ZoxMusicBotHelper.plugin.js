@@ -641,7 +641,19 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       /**@type {string} */
       const botName = DisUserStore.getUser(activeBotId).username;
 
-      let mostUpToDateFormData = {};
+      const initialData = {
+        serverSpecific: {
+          selectedTextChannel: '1028616633712922667',
+        },
+        botSpecific: {
+          playFromLinkCommand: 'playFromLinkCommand',
+          playFromSearchCommand: 'playFromSearchCommand',
+          pauseCommand: 'pauseCommand',
+          resumeCommand: 'resumeCommand',
+        },
+      };
+
+      let mostUpToDateFormData = JSON.parse(JSON.stringify(initialData));
 
       BdApi.showConfirmationModal(
         `Setup ${this.getName()} for ${this.getSelectedGuildName()}`,
@@ -653,17 +665,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
           ),
           botUsername: botName,
           serverName: this.getSelectedGuildName(),
-          initialData: {
-            serverSpecific: {
-              selectedTextChannel: 'selectedTextChannel',
-            },
-            botSpecific: {
-              playFromLinkCommand: 'playFromLinkCommand',
-              playFromSearchCommand: 'playFromSearchCommand',
-              pauseCommand: 'pauseCommand',
-              resumeCommand: 'resumeCommand',
-            },
-          },
+          initialData: initialData,
           getUpdate: (e) => {
             mostUpToDateFormData = e;
           },
@@ -684,7 +686,13 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
           confirmText: 'Save',
           cancelText: 'Cancel',
           onConfirm: () => Logger.info(mostUpToDateFormData),
-          // onCancel: () => window.alert('two'),
+          onCancel: () => {
+            const hasDataChanged =
+              JSON.stringify(mostUpToDateFormData) !==
+              JSON.stringify(initialData);
+
+            Logger.info(hasDataChanged);
+          },
         }
       );
     }
