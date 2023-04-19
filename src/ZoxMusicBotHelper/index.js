@@ -195,12 +195,21 @@ module.exports = (Plugin, Library) => {
   }
 
   function SetupDialog(props) {
-    const [selectedTextChannel, setSelectedTextChannel] = React.useState('');
-    const [playFromLinkCommand, setPlayFromLinkCommand] = React.useState('');
-    const [playFromSearchCommand, setPlayFromSearchCommand] =
-      React.useState('');
-    const [pauseCommand, setPauseCommand] = React.useState('');
-    const [resumeCommand, setResumeCommand] = React.useState('');
+    const [selectedTextChannel, setSelectedTextChannel] = React.useState(
+      props.initialData.serverSpecific.selectedTextChannel
+    );
+    const [playFromLinkCommand, setPlayFromLinkCommand] = React.useState(
+      props.initialData.botSpecific.playFromLinkCommand
+    );
+    const [playFromSearchCommand, setPlayFromSearchCommand] = React.useState(
+      props.initialData.botSpecific.playFromSearchCommand
+    );
+    const [pauseCommand, setPauseCommand] = React.useState(
+      props.initialData.botSpecific.pauseCommand
+    );
+    const [resumeCommand, setResumeCommand] = React.useState(
+      props.initialData.botSpecific.resumeCommand
+    );
 
     React.useEffect(() => {
       props.getUpdate({
@@ -278,6 +287,7 @@ module.exports = (Plugin, Library) => {
             placeholder: 'eg. -p [url]',
             description:
               'Enter the command followed by [url] where [url] will be replaced by a link to the song',
+            value: playFromLinkCommand,
             onChange: (/**@type {string?} */ newValue) =>
               setPlayFromLinkCommand(newValue),
           }),
@@ -286,6 +296,7 @@ module.exports = (Plugin, Library) => {
             placeholder: 'eg. -p [search]',
             description:
               'Enter the command followed by [search] where [search] will be replaced by the search phrase',
+            value: playFromSearchCommand,
             onChange: (/**@type {string?} */ newValue) =>
               setPlayFromSearchCommand(newValue),
           }),
@@ -293,6 +304,7 @@ module.exports = (Plugin, Library) => {
             label: 'Command used to pause the music',
             placeholder: 'eg. -pause',
             description: 'Enter the command used to pause the music',
+            value: pauseCommand,
             onChange: (/**@type {string?} */ newValue) =>
               setPauseCommand(newValue),
           }),
@@ -300,6 +312,7 @@ module.exports = (Plugin, Library) => {
             label: 'Command used to resume the music after it was paused',
             placeholder: 'eg. -play',
             description: 'Enter the command used to resume the music',
+            value: resumeCommand,
             onChange: (/**@type {string?} */ newValue) =>
               setResumeCommand(newValue),
           })
@@ -432,6 +445,17 @@ module.exports = (Plugin, Library) => {
           ),
           botUsername: botName,
           serverName: this.getSelectedGuildName(),
+          initialData: {
+            serverSpecific: {
+              selectedTextChannel: 'selectedTextChannel',
+            },
+            botSpecific: {
+              playFromLinkCommand: 'playFromLinkCommand',
+              playFromSearchCommand: 'playFromSearchCommand',
+              pauseCommand: 'pauseCommand',
+              resumeCommand: 'resumeCommand',
+            },
+          },
           getUpdate: (e) => {
             mostUpToDateFormData = e;
           },

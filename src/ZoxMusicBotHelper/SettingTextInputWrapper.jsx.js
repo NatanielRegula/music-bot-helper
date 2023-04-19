@@ -14,7 +14,7 @@ function SettingTextInputWrapper(props) {
     React.createElement(DisComponents.TextInput, {
       placeholder: props.placeholder,
       clearable: true,
-
+      value: props.value,
       onChange: props.onChange,
     }),
     FormInputDescription({
