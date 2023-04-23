@@ -20,6 +20,7 @@ module.exports = (Plugin, Library) => {
   } = Library;
 
   const Dispatcher = BdApi.findModuleByProps('dispatch', 'subscribe');
+
   const DisVoiceStateStore = BdApi.findModuleByProps(
     'getVoiceStateForUser',
     'getVoiceStatesForChannel'
@@ -237,6 +238,12 @@ module.exports = (Plugin, Library) => {
       this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
       this.openSetupDialog = this.openSetupDialog.bind(this);
 
+      //Loading and Saving Data
+      this.saveBotData = this.saveBotData.bind(this);
+      this.loadBotData = this.loadBotData.bind(this);
+      this.saveServerData = this.saveServerData.bind(this);
+      this.loadServerData = this.loadServerData.bind(this);
+
       //Guild Info Getters / Guild Interactions
       this.getAllTextChannelsInSelectedGuild =
         this.getAllTextChannelsInSelectedGuild.bind(this);
@@ -253,7 +260,6 @@ module.exports = (Plugin, Library) => {
       if (activeBotId.length == 0) return;
 
       DisAudioCtl.toggleLocalMute(activeBotId);
-      // Logger.info(DisUserStore.getUser(activeBotId));
 
       /**@type {string} */
       const botName = DisUserStore.getUser(activeBotId).username;
@@ -318,20 +324,15 @@ module.exports = (Plugin, Library) => {
 
     async openSetupDialog() {
       const activeBotId = this.getCurrentlyActiveBotId();
-      if (activeBotId.length == 0) return;
+      const activeServerId = DisSelectedGuildStore.getLastSelectedGuildId();
+
+      if (!activeBotId || !activeServerId) return;
       /**@type {string} */
       const botName = DisUserStore.getUser(activeBotId).username;
 
       const initialData = {
-        serverSpecific: {
-          selectedTextChannel: '1028616633712922667',
-        },
-        botSpecific: {
-          playFromLinkCommand: 'playFromLinkCommand',
-          playFromSearchCommand: 'playFromSearchCommand',
-          pauseCommand: 'pauseCommand',
-          resumeCommand: 'resumeCommand',
-        },
+        serverData: this.loadServerData(activeServerId),
+        botData: this.loadBotData(activeBotId),
       };
 
       let mostUpToDateFormData = JSON.parse(JSON.stringify(initialData));
@@ -368,7 +369,11 @@ module.exports = (Plugin, Library) => {
           cancelText: 'Cancel',
           onConfirm: () => {
             ///save data here
-            Logger.info(mostUpToDateFormData);
+            this.saveBotData(activeBotId, mostUpToDateFormData.botData);
+            this.saveServerData(
+              activeServerId,
+              mostUpToDateFormData.serverData
+            );
           },
           onCancel: () => {
             const hasDataChanged =
@@ -392,6 +397,11 @@ module.exports = (Plugin, Library) => {
                 onConfirm: () => {},
                 onCancel: () => {
                   ///save data here
+                  this.saveBotData(activeBotId, mostUpToDateFormData.botData);
+                  this.saveServerData(
+                    activeServerId,
+                    mostUpToDateFormData.serverData
+                  );
                 },
               }
             );
@@ -457,6 +467,60 @@ module.exports = (Plugin, Library) => {
       document.removeEventListener('keydown', this.keyBindHandler);
       Patcher.unpatchAll();
       BdApi.clearCSS(this.getName());
+    }
+
+    ///-----Loading and Saving Data-----///
+
+    /**
+     * @param {string} botId
+     *  @param {{
+     *    playFromLinkCommand: string,
+     *     playFromSearchCommand: string,
+     *      pauseCommand: string,
+     *      resumeCommand: string,
+     *     }} data
+     * @returns
+     */
+    saveBotData(botId, data) {
+      BdApi.Data.save(`botData-${botId}`, JSON.stringify(data));
+    }
+
+    /**
+     * @param {string} botId
+     * @returns {{
+     *    playFromLinkCommand: string,
+     *     playFromSearchCommand: string,
+     *      pauseCommand: string,
+     *      resumeCommand: string,
+     *     }}
+     */
+    loadBotData(botId) {
+      const data = BdApi.Data.load(`botData-${botId}`);
+      if (!data) return;
+      return JSON.parse(data);
+    }
+
+    /**
+     * @param {string} serverId
+     * @param {{
+     *   selectedTextChannel: string,
+     * }} data
+     * @returns
+     */
+    saveServerData(serverId, data) {
+      BdApi.Data.save(`serverData-${serverId}`, JSON.stringify(data));
+    }
+
+    /**
+     * @param {string} serverId
+     * @returns {{
+     *   selectedTextChannel: string,
+     * }}
+     */
+    loadServerData(serverId) {
+      const data = BdApi.Data.load(`serverData-${serverId}`);
+      if (!data) return;
+      return JSON.parse(data);
     }
 
     ///-----Guild Info Getters / Guild Interactions-----///

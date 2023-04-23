@@ -1,26 +1,26 @@
 function SetupDialog(props) {
   const [selectedTextChannel, setSelectedTextChannel] = React.useState(
-    props.initialData.serverSpecific.selectedTextChannel
+    props.initialData.serverData?.selectedTextChannel
   );
   const [playFromLinkCommand, setPlayFromLinkCommand] = React.useState(
-    props.initialData.botSpecific.playFromLinkCommand
+    props.initialData.botData?.playFromLinkCommand
   );
   const [playFromSearchCommand, setPlayFromSearchCommand] = React.useState(
-    props.initialData.botSpecific.playFromSearchCommand
+    props.initialData.botData?.playFromSearchCommand
   );
   const [pauseCommand, setPauseCommand] = React.useState(
-    props.initialData.botSpecific.pauseCommand
+    props.initialData.botData?.pauseCommand
   );
   const [resumeCommand, setResumeCommand] = React.useState(
-    props.initialData.botSpecific.resumeCommand
+    props.initialData.botData?.resumeCommand
   );
 
   React.useEffect(() => {
     props.getUpdate({
-      serverSpecific: {
+      serverData: {
         selectedTextChannel: selectedTextChannel,
       },
-      botSpecific: {
+      botData: {
         playFromLinkCommand: playFromLinkCommand,
         playFromSearchCommand: playFromSearchCommand,
         pauseCommand: pauseCommand,
