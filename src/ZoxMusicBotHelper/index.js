@@ -459,14 +459,14 @@ module.exports = (Plugin, Library) => {
       this.createFakeAudioPlayer();
       document.addEventListener('keydown', this.keyBindHandler);
 
-      BdApi.injectCSS(this.getName(), this.playbackUiCss);
+      BdApi.DOM.addStyle(this.playbackUiCss);
     }
 
     onStop() {
       Logger.info('Plugin disabled!');
       document.removeEventListener('keydown', this.keyBindHandler);
       Patcher.unpatchAll();
-      BdApi.clearCSS(this.getName());
+      BdApi.DOM.removeStyle(this.getName());
     }
 
     ///-----Loading and Saving Data-----///
