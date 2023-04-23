@@ -265,9 +265,13 @@ module.exports = (Plugin, Library) => {
       const botName = DisUserStore.getUser(activeBotId).username;
 
       if (DisMediaInfo.isLocalMute(activeBotId)) {
-        BdApi.showToast(`⏸️ ${botName} PAUSED (Just for you)`);
+        UI.showToast(`⏸️ ${botName} PAUSED (Just for you)`, {
+          forceShow: true,
+        });
       } else {
-        BdApi.showToast(`▶️ ${botName} RESUMED (Just for you)`);
+        UI.showToast(`▶️ ${botName} RESUMED (Just for you)`, {
+          forceShow: true,
+        });
       }
     }
 
@@ -394,7 +398,12 @@ module.exports = (Plugin, Library) => {
                 danger: true,
                 confirmText: 'Yes, discard the changes',
                 cancelText: 'Save changes',
-                onConfirm: () => {},
+                onConfirm: () => {
+                  UI.showToast(`Changes have been discarded!`, {
+                    type: 'warn',
+                    forceShow: true,
+                  });
+                },
                 onCancel: () => {
                   ///save data here
                   this.saveBotData(activeBotId, mostUpToDateFormData.botData);
