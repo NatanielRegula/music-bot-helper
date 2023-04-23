@@ -7,7 +7,9 @@
  */
 
 module.exports = (Plugin, Library) => {
-  const { UI, React, Patcher, Webpack } = new BdApi('ZoxMusicBotHelper');
+  const BdApi = new window.BdApi('ZoxMusicBotHelper');
+  const { UI, React, Patcher, Webpack } = BdApi;
+
   const {
     Logger,
     Utilities,
@@ -447,14 +449,14 @@ module.exports = (Plugin, Library) => {
       this.createFakeAudioPlayer();
       document.addEventListener('keydown', this.keyBindHandler);
 
-      PluginUtilities.addStyle(this.getName(), this.playbackUiCss);
+      BdApi.injectCSS(this.getName(), this.playbackUiCss);
     }
 
     onStop() {
       Logger.info('Plugin disabled!');
       document.removeEventListener('keydown', this.keyBindHandler);
       Patcher.unpatchAll();
-      PluginUtilities.removeStyle(this.getName());
+      BdApi.clearCSS(this.getName());
     }
 
     ///-----Guild Info Getters / Guild Interactions-----///
