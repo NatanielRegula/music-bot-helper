@@ -67,6 +67,14 @@ module.exports = (Plugin, Library) => {
   const SettingTextInputWrapper = require('SettingTextInputWrapper.jsx.js');
   const SetupDialog = require('SetupDialog.jsx.js');
 
+  const OUTGOING_ACTIONS = Object.freeze({
+    PLAY_FROM_URL: {
+      name: 'Play from url command',
+      commandVariables: ['[url]'],
+      commandDataName: 'playFromLinkCommand',
+    },
+  });
+
   function getModuleAndKey(filter) {
     let module;
     const target = Webpack.getModule(
