@@ -350,6 +350,23 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 }
 })();
 
+  /**
+   *
+   * @readonly
+   * @enum {{
+   * name: string,
+   * commandVariables: Array<string>,
+   * commandDataName: string,
+   * }}
+   */
+  const OUTGOING_ACTIONS = Object.freeze({
+    PLAY_FROM_URL: {
+      name: 'Play from url command',
+      commandVariables: ['[url]'],
+      commandDataName: 'playFromLinkCommand',
+    },
+  });
+
   function getModuleAndKey(filter) {
     let module;
     const target = Webpack.getModule(
@@ -514,6 +531,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       //audio actions
       this.muteClientSide = this.muteClientSide.bind(this);
       this.sendMessageInBotChannel = this.sendMessageInBotChannel.bind(this);
+      this.sendActionToBot = this.sendActionToBot.bind(this);
 
       //misc
       this.keyBindHandler = this.keyBindHandler.bind(this);
@@ -609,13 +627,22 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 
     /**
      * @param {string} message
+     * @param {string?} botChannelId
      * @returns {boolean}
      */
-    sendMessageInBotChannel(message) {
-      //get this from the user using dropdown menu
-      const botChannelId = '1028616633712922667';
+    sendMessageInBotChannel(message, botChannelId) {
+      /**@type {string?} */
+      const _botChannelId =
+        botChannelId ??
+        this.loadServerData(DisSelectedGuildStore.getLastSelectedGuildId())
+          .selectedTextChannel;
 
-      DisMessageStore.sendMessage(botChannelId, {
+      if (!_botChannelId) {
+        Logger.error('couldnt get botChannelId');
+        return false;
+      }
+
+      DisMessageStore.sendMessage(_botChannelId, {
         content: message,
         tts: false,
         invalidEmojis: [],
@@ -623,6 +650,28 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       });
 
       return true;
+    }
+
+    /**
+     * @param {OUTGOING_ACTIONS} action
+     * @param {Array<string>} variablesInOrder
+     * @returns {boolean}
+     */
+    sendActionToBot(action, variablesInOrder) {
+      const currentBotId = this.getCurrentlyActiveBotId();
+      const botData = this.loadBotData(currentBotId);
+
+      /**@type {string} */
+      let message = botData[action.commandDataName];
+
+      action.commandVariables.forEach((commandVariable) => {
+        message = message.replace(
+          commandVariable,
+          variablesInOrder[action.commandVariables.indexOf(commandVariable)]
+        );
+      });
+
+      return this.sendMessageInBotChannel(message);
     }
 
     ///-----Misc-----///
@@ -642,6 +691,9 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
           break;
         case 'KeyN':
           await this.patchPlaybackUi();
+          break;
+        case 'KeyP':
+          this.sendActionToBot(OUTGOING_ACTIONS.PLAY_FROM_URL, ['aaaa']);
           break;
 
         default:
@@ -799,7 +851,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       // Logger.info(this.getName());
       this.createFakeAudioPlayer();
       document.addEventListener('keydown', this.keyBindHandler);
-
+      window.sendActionToBot = this.sendActionToBot;
       BdApi.DOM.addStyle(this.playbackUiCss);
     }
 

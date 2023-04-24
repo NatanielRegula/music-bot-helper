@@ -67,6 +67,15 @@ module.exports = (Plugin, Library) => {
   const SettingTextInputWrapper = require('SettingTextInputWrapper.jsx.js');
   const SetupDialog = require('SetupDialog.jsx.js');
 
+  /**
+   *
+   * @readonly
+   * @enum {{
+   * name: string,
+   * commandVariables: Array<string>,
+   * commandDataName: string,
+   * }}
+   */
   const OUTGOING_ACTIONS = Object.freeze({
     PLAY_FROM_URL: {
       name: 'Play from url command',
@@ -239,6 +248,7 @@ module.exports = (Plugin, Library) => {
       //audio actions
       this.muteClientSide = this.muteClientSide.bind(this);
       this.sendMessageInBotChannel = this.sendMessageInBotChannel.bind(this);
+      this.sendActionToBot = this.sendActionToBot.bind(this);
 
       //misc
       this.keyBindHandler = this.keyBindHandler.bind(this);
@@ -285,13 +295,22 @@ module.exports = (Plugin, Library) => {
 
     /**
      * @param {string} message
+     * @param {string?} botChannelId
      * @returns {boolean}
      */
-    sendMessageInBotChannel(message) {
-      //get this from the user using dropdown menu
-      const botChannelId = '1028616633712922667';
+    sendMessageInBotChannel(message, botChannelId) {
+      /**@type {string?} */
+      const _botChannelId =
+        botChannelId ??
+        this.loadServerData(DisSelectedGuildStore.getLastSelectedGuildId())
+          .selectedTextChannel;
 
-      DisMessageStore.sendMessage(botChannelId, {
+      if (!_botChannelId) {
+        Logger.error('couldnt get botChannelId');
+        return false;
+      }
+
+      DisMessageStore.sendMessage(_botChannelId, {
         content: message,
         tts: false,
         invalidEmojis: [],
@@ -299,6 +318,28 @@ module.exports = (Plugin, Library) => {
       });
 
       return true;
+    }
+
+    /**
+     * @param {OUTGOING_ACTIONS} action
+     * @param {Array<string>} variablesInOrder
+     * @returns {boolean}
+     */
+    sendActionToBot(action, variablesInOrder) {
+      const currentBotId = this.getCurrentlyActiveBotId();
+      const botData = this.loadBotData(currentBotId);
+
+      /**@type {string} */
+      let message = botData[action.commandDataName];
+
+      action.commandVariables.forEach((commandVariable) => {
+        message = message.replace(
+          commandVariable,
+          variablesInOrder[action.commandVariables.indexOf(commandVariable)]
+        );
+      });
+
+      return this.sendMessageInBotChannel(message);
     }
 
     ///-----Misc-----///
@@ -318,6 +359,9 @@ module.exports = (Plugin, Library) => {
           break;
         case 'KeyN':
           await this.patchPlaybackUi();
+          break;
+        case 'KeyP':
+          this.sendActionToBot(OUTGOING_ACTIONS.PLAY_FROM_URL, ['aaaa']);
           break;
 
         default:
@@ -475,7 +519,7 @@ module.exports = (Plugin, Library) => {
       // Logger.info(this.getName());
       this.createFakeAudioPlayer();
       document.addEventListener('keydown', this.keyBindHandler);
-
+      window.sendActionToBot = this.sendActionToBot;
       BdApi.DOM.addStyle(this.playbackUiCss);
     }
 
