@@ -360,9 +360,6 @@ module.exports = (Plugin, Library) => {
         case 'KeyN':
           await this.patchPlaybackUi();
           break;
-        case 'KeyP':
-          this.sendActionToBot(OUTGOING_ACTIONS.PLAY_FROM_URL, ['aaaa']);
-          break;
 
         default:
           return;
