@@ -108,6 +108,9 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     PluginUtilities,
   } = Library;
 
+  const NativeDisUtils =
+    DiscordNative.nativeModules.requireModule('discord_utils');
+
   const Dispatcher = BdApi.findModuleByProps('dispatch', 'subscribe');
 
   const DisVoiceStateStore = BdApi.findModuleByProps(
@@ -350,6 +353,26 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 }
 })();
 
+  const linuxKeycodeMappings = BdApi.Webpack.getModule((m) => m.ctrl === 0x25, {
+    searchExports: true,
+  });
+
+  const windowsKeycodeMappings = BdApi.Webpack.getModule(
+    (m) => m.ctrl === 0xa2,
+    { searchExports: true }
+  );
+
+  const macKeycodeMappings = BdApi.Webpack.getModule((m) => m.ctrl === 0xe0, {
+    searchExports: true,
+  });
+
+  const keycodeMappings =
+    DiscordNative.process.platform === 'linux'
+      ? linuxKeycodeMappings
+      : DiscordNative.process.platform === 'win32'
+      ? windowsKeycodeMappings
+      : macKeycodeMappings;
+
   /**
    *
    * @readonly
@@ -521,6 +544,8 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
   return class ZoxMusicBotHelper extends Plugin {
     constructor() {
       super();
+      this.globalKeyboardShortcutsRegisterIds = [];
+
       ///-----Adding Context To Methods-----///
       //misc
       this.getCurrentVoiceChannelUsersIds =
@@ -529,12 +554,16 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       this.getCurrentlyActiveBotId = this.getCurrentlyActiveBotId.bind(this);
 
       //audio actions
-      this.muteClientSide = this.muteClientSide.bind(this);
+      this.toggleMuteClientSide = this.toggleMuteClientSide.bind(this);
       this.sendMessageInBotChannel = this.sendMessageInBotChannel.bind(this);
       this.sendActionToBot = this.sendActionToBot.bind(this);
 
       //misc
       this.keyBindHandler = this.keyBindHandler.bind(this);
+      this.registerGlobalKeyboardShortcuts =
+        this.registerGlobalKeyboardShortcuts.bind(this);
+      this.unregisterAllGlobalKeyboardShortcuts =
+        this.unregisterAllGlobalKeyboardShortcuts.bind(this);
       this.createFakeAudioPlayer = this.createFakeAudioPlayer.bind(this);
       this.patchPlaybackUi = this.patchPlaybackUi.bind(this);
       this.openSetupDialog = this.openSetupDialog.bind(this);
@@ -605,7 +634,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     }
 
     ///-----Audio actions / Bot interactions-----///
-    muteClientSide() {
+    toggleMuteClientSide() {
       const activeBotId = this.getCurrentlyActiveBotId();
       if (activeBotId.length == 0) return;
 
@@ -679,9 +708,9 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     async keyBindHandler(e) {
       if (!e.ctrlKey || !e.altKey) return;
       switch (e.code) {
-        case 'KeyK':
-          this.muteClientSide();
-          break;
+        // case 'KeyK':
+        //   this.toggleMuteClientSide();
+        //   break;
 
         case 'KeyO':
           this.createFakeAudioPlayer();
@@ -697,6 +726,42 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
           return;
       }
     }
+
+    registerGlobalKeyboardShortcuts() {
+      const toggleMuteClientSideRegisterId = parseInt(Math.random() * 100000);
+
+      this.globalKeyboardShortcutsRegisterIds.push(
+        toggleMuteClientSideRegisterId
+      );
+
+      NativeDisUtils.inputEventRegister(
+        toggleMuteClientSideRegisterId,
+        [
+          [0, keycodeMappings.ctrl],
+          [0, keycodeMappings.alt],
+          [0, keycodeMappings.k],
+        ],
+        (isDown) => {
+          console.log(`ctrl+alt+k - isDown ${isDown}`);
+          if (isDown) {
+            this.toggleMuteClientSide();
+          }
+        },
+        {
+          blurred: true,
+          focused: true,
+          keydown: true,
+          keyup: true,
+        }
+      );
+    }
+
+    unregisterAllGlobalKeyboardShortcuts() {
+      for (let id in this.globalKeyboardShortcutsRegisterIds) {
+        NativeDisUtils.inputEventUnregister(id);
+      }
+    }
+
     async patchPlaybackUi() {
       BdApi.showConfirmationModal(
         `Playback controls`,
@@ -848,6 +913,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
       // Logger.info(this.getName());
       this.createFakeAudioPlayer();
       document.addEventListener('keydown', this.keyBindHandler);
+      this.registerGlobalKeyboardShortcuts();
       window.sendActionToBot = this.sendActionToBot;
       BdApi.DOM.addStyle(this.playbackUiCss);
     }
@@ -855,6 +921,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     onStop() {
       Logger.info('Plugin disabled!');
       document.removeEventListener('keydown', this.keyBindHandler);
+      this.unregisterAllGlobalKeyboardShortcuts();
       Patcher.unpatchAll();
       BdApi.DOM.removeStyle(this.getName());
     }
