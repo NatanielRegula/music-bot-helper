@@ -23,7 +23,7 @@ bun run build --watch
 
 ## Disclaimer
 
-### Use at your own risk! And read the [license](https://github.com/NatanielRegula/bd-voice-announcer/blob/master/LICENSE) before you do.
+### Use at your own risk! And read the [license](https://github.com/NatanielRegula/music-bot-helper/blob/master/LICENSE) before you do.
 
 ```
 15. Disclaimer of Warranty.
