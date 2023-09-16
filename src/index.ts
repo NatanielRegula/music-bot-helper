@@ -30,7 +30,7 @@ export default class {
   ///-----Audio actions / Bot interactions-----///
   toggleMuteClientSide() {
     const activeBotId = this.getCurrentlyActiveBotId();
-    if (activeBotId.length == 0) return;
+    if (activeBotId == null) return;
 
     DisAudioCtl.toggleLocalMute(activeBotId);
 
@@ -119,12 +119,12 @@ export default class {
     return currentVoiceChannelUsersIds;
   }
 
-  getCurrentlyActiveBotId(): string {
+  getCurrentlyActiveBotId(): string | null {
     //this will in the future allow to switch between multiple bots in vc
     //for now it just gives the first form the list
     const selectedBots = this.getMusicBotsInCurrentVoiceChat();
 
-    if (selectedBots.length == 0) return '';
+    if (selectedBots.length == 0) return null;
 
     return selectedBots[0];
   }

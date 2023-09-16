@@ -316,7 +316,7 @@ var default_1 = /** @class */ (function () {
     ///-----Audio actions / Bot interactions-----///
     default_1.prototype.toggleMuteClientSide = function () {
         var activeBotId = this.getCurrentlyActiveBotId();
-        if (activeBotId.length == 0)
+        if (activeBotId == null)
             return;
         _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisAudioCtl.toggleLocalMute(activeBotId);
         var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
@@ -395,7 +395,7 @@ var default_1 = /** @class */ (function () {
         //for now it just gives the first form the list
         var selectedBots = this.getMusicBotsInCurrentVoiceChat();
         if (selectedBots.length == 0)
-            return '';
+            return null;
         return selectedBots[0];
     };
     default_1.prototype.getMusicBotsInCurrentVoiceChat = function () {
