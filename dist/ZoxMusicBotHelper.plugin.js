@@ -302,13 +302,15 @@ var default_1 = /** @class */ (function () {
     function default_1() {
     }
     default_1.prototype.start = function () {
+        var _this = this;
         _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].info('Plugin enabled!');
-        document.addEventListener('keydown', this.keyBindHandler);
+        document.addEventListener('keydown', function () { return _this.keyBindHandler; });
         this.registerGlobalKeyboardShortcuts();
     };
     default_1.prototype.stop = function () {
+        var _this = this;
         _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].info('Plugin disabled!');
-        document.removeEventListener('keydown', this.keyBindHandler);
+        document.removeEventListener('keydown', function () { return _this.keyBindHandler; });
         this.unregisterAllGlobalKeyboardShortcuts();
     };
     ///-----Audio actions / Bot interactions-----///
@@ -317,7 +319,6 @@ var default_1 = /** @class */ (function () {
         if (activeBotId.length == 0)
             return;
         _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisAudioCtl.toggleLocalMute(activeBotId);
-        /**@type {string} */
         var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
         if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisMediaInfo.isLocalMute(activeBotId)) {
             _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
@@ -384,10 +385,6 @@ var default_1 = /** @class */ (function () {
         }
     };
     ///-----Bot Detection-----///
-    default_1.prototype.getIsUserABot = function (userId) {
-        var userData = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(userId);
-        return userData.bot;
-    };
     default_1.prototype.getCurrentVoiceChannelUsersIds = function () {
         var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisSelectedChannelStore.getVoiceChannelId());
         var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
@@ -402,14 +399,8 @@ var default_1 = /** @class */ (function () {
         return selectedBots[0];
     };
     default_1.prototype.getMusicBotsInCurrentVoiceChat = function () {
-        var _this = this;
         var currentVoiceChannelUsersIds = this.getCurrentVoiceChannelUsersIds();
-        var detectedBotsIds = [];
-        currentVoiceChannelUsersIds.forEach(function (userId) {
-            if (_this.getIsUserABot(userId)) {
-                detectedBotsIds.push(userId);
-            }
-        });
+        var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(userId).bot; });
         return detectedBotsIds;
     };
     return default_1;

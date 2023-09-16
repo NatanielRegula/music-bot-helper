@@ -103,11 +103,8 @@ export default class {
       NativeDisUtils.inputEventUnregister(id);
     }
   }
+
   ///-----Bot Detection-----///
-  getIsUserABot(userId: string): boolean {
-    const userData = DisUserStore.getUser(userId);
-    return userData.bot;
-  }
 
   getCurrentVoiceChannelUsersIds(): Array<string> {
     const voiceStatesForCurrentVoiceChannelObject =
@@ -126,19 +123,19 @@ export default class {
     //this will in the future allow to switch between multiple bots in vc
     //for now it just gives the first form the list
     const selectedBots = this.getMusicBotsInCurrentVoiceChat();
+
     if (selectedBots.length == 0) return '';
+
     return selectedBots[0];
   }
 
   getMusicBotsInCurrentVoiceChat(): Array<string> {
     const currentVoiceChannelUsersIds = this.getCurrentVoiceChannelUsersIds();
 
-    const detectedBotsIds: Array<string> = [];
-    currentVoiceChannelUsersIds.forEach((userId) => {
-      if (this.getIsUserABot(userId)) {
-        detectedBotsIds.push(userId);
-      }
-    });
+    const detectedBotsIds: Array<string> = currentVoiceChannelUsersIds.filter(
+      (userId) => DisUserStore.getUser(userId).bot
+    );
+
     return detectedBotsIds;
   }
 }
