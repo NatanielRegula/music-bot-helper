@@ -18,12 +18,12 @@ checkIfVersionUpdated();
 export default class {
   start() {
     Logger.info('Plugin enabled!');
-    document.addEventListener('keydown', this.keyBindHandler);
+    document.addEventListener('keydown', () => this.keyBindHandler);
     this.registerGlobalKeyboardShortcuts();
   }
   stop() {
     Logger.info('Plugin disabled!');
-    document.removeEventListener('keydown', this.keyBindHandler);
+    document.removeEventListener('keydown', () => this.keyBindHandler);
     this.unregisterAllGlobalKeyboardShortcuts();
   }
 
@@ -34,8 +34,7 @@ export default class {
 
     DisAudioCtl.toggleLocalMute(activeBotId);
 
-    /**@type {string} */
-    const botName = DisUserStore.getUser(activeBotId).username;
+    const botName: string = DisUserStore.getUser(activeBotId).username;
 
     if (DisMediaInfo.isLocalMute(activeBotId)) {
       UI.showToast(`⏸️ ${botName} PAUSED (Just for you)`, {

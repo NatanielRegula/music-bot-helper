@@ -1,8 +1,7 @@
 export {};
 declare global {
-    interface Window {
-      BdApi:any;
-      DiscordNative:any;
-  
-    }
+  interface Window {
+    BdApi: any;
+    DiscordNative: any;
   }
+}
