@@ -1,10 +1,6 @@
+import { getCurrentlyActiveBotId } from './botController/botController';
 import { DisAudioCtl } from './dis/modules/modules';
-import {
-  DisMediaInfo,
-  DisSelectedChannelStore,
-  DisUserStore,
-  DisVoiceStateStore,
-} from './dis/modules/stores';
+import { DisMediaInfo, DisUserStore } from './dis/modules/stores';
 import NativeDisUtils from './dis/nativeModules/discordUtils';
 import { UI } from './utils/bdApi';
 import getKeycodeMappings from './utils/keycodeMappings';
@@ -29,7 +25,8 @@ export default class {
 
   ///-----Audio actions / Bot interactions-----///
   toggleMuteClientSide() {
-    const activeBotId = this.getCurrentlyActiveBotId();
+    const activeBotId = getCurrentlyActiveBotId();
+
     if (activeBotId == null) return;
 
     DisAudioCtl.toggleLocalMute(activeBotId);
@@ -102,40 +99,5 @@ export default class {
     for (const id of globalKeyboardShortcutsRegisterIds) {
       NativeDisUtils.inputEventUnregister(id);
     }
-  }
-
-  ///-----Bot Detection-----///
-
-  getCurrentVoiceChannelUsersIds(): Array<string> {
-    const voiceStatesForCurrentVoiceChannelObject =
-      DisVoiceStateStore.getVoiceStatesForChannel(
-        DisSelectedChannelStore.getVoiceChannelId()
-      );
-
-    const currentVoiceChannelUsersIds = Object.keys(
-      voiceStatesForCurrentVoiceChannelObject
-    ).map((key) => voiceStatesForCurrentVoiceChannelObject[key].userId);
-
-    return currentVoiceChannelUsersIds;
-  }
-
-  getCurrentlyActiveBotId(): string | null {
-    //this will in the future allow to switch between multiple bots in vc
-    //for now it just gives the first form the list
-    const selectedBots = this.getMusicBotsInCurrentVoiceChat();
-
-    if (selectedBots.length == 0) return null;
-
-    return selectedBots[0];
-  }
-
-  getMusicBotsInCurrentVoiceChat(): Array<string> {
-    const currentVoiceChannelUsersIds = this.getCurrentVoiceChannelUsersIds();
-
-    const detectedBotsIds: Array<string> = currentVoiceChannelUsersIds.filter(
-      (userId) => DisUserStore.getUser(userId).bot
-    );
-
-    return detectedBotsIds;
   }
 }

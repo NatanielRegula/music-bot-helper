@@ -8,6 +8,42 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/botController/botController.ts":
+/*!********************************************!*\
+  !*** ./src/botController/botController.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCurrentVoiceChannelUsersIds: () => (/* binding */ getCurrentVoiceChannelUsersIds),
+/* harmony export */   getCurrentlyActiveBotId: () => (/* binding */ getCurrentlyActiveBotId),
+/* harmony export */   getMusicBotsInCurrentVoiceChat: () => (/* binding */ getMusicBotsInCurrentVoiceChat)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dis/modules/stores */ "./src/dis/modules/stores.ts");
+
+function getCurrentVoiceChannelUsersIds() {
+    var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisSelectedChannelStore.getVoiceChannelId());
+    var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
+    return currentVoiceChannelUsersIds;
+}
+function getCurrentlyActiveBotId() {
+    //this will in the future allow to switch between multiple bots in vc
+    //for now it just gives the first form the list
+    var selectedBots = getMusicBotsInCurrentVoiceChat();
+    if (selectedBots.length == 0)
+        return null;
+    return selectedBots[0];
+}
+function getMusicBotsInCurrentVoiceChat() {
+    var currentVoiceChannelUsersIds = getCurrentVoiceChannelUsersIds();
+    var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisUserStore.getUser(userId).bot; });
+    return detectedBotsIds;
+}
+
+
+/***/ }),
+
 /***/ "./src/dis/modules/modules.ts":
 /*!************************************!*\
   !*** ./src/dis/modules/modules.ts ***!
@@ -246,13 +282,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dis/modules/modules */ "./src/dis/modules/modules.ts");
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dis/modules/stores */ "./src/dis/modules/stores.ts");
-/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dis/nativeModules/discordUtils */ "./src/dis/nativeModules/discordUtils.ts");
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/bdApi */ "./src/utils/bdApi.ts");
-/* harmony import */ var _utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/keycodeMappings */ "./src/utils/keycodeMappings.ts");
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/logger */ "./src/utils/logger.ts");
-/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/versionChecker */ "./src/utils/versionChecker.ts");
+/* harmony import */ var _botController_botController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./botController/botController */ "./src/botController/botController.ts");
+/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dis/modules/modules */ "./src/dis/modules/modules.ts");
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dis/modules/stores */ "./src/dis/modules/stores.ts");
+/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dis/nativeModules/discordUtils */ "./src/dis/nativeModules/discordUtils.ts");
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/bdApi */ "./src/utils/bdApi.ts");
+/* harmony import */ var _utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/keycodeMappings */ "./src/utils/keycodeMappings.ts");
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/logger */ "./src/utils/logger.ts");
+/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/versionChecker */ "./src/utils/versionChecker.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -296,37 +333,38 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var globalKeyboardShortcutsRegisterIds = [];
-(0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_6__["default"])();
+(0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_7__["default"])();
 var default_1 = /** @class */ (function () {
     function default_1() {
     }
     default_1.prototype.start = function () {
         var _this = this;
-        _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].info('Plugin enabled!');
+        _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info('Plugin enabled!');
         document.addEventListener('keydown', function () { return _this.keyBindHandler; });
         this.registerGlobalKeyboardShortcuts();
     };
     default_1.prototype.stop = function () {
         var _this = this;
-        _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].info('Plugin disabled!');
+        _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info('Plugin disabled!');
         document.removeEventListener('keydown', function () { return _this.keyBindHandler; });
         this.unregisterAllGlobalKeyboardShortcuts();
     };
     ///-----Audio actions / Bot interactions-----///
     default_1.prototype.toggleMuteClientSide = function () {
-        var activeBotId = this.getCurrentlyActiveBotId();
+        var activeBotId = (0,_botController_botController__WEBPACK_IMPORTED_MODULE_0__.getCurrentlyActiveBotId)();
         if (activeBotId == null)
             return;
-        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisAudioCtl.toggleLocalMute(activeBotId);
-        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
-        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisMediaInfo.isLocalMute(activeBotId)) {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
+        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_1__.DisAudioCtl.toggleLocalMute(activeBotId);
+        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_2__.DisUserStore.getUser(activeBotId).username;
+        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_2__.DisMediaInfo.isLocalMute(activeBotId)) {
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
                 forceShow: true,
             });
         }
         else {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
                 forceShow: true,
             });
         }
@@ -359,15 +397,15 @@ var default_1 = /** @class */ (function () {
     };
     default_1.prototype.registerGlobalKeyboardShortcuts = function () {
         var _this = this;
-        var keycodeMappings = (0,_utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_4__["default"])();
+        var keycodeMappings = (0,_utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_5__["default"])();
         var toggleMuteClientSideRegisterId = Math.floor(Math.random() * 100000);
         globalKeyboardShortcutsRegisterIds.push(toggleMuteClientSideRegisterId);
-        _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_2__["default"].inputEventRegister(toggleMuteClientSideRegisterId, [
+        _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_3__["default"].inputEventRegister(toggleMuteClientSideRegisterId, [
             [0, keycodeMappings.ctrl],
             [0, keycodeMappings.alt],
             [0, keycodeMappings.k],
         ], function (isDown) {
-            _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].log("ctrl+alt+k - isDown ".concat(isDown));
+            _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].log("ctrl+alt+k - isDown ".concat(isDown));
             if (isDown) {
                 _this.toggleMuteClientSide();
             }
@@ -381,27 +419,8 @@ var default_1 = /** @class */ (function () {
     default_1.prototype.unregisterAllGlobalKeyboardShortcuts = function () {
         for (var _i = 0, globalKeyboardShortcutsRegisterIds_1 = globalKeyboardShortcutsRegisterIds; _i < globalKeyboardShortcutsRegisterIds_1.length; _i++) {
             var id = globalKeyboardShortcutsRegisterIds_1[_i];
-            _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_2__["default"].inputEventUnregister(id);
+            _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_3__["default"].inputEventUnregister(id);
         }
-    };
-    ///-----Bot Detection-----///
-    default_1.prototype.getCurrentVoiceChannelUsersIds = function () {
-        var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisSelectedChannelStore.getVoiceChannelId());
-        var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
-        return currentVoiceChannelUsersIds;
-    };
-    default_1.prototype.getCurrentlyActiveBotId = function () {
-        //this will in the future allow to switch between multiple bots in vc
-        //for now it just gives the first form the list
-        var selectedBots = this.getMusicBotsInCurrentVoiceChat();
-        if (selectedBots.length == 0)
-            return null;
-        return selectedBots[0];
-    };
-    default_1.prototype.getMusicBotsInCurrentVoiceChat = function () {
-        var currentVoiceChannelUsersIds = this.getCurrentVoiceChannelUsersIds();
-        var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(userId).bot; });
-        return detectedBotsIds;
     };
     return default_1;
 }());
