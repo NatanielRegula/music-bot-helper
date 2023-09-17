@@ -1,7 +1,6 @@
 import { Switch } from '../../../dis/modules/uiComponents';
 import BdApi, { React, useState } from '../../../utils/bdApi';
 import config from '../../../../config.json';
-import Logger from '../../../utils/logger';
 
 interface Props {}
 
@@ -13,7 +12,7 @@ export default function EnablePluginPrompt(props: Props) {
   return (
     <div
       style={{
-        boxShadow: 'var(--dark-elevation-border), var(--dark-elevation-high)',
+        border: '1px solid var(--primary-500)',
         padding: '1rem',
         borderRadius: '5px',
         margin: '1rem 0 1rem 0',
