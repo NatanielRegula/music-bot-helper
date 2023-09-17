@@ -310,13 +310,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UI: () => (/* binding */ UI),
 /* harmony export */   Webpack: () => (/* binding */ Webpack),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   useState: () => (/* binding */ useState)
+/* harmony export */   useCallback: () => (/* binding */ useCallback),
+/* harmony export */   useContext: () => (/* binding */ useContext),
+/* harmony export */   useDebugValue: () => (/* binding */ useDebugValue),
+/* harmony export */   useDeferredValue: () => (/* binding */ useDeferredValue),
+/* harmony export */   useEffect: () => (/* binding */ useEffect),
+/* harmony export */   useId: () => (/* binding */ useId),
+/* harmony export */   useImperativeHandle: () => (/* binding */ useImperativeHandle),
+/* harmony export */   useInsertionEffect: () => (/* binding */ useInsertionEffect),
+/* harmony export */   useLayoutEffect: () => (/* binding */ useLayoutEffect),
+/* harmony export */   useMemo: () => (/* binding */ useMemo),
+/* harmony export */   useReducer: () => (/* binding */ useReducer),
+/* harmony export */   useRef: () => (/* binding */ useRef),
+/* harmony export */   useState: () => (/* binding */ useState),
+/* harmony export */   useSyncExternalStore: () => (/* binding */ useSyncExternalStore),
+/* harmony export */   useTransition: () => (/* binding */ useTransition)
 /* harmony export */ });
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config.json */ "./config.json");
 
 var BdApi = new window.BdApi(_config_json__WEBPACK_IMPORTED_MODULE_0__.name);
-var UI = BdApi.UI, React = BdApi.React, Patcher = BdApi.Patcher, Webpack = BdApi.Webpack, Data = BdApi.Data;
-var useState = BdApi.React.useState;
+var UI = BdApi.UI, Patcher = BdApi.Patcher, Webpack = BdApi.Webpack, Data = BdApi.Data;
+var React = BdApi.React;
+var useState = React.useState, useEffect = React.useEffect, useMemo = React.useMemo, useCallback = React.useCallback, useContext = React.useContext, useDebugValue = React.useDebugValue, useDeferredValue = React.useDeferredValue, useId = React.useId, useImperativeHandle = React.useImperativeHandle, useInsertionEffect = React.useInsertionEffect, useLayoutEffect = React.useLayoutEffect, useReducer = React.useReducer, useRef = React.useRef, useSyncExternalStore = React.useSyncExternalStore, useTransition = React.useTransition;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BdApi);
 
 
