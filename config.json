@@ -1,6 +1,6 @@
 {
     "name": "ZoxMusicBotHelper",
-    "description": "describe",
+    "description": "zoxMusicBotHelper allows you to control a music bot that's in your vc.",
     "author": "NR",
     "version": "0.0.6"
   }
