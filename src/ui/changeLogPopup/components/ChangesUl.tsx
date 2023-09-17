@@ -45,7 +45,7 @@ export function ChangesUlBugFixes(props: Props) {
           </span>
           <ul style={{ margin: '.3rem 0px 0 1.5rem' }}>
             {props.changes.map((change) => {
-              return <li>{change}</li>;
+              return <li key={change}>{change}</li>;
             })}
           </ul>
         </div>
