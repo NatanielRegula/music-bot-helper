@@ -26,9 +26,21 @@ function ChangeLogPopup(props: Props) {
                 gap: '1rem',
               }}
             >
-              <span className="defaultColor-1EVLSt heading-lg-semibold-14ouVv">
-                {value.title}
-              </span>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <span className="defaultColor-1EVLSt heading-lg-semibold-14ouVv">
+                  {value.title}
+                </span>
+
+                {value.title === props.newVersion && (
+                  <span className="defaultColor-1EVLSt">New</span>
+                )}
+              </div>
               <ChangesUlFeatures changes={value.feature} />
               <ChangesUlBugFixes changes={value.fixed} />
             </div>

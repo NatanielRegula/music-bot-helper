@@ -142,20 +142,24 @@ function ChangeLogPopup(props) {
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "content-FDHp32" }, Object.entries(_changelog_json__WEBPACK_IMPORTED_MODULE_1__).map(function (_a) {
-            var _ = _a[0], value = _a[1];
-            return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: {
+            var key = _a[0], value = _a[1];
+            return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { key: key, style: {
                     padding: '1rem',
                     background: 'var(--primary-700)',
                     borderRadius: '5px',
                     margin: '0 0 1rem 0',
                     display: 'flex',
                     flexDirection: 'column',
+                    gap: '1rem',
                 } },
-                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
-                        //   alignSelf: 'flex-end',
-                        margin: '0 0 1rem 0',
-                    }, className: "defaultColor-1EVLSt heading-lg-semibold-14ouVv" }, value.title),
-                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__.ChangesUlImprovements, { changes: value.improved }),
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: {
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-start',
+                    } },
+                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { className: "defaultColor-1EVLSt heading-lg-semibold-14ouVv" }, value.title),
+                    value.title === props.newVersion && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { className: "defaultColor-1EVLSt" }, "New"))),
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__.ChangesUlFeatures, { changes: value.feature }),
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__.ChangesUlBugFixes, { changes: value.fixed })));
         }))));
 }
@@ -212,30 +216,30 @@ function ChangeLogTopBanner() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ChangesUlBugFixes: () => (/* binding */ ChangesUlBugFixes),
-/* harmony export */   ChangesUlImprovements: () => (/* binding */ ChangesUlImprovements)
+/* harmony export */   ChangesUlFeatures: () => (/* binding */ ChangesUlFeatures)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/bdApi */ "./src/utils/bdApi.ts");
 
-function ChangesUlImprovements(props) {
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null,
+function ChangesUlFeatures(props) {
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null,
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
                 color: 'var(--text-positive)',
                 fontWeight: 600,
-                //   textTransform: 'uppercase',
-            } }, "Improvements"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 1.5rem 1.5rem' } }, props.changes.map(function (change) {
-            return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", null, change);
+                textTransform: 'uppercase',
+            } }, "[Features]"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 0 1.5rem' } }, props.changes.map(function (change) {
+            return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", { key: change }, change);
         }))))));
 }
 function ChangesUlBugFixes(props) {
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null,
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null,
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
                 color: 'var(--text-danger)',
                 fontWeight: 600,
-                //   textTransform: 'uppercase',
-            } }, "Bug fixes"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 1.5rem 1.5rem' } }, props.changes.map(function (change) {
-            return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", null, change);
+                textTransform: 'uppercase',
+            } }, "[Bug fixes]"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 0 1.5rem' } }, props.changes.map(function (change) {
+            return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", { key: change }, change);
         }))))));
 }
 
@@ -261,7 +265,7 @@ __webpack_require__.r(__webpack_exports__);
 function EnablePluginPrompt(props) {
     var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.useState)(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name)), isChecked = _a[0], setIsChecked = _a[1];
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
-            boxShadow: 'var(--dark-elevation-border), var(--dark-elevation-high)',
+            border: '1px solid var(--primary-500)',
             padding: '1rem',
             borderRadius: '5px',
             margin: '1rem 0 1rem 0',
@@ -391,7 +395,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function checkIfVersionUpdated() {
-    if (_config_json__WEBPACK_IMPORTED_MODULE_2__.version != _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load("lastLoadedVersion")) {
+    if (_config_json__WEBPACK_IMPORTED_MODULE_2__.version !== _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load("lastLoadedVersion")) {
         _logger__WEBPACK_IMPORTED_MODULE_1__["default"].info('New version installed!');
         _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].alert(_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__["default"], null), _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__["default"], { newVersion: _config_json__WEBPACK_IMPORTED_MODULE_2__.version }));
         _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save("lastLoadedVersion", _config_json__WEBPACK_IMPORTED_MODULE_2__.version);
@@ -407,7 +411,7 @@ function checkIfVersionUpdated() {
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"0.0.6":{"title":"0.0.6","fixed":[],"improved":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"improved":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"improved":["Improved toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"improved":[]},"0.0.2":{"title":"0.0.2","fixed":[],"improved":["Added toast message when bot muted or unmuted with the keybind"]}}');
+module.exports = JSON.parse('{"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
 

@@ -5,7 +5,7 @@ import ChangeLogPopup from '../ui/changeLogPopup/ChangeLogPopup';
 import ChangeLogTopBanner from '../ui/changeLogPopup/ChangeLogTopBanner';
 
 export default function checkIfVersionUpdated() {
-  if (config.version != Data.load(`lastLoadedVersion`)) {
+  if (config.version !== Data.load(`lastLoadedVersion`)) {
     Logger.info('New version installed!');
 
     BdApi.alert(
