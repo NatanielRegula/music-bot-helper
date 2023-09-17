@@ -13,10 +13,10 @@ export function ChangesUlFeatures(props: Props) {
             style={{
               color: 'var(--text-positive)',
               fontWeight: 600,
-              //   textTransform: 'uppercase',
+              textTransform: 'uppercase',
             }}
           >
-            Features
+            &#91;Features&#93;
           </span>
           <ul style={{ margin: '.3rem 0px 0 1.5rem' }}>
             {props.changes.map((change) => {
@@ -38,10 +38,10 @@ export function ChangesUlBugFixes(props: Props) {
             style={{
               color: 'var(--text-danger)',
               fontWeight: 600,
-              //   textTransform: 'uppercase',
+              textTransform: 'uppercase',
             }}
           >
-            Bug fixes
+            &#91;Bug fixes&#93;
           </span>
           <ul style={{ margin: '.3rem 0px 0 1.5rem' }}>
             {props.changes.map((change) => {
