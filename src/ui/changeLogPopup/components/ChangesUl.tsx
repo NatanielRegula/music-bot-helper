@@ -4,7 +4,7 @@ interface Props {
   changes: string[];
 }
 
-export function ChangesUlImprovements(props: Props) {
+export function ChangesUlFeatures(props: Props) {
   return (
     <div>
       {props.changes.length != 0 && (
@@ -16,11 +16,11 @@ export function ChangesUlImprovements(props: Props) {
               //   textTransform: 'uppercase',
             }}
           >
-            Improvements
+            Features
           </span>
-          <ul style={{ margin: '.3rem 0px 1.5rem 1.5rem' }}>
+          <ul style={{ margin: '.3rem 0px 0 1.5rem' }}>
             {props.changes.map((change) => {
-              return <li>{change}</li>;
+              return <li key={change}>{change}</li>;
             })}
           </ul>
         </>
@@ -43,7 +43,7 @@ export function ChangesUlBugFixes(props: Props) {
           >
             Bug fixes
           </span>
-          <ul style={{ margin: '.3rem 0px 1.5rem 1.5rem' }}>
+          <ul style={{ margin: '.3rem 0px 0 1.5rem' }}>
             {props.changes.map((change) => {
               return <li>{change}</li>;
             })}
