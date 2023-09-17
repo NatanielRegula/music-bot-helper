@@ -102,9 +102,9 @@ var NativeDisUtils = window.DiscordNative.nativeModules.requireModule('discord_u
 
 /***/ }),
 
-/***/ "./src/ui/changeLogPopup/changeLogPopup.tsx":
+/***/ "./src/ui/changeLogPopup/ChangeLogPopup.tsx":
 /*!**************************************************!*\
-  !*** ./src/ui/changeLogPopup/changeLogPopup.tsx ***!
+  !*** ./src/ui/changeLogPopup/ChangeLogPopup.tsx ***!
   \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -120,11 +120,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function ChangeLogPopup(props) {
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { marginBottom: '1rem' } },
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("h2", { className: "defaultColor-1EVLSt heading-lg-semibold-14ouVv" }, "Here is what changed"),
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", null,
-                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", null,
-                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", null, "Current Version: ".concat(props.newVersion))))),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "content-FDHp32" }, Object.entries(_changelog_json__WEBPACK_IMPORTED_MODULE_1__).map(function (_a) {
             var _ = _a[0], value = _a[1];
             return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: {
@@ -148,6 +143,45 @@ function ChangeLogPopup(props) {
 
 /***/ }),
 
+/***/ "./src/ui/changeLogPopup/ChangeLogTopBanner.tsx":
+/*!******************************************************!*\
+  !*** ./src/ui/changeLogPopup/ChangeLogTopBanner.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ChangeLogTopBanner)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/bdApi */ "./src/utils/bdApi.ts");
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../config.json */ "./config.json");
+
+
+function ChangeLogTopBanner() {
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: {
+            display: 'flex',
+            flexDirection: 'column',
+        } },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: {
+                width: '410px',
+                display: 'flex',
+                justifyContent: 'space-between',
+            } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
+                    fontSize: '0.8rem',
+                    textTransform: 'uppercase',
+                } }, "Plugin updated"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
+                    fontSize: '0.7rem',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-normal)',
+                } }, "Current Version: ".concat(_config_json__WEBPACK_IMPORTED_MODULE_1__.version))),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", null, "".concat(_config_json__WEBPACK_IMPORTED_MODULE_1__.name))));
+}
+
+
+/***/ }),
+
 /***/ "./src/ui/changeLogPopup/components/ChangesUl.tsx":
 /*!********************************************************!*\
   !*** ./src/ui/changeLogPopup/components/ChangesUl.tsx ***!
@@ -165,6 +199,7 @@ function ChangesUlImprovements(props) {
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null,
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
                 color: 'var(--text-positive)',
+                fontWeight: 600,
                 //   textTransform: 'uppercase',
             } }, "Improvements"),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 1.5rem 1.5rem' } }, props.changes.map(function (change) {
@@ -175,6 +210,7 @@ function ChangesUlBugFixes(props) {
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null,
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
                 color: 'var(--text-danger)',
+                fontWeight: 600,
                 //   textTransform: 'uppercase',
             } }, "Bug fixes"),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 1.5rem 1.5rem' } }, props.changes.map(function (change) {
@@ -276,7 +312,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bdApi */ "./src/utils/bdApi.ts");
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logger */ "./src/utils/logger.ts");
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config.json */ "./config.json");
-/* harmony import */ var _ui_changeLogPopup_changeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ui/changeLogPopup/changeLogPopup */ "./src/ui/changeLogPopup/changeLogPopup.tsx");
+/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ui/changeLogPopup/ChangeLogPopup */ "./src/ui/changeLogPopup/ChangeLogPopup.tsx");
+/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ui/changeLogPopup/ChangeLogTopBanner */ "./src/ui/changeLogPopup/ChangeLogTopBanner.tsx");
+
 
 
 
@@ -284,7 +322,7 @@ __webpack_require__.r(__webpack_exports__);
 function checkIfVersionUpdated() {
     if (_config_json__WEBPACK_IMPORTED_MODULE_2__.version != _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load("lastLoadedVersion")) {
         _logger__WEBPACK_IMPORTED_MODULE_1__["default"].info('New version installed!');
-        _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].showConfirmationModal("New version of ".concat(_config_json__WEBPACK_IMPORTED_MODULE_2__.name, " was installed."), _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_changeLogPopup__WEBPACK_IMPORTED_MODULE_3__["default"], { newVersion: _config_json__WEBPACK_IMPORTED_MODULE_2__.version }));
+        _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].alert(_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__["default"], null), _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__["default"], { newVersion: _config_json__WEBPACK_IMPORTED_MODULE_2__.version }));
         _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save("lastLoadedVersion", _config_json__WEBPACK_IMPORTED_MODULE_2__.version);
     }
 }

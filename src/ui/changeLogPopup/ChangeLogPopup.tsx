@@ -12,16 +12,6 @@ interface Props {
 function ChangeLogPopup(props: Props) {
   return (
     <div className="colorStandard-1Xxp1s size12-12FL_s">
-      <div style={{ marginBottom: '1rem' }}>
-        <h2 className="defaultColor-1EVLSt heading-lg-semibold-14ouVv">
-          Here is what changed
-        </h2>
-        <ul>
-          <li>
-            <span>{`Current Version: ${props.newVersion}`}</span>
-          </li>
-        </ul>
-      </div>
       <div className="content-FDHp32">
         {Object.entries(changeLog).map(([_, value]) => {
           return (
@@ -53,4 +43,5 @@ function ChangeLogPopup(props: Props) {
     </div>
   );
 }
+
 export default ChangeLogPopup;

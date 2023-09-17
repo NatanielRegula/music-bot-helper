@@ -12,6 +12,7 @@ export function ChangesUlImprovements(props: Props) {
           <span
             style={{
               color: 'var(--text-positive)',
+              fontWeight: 600,
               //   textTransform: 'uppercase',
             }}
           >
@@ -36,6 +37,7 @@ export function ChangesUlBugFixes(props: Props) {
           <span
             style={{
               color: 'var(--text-danger)',
+              fontWeight: 600,
               //   textTransform: 'uppercase',
             }}
           >
