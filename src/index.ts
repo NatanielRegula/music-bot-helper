@@ -17,6 +17,7 @@ export default class {
     document.addEventListener('keydown', () => this.keyBindHandler);
     this.registerGlobalKeyboardShortcuts();
   }
+
   stop() {
     Logger.info('Plugin disabled!');
     document.removeEventListener('keydown', () => this.keyBindHandler);

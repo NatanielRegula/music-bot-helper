@@ -86,6 +86,24 @@ var DisMediaInfo = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModu
 
 /***/ }),
 
+/***/ "./src/dis/modules/uiComponents.ts":
+/*!*****************************************!*\
+  !*** ./src/dis/modules/uiComponents.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Switch: () => (/* binding */ Switch)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/bdApi */ "./src/utils/bdApi.ts");
+
+var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('AnimatedAvatar');
+var Switch = DisUiComponents.Switch;
+
+
+/***/ }),
+
 /***/ "./src/dis/nativeModules/discordUtils.ts":
 /*!***********************************************!*\
   !*** ./src/dis/nativeModules/discordUtils.ts ***!
@@ -115,11 +133,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/bdApi */ "./src/utils/bdApi.ts");
 /* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../changelog.json */ "./changelog.json");
 /* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ChangesUl */ "./src/ui/changeLogPopup/components/ChangesUl.tsx");
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/EnablePluginPrompt */ "./src/ui/changeLogPopup/components/EnablePluginPrompt.tsx");
+
 
 
 
 function ChangeLogPopup(props) {
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "content-FDHp32" }, Object.entries(_changelog_json__WEBPACK_IMPORTED_MODULE_1__).map(function (_a) {
             var _ = _a[0], value = _a[1];
             return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: {
@@ -221,6 +242,54 @@ function ChangesUlBugFixes(props) {
 
 /***/ }),
 
+/***/ "./src/ui/changeLogPopup/components/EnablePluginPrompt.tsx":
+/*!*****************************************************************!*\
+  !*** ./src/ui/changeLogPopup/components/EnablePluginPrompt.tsx ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../dis/modules/uiComponents */ "./src/dis/modules/uiComponents.ts");
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/bdApi */ "./src/utils/bdApi.ts");
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../config.json */ "./config.json");
+
+
+
+function EnablePluginPrompt(props) {
+    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.useState)(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name)), isChecked = _a[0], setIsChecked = _a[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
+            boxShadow: 'var(--dark-elevation-border), var(--dark-elevation-high)',
+            padding: '1rem',
+            borderRadius: '5px',
+            margin: '1rem 0 1rem 0',
+            display: 'flex',
+            flexDirection: 'column',
+        } },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+            } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("label", { htmlFor: "enablePlugin", className: "title-2yADjX" }, "Enable the plugin"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__.Switch, { id: "enablePlugin", checked: isChecked, onChange: function (value) {
+                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.toggle(_config_json__WEBPACK_IMPORTED_MODULE_2__.name);
+                    setIsChecked(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name));
+                } })),
+        !isChecked && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: { margin: '1rem 0 0 0' } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("span", { style: {
+                    fontSize: ' 0.8rem',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-danger)',
+                } }, "Plugin is currently disabled!"),
+            ' '))));
+}
+
+
+/***/ }),
+
 /***/ "./src/utils/bdApi.ts":
 /*!****************************!*\
   !*** ./src/utils/bdApi.ts ***!
@@ -234,12 +303,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   React: () => (/* binding */ React),
 /* harmony export */   UI: () => (/* binding */ UI),
 /* harmony export */   Webpack: () => (/* binding */ Webpack),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   useState: () => (/* binding */ useState)
 /* harmony export */ });
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config.json */ "./config.json");
 
 var BdApi = new window.BdApi(_config_json__WEBPACK_IMPORTED_MODULE_0__.name);
 var UI = BdApi.UI, React = BdApi.React, Patcher = BdApi.Patcher, Webpack = BdApi.Webpack, Data = BdApi.Data;
+var useState = BdApi.React.useState;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BdApi);
 
 
@@ -346,7 +417,7 @@ module.exports = JSON.parse('{"0.0.6":{"title":"0.0.6","fixed":[],"improved":["A
   \*********************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"describe","author":"NR","version":"0.0.6"}');
+module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.6"}');
 
 /***/ })
 
