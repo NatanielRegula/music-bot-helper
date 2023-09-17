@@ -6,9 +6,9 @@ interface Props {
 
 export function ChangesUlFeatures(props: Props) {
   return (
-    <div>
+    <>
       {props.changes.length != 0 && (
-        <>
+        <div>
           <span
             style={{
               color: 'var(--text-positive)',
@@ -23,17 +23,17 @@ export function ChangesUlFeatures(props: Props) {
               return <li key={change}>{change}</li>;
             })}
           </ul>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 
 export function ChangesUlBugFixes(props: Props) {
   return (
-    <div>
+    <>
       {props.changes.length != 0 && (
-        <>
+        <div>
           <span
             style={{
               color: 'var(--text-danger)',
@@ -48,8 +48,8 @@ export function ChangesUlBugFixes(props: Props) {
               return <li>{change}</li>;
             })}
           </ul>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
