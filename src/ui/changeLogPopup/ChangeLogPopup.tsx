@@ -4,6 +4,7 @@ import {
   ChangesUlBugFixes,
   ChangesUlImprovements,
 } from './components/ChangesUl';
+import EnablePluginPrompt from './components/EnablePluginPrompt';
 
 interface Props {
   newVersion: string;
@@ -12,6 +13,7 @@ interface Props {
 function ChangeLogPopup(props: Props) {
   return (
     <div className="colorStandard-1Xxp1s size12-12FL_s">
+      <EnablePluginPrompt />
       <div className="content-FDHp32">
         {Object.entries(changeLog).map(([_, value]) => {
           return (
