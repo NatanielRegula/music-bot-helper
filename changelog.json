@@ -1,22 +1,36 @@
 {
+    "0.0.6": {
+        "title": "0.0.6",
+        "fixed": [],
+        "improved": [
+            "Adds changelog back."
+        ]
+    },
+    "0.0.5": {
+        "title": "0.0.5",
+        "fixed": [],
+        "improved": [
+            "New version with new codebase."
+        ]
+    },
     "0.0.4": {
         "title": "0.0.4",
-        "type": "improved",
-        "items": [
+        "fixed": [],
+        "improved": [
             "Improved toast messages."
         ]
     },
     "0.0.3": {
         "title": "0.0.3",
-        "type": "fixed",
-        "items": [
+        "fixed": [
             "Fixed bugs"
-        ]
+        ],
+        "improved": []
     },
     "0.0.2": {
         "title": "0.0.2",
-        "type": "improved",
-        "items": [
+        "fixed": [],
+        "improved": [
             "Added toast message when bot muted or unmuted with the keybind"
         ]
     }

@@ -1,5 +1,8 @@
 {
   "devDependencies": {
+    "@types/react": "^18.2.21",
+    "css-loader": "^6.8.1",
+    "raw-loader": "^4.0.2",
     "ts-loader": "^9.4.4",
     "typescript": "^5.2.2",
     "webpack": "^5.88.2",

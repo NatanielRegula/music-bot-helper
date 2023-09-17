@@ -5,3 +5,4 @@ declare global {
     DiscordNative: any;
   }
 }
+declare module '*.module.css';

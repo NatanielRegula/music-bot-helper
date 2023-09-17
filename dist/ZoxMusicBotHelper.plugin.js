@@ -102,6 +102,89 @@ var NativeDisUtils = window.DiscordNative.nativeModules.requireModule('discord_u
 
 /***/ }),
 
+/***/ "./src/ui/changeLogPopup/changeLogPopup.tsx":
+/*!**************************************************!*\
+  !*** ./src/ui/changeLogPopup/changeLogPopup.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/bdApi */ "./src/utils/bdApi.ts");
+/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../changelog.json */ "./changelog.json");
+/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ChangesUl */ "./src/ui/changeLogPopup/components/ChangesUl.tsx");
+
+
+
+function ChangeLogPopup(props) {
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { marginBottom: '1rem' } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("h2", { className: "defaultColor-1EVLSt heading-lg-semibold-14ouVv" }, "Here is what changed"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", null,
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", null,
+                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", null, "Current Version: ".concat(props.newVersion))))),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "content-FDHp32" }, Object.entries(_changelog_json__WEBPACK_IMPORTED_MODULE_1__).map(function (_a) {
+            var _ = _a[0], value = _a[1];
+            return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: {
+                    padding: '1rem',
+                    background: 'var(--primary-700)',
+                    borderRadius: '5px',
+                    margin: '0 0 1rem 0',
+                    display: 'flex',
+                    flexDirection: 'column',
+                } },
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
+                        //   alignSelf: 'flex-end',
+                        margin: '0 0 1rem 0',
+                    }, className: "defaultColor-1EVLSt heading-lg-semibold-14ouVv" }, value.title),
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__.ChangesUlImprovements, { changes: value.improved }),
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__.ChangesUlBugFixes, { changes: value.fixed })));
+        }))));
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChangeLogPopup);
+
+
+/***/ }),
+
+/***/ "./src/ui/changeLogPopup/components/ChangesUl.tsx":
+/*!********************************************************!*\
+  !*** ./src/ui/changeLogPopup/components/ChangesUl.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ChangesUlBugFixes: () => (/* binding */ ChangesUlBugFixes),
+/* harmony export */   ChangesUlImprovements: () => (/* binding */ ChangesUlImprovements)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/bdApi */ "./src/utils/bdApi.ts");
+
+function ChangesUlImprovements(props) {
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null,
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
+                color: 'var(--text-positive)',
+                //   textTransform: 'uppercase',
+            } }, "Improvements"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 1.5rem 1.5rem' } }, props.changes.map(function (change) {
+            return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", null, change);
+        }))))));
+}
+function ChangesUlBugFixes(props) {
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null,
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { style: {
+                color: 'var(--text-danger)',
+                //   textTransform: 'uppercase',
+            } }, "Bug fixes"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 1.5rem 1.5rem' } }, props.changes.map(function (change) {
+            return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", null, change);
+        }))))));
+}
+
+
+/***/ }),
+
 /***/ "./src/utils/bdApi.ts":
 /*!****************************!*\
   !*** ./src/utils/bdApi.ts ***!
@@ -180,10 +263,10 @@ Logger.name = _config_json__WEBPACK_IMPORTED_MODULE_1__.name;
 
 /***/ }),
 
-/***/ "./src/utils/versionChecker.ts":
-/*!*************************************!*\
-  !*** ./src/utils/versionChecker.ts ***!
-  \*************************************/
+/***/ "./src/utils/versionChecker.tsx":
+/*!**************************************!*\
+  !*** ./src/utils/versionChecker.tsx ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -193,16 +276,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bdApi */ "./src/utils/bdApi.ts");
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logger */ "./src/utils/logger.ts");
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config.json */ "./config.json");
+/* harmony import */ var _ui_changeLogPopup_changeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ui/changeLogPopup/changeLogPopup */ "./src/ui/changeLogPopup/changeLogPopup.tsx");
+
 
 
 
 function checkIfVersionUpdated() {
     if (_config_json__WEBPACK_IMPORTED_MODULE_2__.version != _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load("lastLoadedVersion")) {
-        _logger__WEBPACK_IMPORTED_MODULE_1__["default"].info('new version loaded');
+        _logger__WEBPACK_IMPORTED_MODULE_1__["default"].info('New version installed!');
+        _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].showConfirmationModal("New version of ".concat(_config_json__WEBPACK_IMPORTED_MODULE_2__.name, " was installed."), _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_changeLogPopup__WEBPACK_IMPORTED_MODULE_3__["default"], { newVersion: _config_json__WEBPACK_IMPORTED_MODULE_2__.version }));
         _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save("lastLoadedVersion", _config_json__WEBPACK_IMPORTED_MODULE_2__.version);
     }
 }
 
+
+/***/ }),
+
+/***/ "./changelog.json":
+/*!************************!*\
+  !*** ./changelog.json ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = JSON.parse('{"0.0.6":{"title":"0.0.6","fixed":[],"improved":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"improved":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"improved":["Improved toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"improved":[]},"0.0.2":{"title":"0.0.2","fixed":[],"improved":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
 
@@ -212,7 +308,7 @@ function checkIfVersionUpdated() {
   \*********************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"describe","author":"NR","version":"0.0.2"}');
+module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"describe","author":"NR","version":"0.0.6"}');
 
 /***/ })
 
@@ -289,7 +385,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/bdApi */ "./src/utils/bdApi.ts");
 /* harmony import */ var _utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/keycodeMappings */ "./src/utils/keycodeMappings.ts");
 /* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/logger */ "./src/utils/logger.ts");
-/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/versionChecker */ "./src/utils/versionChecker.ts");
+/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/versionChecker */ "./src/utils/versionChecker.tsx");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
