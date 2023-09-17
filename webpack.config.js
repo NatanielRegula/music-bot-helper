@@ -1,19 +1,7 @@
 const webpack = require('webpack');
-const pkg = require('./package.json');
-const pluginConfig = require('./config.json');
+const config = require('./config.json');
 const path = require('path');
 const fs = require('fs');
-
-pluginConfig.version = pkg.version;
-
-const meta = (() => {
-  const lines = ['/**'];
-  for (const key in pluginConfig) {
-    lines.push(` * @${key} ${pluginConfig[key]}`);
-  }
-  lines.push(' */');
-  return lines.join('\n');
-})();
 
 module.exports = {
   mode: 'development',
@@ -41,7 +29,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: `${pluginConfig.name}.plugin.js`,
+    filename: `${config.name}.plugin.js`,
     path: path.join(__dirname, 'dist'),
     libraryTarget: 'commonjs2',
     libraryExport: 'default',
@@ -51,10 +39,23 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.css'],
   },
   plugins: [
-    new webpack.BannerPlugin({ raw: true, banner: meta }),
+    new webpack.BannerPlugin({
+      raw: true,
+      banner: (_) => {
+        const upToDateConfig = fs.readFileSync('./config.json');
+        const upToDateConfigJson = JSON.parse(upToDateConfig);
+
+        const lines = ['/**'];
+        for (const key in upToDateConfigJson) {
+          lines.push(` * @${key} ${upToDateConfigJson[key]}`);
+        }
+        lines.push(' */');
+        return lines.join('\n');
+      },
+    }),
     {
       apply: (compiler) => {
-        compiler.hooks.assetEmitted.tap(pluginConfig.name, (filename, info) => {
+        compiler.hooks.assetEmitted.tap(config.name, (filename, info) => {
           const userConfig = (() => {
             if (process.platform === 'win32') return process.env.APPDATA;
 

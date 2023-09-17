@@ -1,4 +1,13 @@
 {
+    "0.0.7": {
+        "title": "0.0.7",
+        "fixed": [
+            "Fixed meta data not being included properly."
+        ],
+        "feature": [
+            "Added source and donate links to meta"
+        ]
+    },
     "0.0.6": {
         "title": "0.0.6",
         "fixed": [],

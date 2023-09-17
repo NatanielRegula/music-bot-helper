@@ -1,8 +1,10 @@
 /**
  * @name ZoxMusicBotHelper
- * @description describe
+ * @description zoxMusicBotHelper allows you to control a music bot that's in your vc.
  * @author NR
- * @version undefined
+ * @version 0.0.7
+ * @donate paypal.me/NatanielRegula
+ * @source https://github.com/NatanielRegula/music-bot-helper/
  */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
@@ -411,7 +413,7 @@ function checkIfVersionUpdated() {
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
+module.exports = JSON.parse('{"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
 
@@ -421,7 +423,7 @@ module.exports = JSON.parse('{"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Ad
   \*********************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.6"}');
+module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.7","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
 
 /***/ })
 
