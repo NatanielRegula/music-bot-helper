@@ -4,6 +4,7 @@ declare global {
     BdApi: any;
     DiscordNative: any;
     showSettings: any;
+    showVersionUpdatedPopup: Function;
   }
 }
 declare module '*.module.css';

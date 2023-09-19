@@ -1,21 +1,25 @@
+import { UI, React } from './utils/bdApi';
 import { getCurrentlyActiveBotId } from './botController/botController';
 import { DisAudioCtl } from './dis/modules/modules';
 import { DisMediaInfo, DisUserStore } from './dis/modules/stores';
 import NativeDisUtils from './dis/nativeModules/discordUtils';
-import { UI } from './utils/bdApi';
+import SettingsPopup from './ui/settingsPopup/SettingsPopup';
 import getKeycodeMappings from './utils/keycodeMappings';
 import Logger from './utils/logger';
 import showSettings from './utils/showSettings';
-import checkIfVersionUpdated from './utils/versionChecker';
+import checkIfVersionUpdated, {
+  showVersionUpdatedPopup,
+} from './utils/versionChecker';
 
 let globalKeyboardShortcutsRegisterIds: number[] = [];
 
 checkIfVersionUpdated();
 
 if (process.env.NODE_ENV === 'development') {
-  Logger.info(`Development Mode!`);
+  Logger.warn(`Development Mode!`);
 
   window.showSettings = showSettings;
+  window.showVersionUpdatedPopup = showVersionUpdatedPopup;
 }
 
 export default class {
@@ -33,36 +37,7 @@ export default class {
   }
 
   getSettingsPanel() {
-    const mySettingsPanel = document.createElement('div');
-    mySettingsPanel.id = 'my-settings';
-
-    const buttonTextSetting = document.createElement('div');
-    buttonTextSetting.classList.add('setting');
-
-    const buttonTextLabel = document.createElement('span');
-    buttonTextLabel.textContent = 'Button Text';
-
-    const buttonTextInput = document.createElement('input');
-    buttonTextInput.type = 'text';
-    buttonTextInput.name = 'buttonText';
-
-    buttonTextSetting.append(buttonTextLabel, buttonTextInput);
-
-    const darkModeSetting = document.createElement('div');
-    darkModeSetting.classList.add('setting');
-
-    const darkModeLabel = document.createElement('span');
-    darkModeLabel.textContent = 'Dark Mode';
-
-    const darkModeInput = document.createElement('input');
-    darkModeInput.type = 'checkbox';
-    darkModeInput.name = 'darkMode';
-
-    darkModeSetting.append(darkModeLabel, darkModeInput);
-
-    mySettingsPanel.append(buttonTextSetting, darkModeSetting);
-
-    return mySettingsPanel;
+    return <SettingsPopup />;
   }
 
   ///-----Audio actions / Bot interactions-----///

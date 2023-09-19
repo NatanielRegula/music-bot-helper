@@ -314,7 +314,8 @@ var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmMod
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ checkIfVersionUpdated)
+/* harmony export */   "default": () => (/* binding */ checkIfVersionUpdated),
+/* harmony export */   showVersionUpdatedPopup: () => (/* binding */ showVersionUpdatedPopup)
 /* harmony export */ });
 /* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
@@ -328,10 +329,13 @@ __webpack_require__.r(__webpack_exports__);
 
 function checkIfVersionUpdated() {
     if (_config_json__WEBPACK_IMPORTED_MODULE_2__.version !== _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load("lastLoadedVersion")) {
-        _logger__WEBPACK_IMPORTED_MODULE_1__["default"].info('New version installed!');
-        _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].alert(_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__["default"], null), _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__["default"], { newVersion: _config_json__WEBPACK_IMPORTED_MODULE_2__.version }));
-        _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save("lastLoadedVersion", _config_json__WEBPACK_IMPORTED_MODULE_2__.version);
+        showVersionUpdatedPopup();
     }
+}
+function showVersionUpdatedPopup() {
+    _logger__WEBPACK_IMPORTED_MODULE_1__["default"].info('New version installed!');
+    _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].alert(_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__["default"], null), _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__["default"], { newVersion: _config_json__WEBPACK_IMPORTED_MODULE_2__.version }));
+    _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save("lastLoadedVersion", _config_json__WEBPACK_IMPORTED_MODULE_2__.version);
 }
 
 
@@ -499,6 +503,69 @@ function ChangeLogTopBanner() {
 }
 
 
+/***/ }),
+/* 17 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SettingsPopup)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19);
+
+
+function SettingsPopup(props) {
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
+}
+
+
+/***/ }),
+/* 18 */,
+/* 19 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+
+
+
+function EnablePluginPrompt(props) {
+    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.useState)(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name)), isChecked = _a[0], setIsChecked = _a[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
+            border: '1px solid var(--primary-500)',
+            padding: '1rem',
+            borderRadius: '5px',
+            margin: '1rem 0 1rem 0',
+            display: 'flex',
+            flexDirection: 'column',
+        } },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+            } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("label", { htmlFor: "enablePlugin", className: "title-2yADjX" }, "Enable the plugin"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__.Switch, { id: "enablePlugin", checked: isChecked, onChange: function (value) {
+                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.toggle(_config_json__WEBPACK_IMPORTED_MODULE_2__.name);
+                    setIsChecked(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name));
+                } })),
+        !isChecked && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: { margin: '1rem 0 0 0' } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("span", { style: {
+                    fontSize: ' 0.8rem',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-danger)',
+                } }, "Plugin is currently disabled!"),
+            ' '))));
+}
+
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -563,15 +630,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _botController_botController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8);
-/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9);
-/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _botController_botController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
+/* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
+/* harmony import */ var _utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
+/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9);
+/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(11);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -617,63 +685,46 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var globalKeyboardShortcutsRegisterIds = [];
-(0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_8__["default"])();
+(0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__["default"])();
 if (true) {
-    _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info("Development Mode!");
-    window.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_7__["default"];
+    _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].warn("Development Mode!");
+    window.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__["default"];
+    window.showVersionUpdatedPopup = _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__.showVersionUpdatedPopup;
 }
 var default_1 = /** @class */ (function () {
     function default_1() {
     }
     default_1.prototype.start = function () {
         var _this = this;
-        _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info('Plugin enabled!');
+        _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('Plugin enabled!');
         document.addEventListener('keydown', function () { return _this.keyBindHandler; });
         this.registerGlobalKeyboardShortcuts();
     };
     default_1.prototype.stop = function () {
         var _this = this;
-        _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info('Plugin disabled!');
+        _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('Plugin disabled!');
         document.removeEventListener('keydown', function () { return _this.keyBindHandler; });
         this.unregisterAllGlobalKeyboardShortcuts();
     };
     default_1.prototype.getSettingsPanel = function () {
-        var mySettingsPanel = document.createElement('div');
-        mySettingsPanel.id = 'my-settings';
-        var buttonTextSetting = document.createElement('div');
-        buttonTextSetting.classList.add('setting');
-        var buttonTextLabel = document.createElement('span');
-        buttonTextLabel.textContent = 'Button Text';
-        var buttonTextInput = document.createElement('input');
-        buttonTextInput.type = 'text';
-        buttonTextInput.name = 'buttonText';
-        buttonTextSetting.append(buttonTextLabel, buttonTextInput);
-        var darkModeSetting = document.createElement('div');
-        darkModeSetting.classList.add('setting');
-        var darkModeLabel = document.createElement('span');
-        darkModeLabel.textContent = 'Dark Mode';
-        var darkModeInput = document.createElement('input');
-        darkModeInput.type = 'checkbox';
-        darkModeInput.name = 'darkMode';
-        darkModeSetting.append(darkModeLabel, darkModeInput);
-        mySettingsPanel.append(buttonTextSetting, darkModeSetting);
-        return mySettingsPanel;
+        return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_5__["default"], null);
     };
     ///-----Audio actions / Bot interactions-----///
     default_1.prototype.toggleMuteClientSide = function () {
-        var activeBotId = (0,_botController_botController__WEBPACK_IMPORTED_MODULE_0__.getCurrentlyActiveBotId)();
+        var activeBotId = (0,_botController_botController__WEBPACK_IMPORTED_MODULE_1__.getCurrentlyActiveBotId)();
         if (activeBotId == null)
             return;
-        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_1__.DisAudioCtl.toggleLocalMute(activeBotId);
-        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_2__.DisUserStore.getUser(activeBotId).username;
-        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_2__.DisMediaInfo.isLocalMute(activeBotId)) {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
+        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_2__.DisAudioCtl.toggleLocalMute(activeBotId);
+        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_3__.DisUserStore.getUser(activeBotId).username;
+        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_3__.DisMediaInfo.isLocalMute(activeBotId)) {
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
                 forceShow: true,
             });
         }
         else {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
                 forceShow: true,
             });
         }
@@ -706,15 +757,15 @@ var default_1 = /** @class */ (function () {
     };
     default_1.prototype.registerGlobalKeyboardShortcuts = function () {
         var _this = this;
-        var keycodeMappings = (0,_utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_5__["default"])();
+        var keycodeMappings = (0,_utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_6__["default"])();
         var toggleMuteClientSideRegisterId = Math.floor(Math.random() * 100000);
         globalKeyboardShortcutsRegisterIds.push(toggleMuteClientSideRegisterId);
-        _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_3__["default"].inputEventRegister(toggleMuteClientSideRegisterId, [
+        _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_4__["default"].inputEventRegister(toggleMuteClientSideRegisterId, [
             [0, keycodeMappings.ctrl],
             [0, keycodeMappings.alt],
             [0, keycodeMappings.k],
         ], function (isDown) {
-            _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].log("ctrl+alt+k - isDown ".concat(isDown));
+            _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].log("ctrl+alt+k - isDown ".concat(isDown));
             if (isDown) {
                 _this.toggleMuteClientSide();
             }
@@ -728,7 +779,7 @@ var default_1 = /** @class */ (function () {
     default_1.prototype.unregisterAllGlobalKeyboardShortcuts = function () {
         for (var _i = 0, globalKeyboardShortcutsRegisterIds_1 = globalKeyboardShortcutsRegisterIds; _i < globalKeyboardShortcutsRegisterIds_1.length; _i++) {
             var id = globalKeyboardShortcutsRegisterIds_1[_i];
-            _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_3__["default"].inputEventUnregister(id);
+            _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_4__["default"].inputEventUnregister(id);
         }
     };
     return default_1;

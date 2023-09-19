@@ -6,13 +6,17 @@ import ChangeLogTopBanner from '../ui/changeLogPopup/ChangeLogTopBanner';
 
 export default function checkIfVersionUpdated() {
   if (config.version !== Data.load(`lastLoadedVersion`)) {
-    Logger.info('New version installed!');
-
-    BdApi.alert(
-      <ChangeLogTopBanner />,
-      <ChangeLogPopup newVersion={config.version} />
-    );
-
-    Data.save(`lastLoadedVersion`, config.version);
+    showVersionUpdatedPopup();
   }
+}
+
+export function showVersionUpdatedPopup() {
+  Logger.info('New version installed!');
+
+  BdApi.alert(
+    <ChangeLogTopBanner />,
+    <ChangeLogPopup newVersion={config.version} />
+  );
+
+  Data.save(`lastLoadedVersion`, config.version);
 }
