@@ -1,4 +1,4 @@
-import { FormLabel } from '../../dis/modules/uiComponents';
+import { DisFormLabel } from '../../dis/modules/uiComponents/DisFormLabel';
 import {
   DisKeybindRecorder,
   KeyCode,
@@ -27,7 +27,7 @@ export default function SettingsPopup(props: Props) {
         Im a label
       </DisSettingToggle>
 
-      <FormLabel>Keybinds</FormLabel>
+      <DisFormLabel>Keybinds</DisFormLabel>
       <DisKeybindRecorder
         defaultValue={keyCodesValue}
         onChange={(newValues) => {
