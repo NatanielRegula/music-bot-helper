@@ -9,6 +9,8 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "build": "webpack --progress --color"
+    "dev": "NODE_ENV=development webpack --progress --color",
+    "build": "NODE_ENV=production webpack --progress --color",
+    "watch": "NODE_ENV=development webpack --progress --color --watch"
   }
 }
