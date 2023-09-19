@@ -1,4 +1,4 @@
-import BdApi from '../../utils/bdApi';
+import BdApi from '../../../utils/bdApi';
 
 const DisUiComponents = BdApi.findModuleByProps('AnimatedAvatar');
 
@@ -43,4 +43,15 @@ export const ConfirmationModal = BdApi.Webpack.getModule(
 
 export const Modal = BdApi.findModuleByProps('handleCancel', 'handleSubmit');
 
-export const { Switch, Dialog, ConfirmModal, Modals } = DisUiComponents;
+export const { Switch, Dialog, ConfirmModal, Modals, FormLabel } =
+  DisUiComponents;
+
+//   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
+
+// function closeLastModal() {
+//   const lastModal = ModalsApi.useModalsStore.getState().default[0];
+
+//   if (!lastModal) return;
+
+//   ModalsApi.closeModal(lastModal.key);
+// }
