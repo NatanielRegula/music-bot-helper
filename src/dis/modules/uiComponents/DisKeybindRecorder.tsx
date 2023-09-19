@@ -1,8 +1,15 @@
 import BdApi from '../../../utils/bdApi';
 
+/** looks like this [0, 69, '0:0'] */
+export type KeyCode = Array<number | string>;
+
 interface Props {
-  defaultValue: any[];
-  onChange: (newValue: any[]) => void;
+  defaultValue: Array<KeyCode>;
+
+  onChange: (newValue: Array<KeyCode>) => void;
+
+  /** false by default */
+  disabled?: boolean;
 }
 
 export const DisKeybindRecorder: React.FC<Props> = BdApi.Webpack.getModule(
