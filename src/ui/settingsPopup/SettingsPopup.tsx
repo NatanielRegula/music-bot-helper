@@ -1,4 +1,9 @@
-import { DisKeybindRecorder } from '../../dis/modules/uiComponents/DisKeybindRecorder';
+import { FormLabel } from '../../dis/modules/uiComponents';
+import {
+  DisKeybindRecorder,
+  KeyCode,
+} from '../../dis/modules/uiComponents/DisKeybindRecorder';
+import { DisSettingToggle } from '../../dis/modules/uiComponents/DisSettingToggle';
 import { React, useState } from '../../utils/bdApi';
 import Logger from '../../utils/logger';
 import EnablePluginPrompt from './components/EnablePluginPrompt';
@@ -6,16 +11,28 @@ import EnablePluginPrompt from './components/EnablePluginPrompt';
 interface Props {}
 
 export default function SettingsPopup(props: Props) {
-  const [values, setValues] = useState([]);
+  const [keyCodesValue, setKeyCodesValue] = useState<KeyCode[]>([]);
+  const [value, setValue] = useState(false);
 
   return (
     <div className="colorStandard-1Xxp1s size12-12FL_s">
       <EnablePluginPrompt />
+      <DisSettingToggle
+        note={'trying to write a note is hard'}
+        onChange={(newValue: boolean) => {
+          setValue(newValue);
+        }}
+        value={value}
+      >
+        Im a label
+      </DisSettingToggle>
+
+      <FormLabel>Keybinds</FormLabel>
       <DisKeybindRecorder
-        defaultValue={values}
-        onChange={(newValues: []) => {
+        defaultValue={keyCodesValue}
+        onChange={(newValues) => {
           Logger.info(newValues);
-          setValues(newValues);
+          setKeyCodesValue(newValues);
         }}
       />
     </div>
