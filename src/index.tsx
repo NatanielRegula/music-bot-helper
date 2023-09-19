@@ -1,4 +1,4 @@
-import { UI, React } from './utils/bdApi';
+import BdApi, { UI, React } from './utils/bdApi';
 import { getCurrentlyActiveBotId } from './botController/botController';
 import { DisAudioCtl } from './dis/modules/modules';
 import { DisMediaInfo, DisUserStore } from './dis/modules/stores';
@@ -11,12 +11,18 @@ import checkIfVersionUpdated, {
   showVersionUpdatedPopup,
 } from './utils/versionChecker';
 
+import config from '../config.json';
+
 let globalKeyboardShortcutsRegisterIds: number[] = [];
 
 checkIfVersionUpdated();
 
 if (process.env.NODE_ENV === 'development') {
-  Logger.warn(`Development Mode!s`);
+  Logger.warn(
+    `Development Mode! | Enabled status: ${BdApi.Plugins.isEnabled(
+      config.name
+    )}`
+  );
 
   window.zoxMusicBotHelper = {};
   window.zoxMusicBotHelper.showSettings = showSettings;
@@ -27,13 +33,13 @@ export default class {
   start() {
     Logger.info('Plugin enabled!');
 
-    document.addEventListener('keydown', () => this.keyBindHandler);
+    document.addEventListener('keydown', this.keyBindHandler);
     this.registerGlobalKeyboardShortcuts();
   }
 
   stop() {
     Logger.info('Plugin disabled!');
-    document.removeEventListener('keydown', () => this.keyBindHandler);
+    document.removeEventListener('keydown', this.keyBindHandler);
     this.unregisterAllGlobalKeyboardShortcuts();
   }
 
@@ -68,10 +74,11 @@ export default class {
     switch (e.code) {
       // case 'KeyK':
       //   this.toggleMuteClientSide();
-      //   break;
+      //   break;l
 
       case 'KeyO':
-        // this.createFakeAudioPlayer();
+        Logger.info('ctrl alt o');
+        UI.alert('Settings', <SettingsPopup />);
         break;
       case 'KeyL':
         // await this.openSetupDialog();
@@ -94,9 +101,9 @@ export default class {
     NativeDisUtils.inputEventRegister(
       toggleMuteClientSideRegisterId,
       [
-        [0, keycodeMappings.ctrl],
-        [0, keycodeMappings.alt],
-        [0, keycodeMappings.k],
+        [0, keycodeMappings.ctrl, '0:0'],
+        [0, keycodeMappings.alt, '0:0'],
+        [0, keycodeMappings.k, '0:0'],
       ],
       (isDown: boolean) => {
         Logger.log(`ctrl+alt+k - isDown ${isDown}`);
