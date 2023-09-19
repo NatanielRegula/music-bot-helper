@@ -199,17 +199,17 @@ function showModal() {
     //     onCancel = () => {},
     //   } = options;
     (0,_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__.openModal)(TestChild);
-    (0,_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__.openModal)(function (props) {
-        // return React.createElement(ConfirmationModal, {
-        //   danger: false,
-        //   confirmText: 'Okay',
-        //   confirmButtonColor: 'red',
-        //   cancelText: 'Cancel',
-        //   onConfirm: () => {},
-        //   onCancel: () => {},
-        // });
-        return _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(TestChild, null);
-    });
+    // openModal((props: any) => {
+    //   // return React.createElement(ConfirmationModal, {
+    //   //   danger: false,
+    //   //   confirmText: 'Okay',
+    //   //   confirmButtonColor: 'red',
+    //   //   cancelText: 'Cancel',
+    //   //   onConfirm: () => {},
+    //   //   onCancel: () => {},
+    //   // });
+    //   return <TestChild />;
+    // });
     //   openModal(
     //       React.createElement(ConfirmationModal, {
     //   danger: false,
@@ -267,8 +267,7 @@ function TestChild(props) {
             // height: '200px',
             // width: '200px',
         } },
-        _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("h1", null, "sss"),
-        _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__.Modals, null)));
+        _bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("h1", null, "sss")));
 }
 
 

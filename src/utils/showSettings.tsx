@@ -22,17 +22,17 @@ function showModal() {
   //   } = options;
 
   openModal(TestChild);
-  openModal((props: any) => {
-    // return React.createElement(ConfirmationModal, {
-    //   danger: false,
-    //   confirmText: 'Okay',
-    //   confirmButtonColor: 'red',
-    //   cancelText: 'Cancel',
-    //   onConfirm: () => {},
-    //   onCancel: () => {},
-    // });
-    return <TestChild />;
-  });
+  // openModal((props: any) => {
+  //   // return React.createElement(ConfirmationModal, {
+  //   //   danger: false,
+  //   //   confirmText: 'Okay',
+  //   //   confirmButtonColor: 'red',
+  //   //   cancelText: 'Cancel',
+  //   //   onConfirm: () => {},
+  //   //   onCancel: () => {},
+  //   // });
+  //   return <TestChild />;
+  // });
   //   openModal(
   //       React.createElement(ConfirmationModal, {
   //   danger: false,
@@ -101,7 +101,7 @@ function TestChild(props: {
       }}
     >
       <h1>sss</h1>
-      <Modals />
+      {/* <Modals /> */}
       {/* <ConfirmationModal
         danger={true}
         confirmText="Okay"
