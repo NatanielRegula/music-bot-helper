@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = {
-  mode: 'development',
+  mode: 'none',
   target: 'node',
   devtool: false,
   entry: './src/index.ts',
@@ -39,6 +39,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.css'],
   },
   plugins: [
+    new webpack.EnvironmentPlugin({ ...process.env }),
     new webpack.BannerPlugin({
       raw: true,
       banner: (_) => {
