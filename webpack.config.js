@@ -7,7 +7,7 @@ module.exports = {
   mode: 'none',
   target: 'node',
   devtool: false,
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
 
   module: {
     rules: [
