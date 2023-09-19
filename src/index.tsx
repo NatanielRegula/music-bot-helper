@@ -16,10 +16,11 @@ let globalKeyboardShortcutsRegisterIds: number[] = [];
 checkIfVersionUpdated();
 
 if (process.env.NODE_ENV === 'development') {
-  Logger.warn(`Development Mode!`);
+  Logger.warn(`Development Mode!s`);
 
-  window.showSettings = showSettings;
-  window.showVersionUpdatedPopup = showVersionUpdatedPopup;
+  window.zoxMusicBotHelper = {};
+  window.zoxMusicBotHelper.showSettings = showSettings;
+  window.zoxMusicBotHelper.showVersionUpdatedPopup = showVersionUpdatedPopup;
 }
 
 export default class {

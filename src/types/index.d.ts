@@ -3,8 +3,7 @@ declare global {
   interface Window {
     BdApi: any;
     DiscordNative: any;
-    showSettings: any;
-    showVersionUpdatedPopup: Function;
+    zoxMusicBotHelper: any;
   }
 }
 declare module '*.module.css';

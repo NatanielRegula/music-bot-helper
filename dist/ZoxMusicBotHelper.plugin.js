@@ -689,9 +689,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var globalKeyboardShortcutsRegisterIds = [];
 (0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__["default"])();
 if (true) {
-    _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].warn("Development Mode!");
-    window.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__["default"];
-    window.showVersionUpdatedPopup = _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__.showVersionUpdatedPopup;
+    _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].warn("Development Mode!s");
+    window.zoxMusicBotHelper = {};
+    window.zoxMusicBotHelper.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__["default"];
+    window.zoxMusicBotHelper.showVersionUpdatedPopup = _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__.showVersionUpdatedPopup;
 }
 var default_1 = /** @class */ (function () {
     function default_1() {
