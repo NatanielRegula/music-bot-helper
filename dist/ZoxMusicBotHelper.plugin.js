@@ -15,58 +15,6 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getCurrentVoiceChannelUsersIds: () => (/* binding */ getCurrentVoiceChannelUsersIds),
-/* harmony export */   getCurrentlyActiveBotId: () => (/* binding */ getCurrentlyActiveBotId),
-/* harmony export */   getMusicBotsInCurrentVoiceChat: () => (/* binding */ getMusicBotsInCurrentVoiceChat)
-/* harmony export */ });
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-
-function getCurrentVoiceChannelUsersIds() {
-    var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisSelectedChannelStore.getVoiceChannelId());
-    var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
-    return currentVoiceChannelUsersIds;
-}
-function getCurrentlyActiveBotId() {
-    //this will in the future allow to switch between multiple bots in vc
-    //for now it just gives the first form the list
-    var selectedBots = getMusicBotsInCurrentVoiceChat();
-    if (selectedBots.length == 0)
-        return null;
-    return selectedBots[0];
-}
-function getMusicBotsInCurrentVoiceChat() {
-    var currentVoiceChannelUsersIds = getCurrentVoiceChannelUsersIds();
-    var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisUserStore.getUser(userId).bot; });
-    return detectedBotsIds;
-}
-
-
-/***/ }),
-/* 2 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DisMediaInfo: () => (/* binding */ DisMediaInfo),
-/* harmony export */   DisSelectedChannelStore: () => (/* binding */ DisSelectedChannelStore),
-/* harmony export */   DisUserStore: () => (/* binding */ DisUserStore),
-/* harmony export */   DisVoiceStateStore: () => (/* binding */ DisVoiceStateStore)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-
-var DisVoiceStateStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getVoiceStateForUser', 'getVoiceStatesForChannel');
-var DisSelectedChannelStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getLastSelectedChannelId');
-//guild info
-var DisUserStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getCurrentUser', 'getUser');
-var DisMediaInfo = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getOutputVolume');
-
-
-/***/ }),
-/* 3 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Data: () => (/* binding */ Data),
 /* harmony export */   Patcher: () => (/* binding */ Patcher),
 /* harmony export */   React: () => (/* binding */ React),
@@ -89,7 +37,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   useSyncExternalStore: () => (/* binding */ useSyncExternalStore),
 /* harmony export */   useTransition: () => (/* binding */ useTransition)
 /* harmony export */ });
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 
 var BdApi = new window.BdApi(_config_json__WEBPACK_IMPORTED_MODULE_0__.name);
 var UI = BdApi.UI, Patcher = BdApi.Patcher, Webpack = BdApi.Webpack, Data = BdApi.Data;
@@ -99,10 +47,62 @@ var useState = React.useState, useEffect = React.useEffect, useMemo = React.useM
 
 
 /***/ }),
-/* 4 */
+/* 2 */
 /***/ ((module) => {
 
 module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.7","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
+
+/***/ }),
+/* 3 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCurrentVoiceChannelUsersIds: () => (/* binding */ getCurrentVoiceChannelUsersIds),
+/* harmony export */   getCurrentlyActiveBotId: () => (/* binding */ getCurrentlyActiveBotId),
+/* harmony export */   getMusicBotsInCurrentVoiceChat: () => (/* binding */ getMusicBotsInCurrentVoiceChat)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+
+function getCurrentVoiceChannelUsersIds() {
+    var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisSelectedChannelStore.getVoiceChannelId());
+    var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
+    return currentVoiceChannelUsersIds;
+}
+function getCurrentlyActiveBotId() {
+    //this will in the future allow to switch between multiple bots in vc
+    //for now it just gives the first form the list
+    var selectedBots = getMusicBotsInCurrentVoiceChat();
+    if (selectedBots.length == 0)
+        return null;
+    return selectedBots[0];
+}
+function getMusicBotsInCurrentVoiceChat() {
+    var currentVoiceChannelUsersIds = getCurrentVoiceChannelUsersIds();
+    var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisUserStore.getUser(userId).bot; });
+    return detectedBotsIds;
+}
+
+
+/***/ }),
+/* 4 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisMediaInfo: () => (/* binding */ DisMediaInfo),
+/* harmony export */   DisSelectedChannelStore: () => (/* binding */ DisSelectedChannelStore),
+/* harmony export */   DisUserStore: () => (/* binding */ DisUserStore),
+/* harmony export */   DisVoiceStateStore: () => (/* binding */ DisVoiceStateStore)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisVoiceStateStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getVoiceStateForUser', 'getVoiceStatesForChannel');
+var DisSelectedChannelStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getLastSelectedChannelId');
+//guild info
+var DisUserStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getCurrentUser', 'getUser');
+var DisMediaInfo = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getOutputVolume');
+
 
 /***/ }),
 /* 5 */
@@ -112,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DisAudioCtl: () => (/* binding */ DisAudioCtl)
 /* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 //audio info
 var DisAudioCtl = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('toggleLocalMute', 'setLocalVolume');
@@ -136,9 +136,189 @@ var NativeDisUtils = window.DiscordNative.nativeModules.requireModule('discord_u
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SettingsPopup)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+/* harmony import */ var _dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
+/* harmony import */ var _dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
+
+
+
+
+
+
+function SettingsPopup(props) {
+    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.useState)([]), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
+    var _b = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.useState)(false), value = _b[0], setValue = _b[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_5__["default"], null),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement(_dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__.DisSettingToggle, { note: 'trying to write a note is hard', onChange: function (newValue) {
+                setValue(newValue);
+            }, value: value }, "Im a label"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, "Keybinds"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
+                _utils_logger__WEBPACK_IMPORTED_MODULE_4__["default"].info(newValues);
+                setKeyCodesValue(newValues);
+            } })));
+}
+
+
+/***/ }),
+/* 8 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal),
+/* harmony export */   ConfirmationModal: () => (/* binding */ ConfirmationModal),
+/* harmony export */   Dialog: () => (/* binding */ Dialog),
+/* harmony export */   DisUiComponents: () => (/* binding */ DisUiComponents),
+/* harmony export */   Modal: () => (/* binding */ Modal),
+/* harmony export */   Modals: () => (/* binding */ Modals),
+/* harmony export */   Switch: () => (/* binding */ Switch),
+/* harmony export */   closeModal: () => (/* binding */ closeModal),
+/* harmony export */   openModal: () => (/* binding */ openModal)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('AnimatedAvatar');
+// type openModalType = (
+// child: (props: {
+//   onClose?: () => void;
+//   transitionState?: number | null;
+// }) => React.JSX.Element
+// ) => void;
+var openModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    return typeof m === 'function' &&
+        (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback')) &&
+        (m === null || m === void 0 ? void 0 : m.toString().includes('Layer'));
+}, { searchExports: true });
+var closeModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    return typeof m === 'function' && (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback()'));
+}, { searchExports: true });
+var ConfirmationModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { var _a, _b; return (_b = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m)) === null || _b === void 0 ? void 0 : _b.includes('.confirmButtonColor'); }, { searchExports: true });
+var Modal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('handleCancel', 'handleSubmit');
+var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmModal = DisUiComponents.ConfirmModal, Modals = DisUiComponents.Modals;
+//   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
+// function closeLastModal() {
+//   const lastModal = ModalsApi.useModalsStore.getState().default[0];
+//   if (!lastModal) return;
+//   ModalsApi.closeModal(lastModal.key);
+// }
+
+
+/***/ }),
+/* 9 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisKeybindRecorder: () => (/* binding */ DisKeybindRecorder)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisKeybindRecorder = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    var _a;
+    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
+    return ((asString === null || asString === void 0 ? void 0 : asString.includes('RECORDING')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('recordStart')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('handleComboKeys')));
+}, { searchExports: true });
+
+
+/***/ }),
+/* 10 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisSettingToggle: () => (/* binding */ DisSettingToggle)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisSettingToggle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    var _a;
+    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
+    return ((asString === null || asString === void 0 ? void 0 : asString.includes('note')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('onChange')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('value')) &&
+        !(asString === null || asString === void 0 ? void 0 : asString.includes('hideDeviceSelector')));
+}, { searchExports: true });
+
+
+/***/ }),
+/* 11 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+
+
+var Logger = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('logger').logger;
+Logger.name = _config_json__WEBPACK_IMPORTED_MODULE_1__.name;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logger);
+
+
+/***/ }),
+/* 12 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+
+
+
+function EnablePluginPrompt(props) {
+    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.useState)(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name)), isChecked = _a[0], setIsChecked = _a[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
+            border: '1px solid var(--primary-500)',
+            padding: '1rem',
+            borderRadius: '5px',
+            margin: '1rem 0 1rem 0',
+            display: 'flex',
+            flexDirection: 'column',
+        } },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+            } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("label", { htmlFor: "enablePlugin", className: "title-2yADjX" }, "Enable the plugin"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__.Switch, { id: "enablePlugin", checked: isChecked, onChange: function (value) {
+                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.toggle(_config_json__WEBPACK_IMPORTED_MODULE_2__.name);
+                    setIsChecked(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name));
+                } })),
+        !isChecked && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: { margin: '1rem 0 0 0' } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("span", { style: {
+                    fontSize: ' 0.8rem',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-danger)',
+                } }, "Plugin is currently disabled!"),
+            ' '))));
+}
+
+
+/***/ }),
+/* 13 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 var linuxKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0x25; }, {
     searchExports: true,
@@ -160,32 +340,15 @@ function getKeycodeMappings() {
 
 
 /***/ }),
-/* 8 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-
-
-var Logger = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('logger').logger;
-Logger.name = _config_json__WEBPACK_IMPORTED_MODULE_1__.name;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logger);
-
-
-/***/ }),
-/* 9 */
+/* 14 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ showSettings)
 /* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 
 
 function showModal() {
@@ -272,44 +435,7 @@ function TestChild(props) {
 
 
 /***/ }),
-/* 10 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal),
-/* harmony export */   ConfirmationModal: () => (/* binding */ ConfirmationModal),
-/* harmony export */   Dialog: () => (/* binding */ Dialog),
-/* harmony export */   Modal: () => (/* binding */ Modal),
-/* harmony export */   Modals: () => (/* binding */ Modals),
-/* harmony export */   Switch: () => (/* binding */ Switch),
-/* harmony export */   closeModal: () => (/* binding */ closeModal),
-/* harmony export */   openModal: () => (/* binding */ openModal)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-
-var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('AnimatedAvatar');
-// type openModalType = (
-// child: (props: {
-//   onClose?: () => void;
-//   transitionState?: number | null;
-// }) => React.JSX.Element
-// ) => void;
-var openModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    return typeof m === 'function' &&
-        (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback')) &&
-        (m === null || m === void 0 ? void 0 : m.toString().includes('Layer'));
-}, { searchExports: true });
-var closeModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    return typeof m === 'function' && (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback()'));
-}, { searchExports: true });
-var ConfirmationModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { var _a, _b; return (_b = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m)) === null || _b === void 0 ? void 0 : _b.includes('.confirmButtonColor'); }, { searchExports: true });
-var Modal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('handleCancel', 'handleSubmit');
-var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmModal = DisUiComponents.ConfirmModal, Modals = DisUiComponents.Modals;
-
-
-/***/ }),
-/* 11 */
+/* 15 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -317,11 +443,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ checkIfVersionUpdated),
 /* harmony export */   showVersionUpdatedPopup: () => (/* binding */ showVersionUpdatedPopup)
 /* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
-/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
-/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
+/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20);
 
 
 
@@ -340,17 +466,17 @@ function showVersionUpdatedPopup() {
 
 
 /***/ }),
-/* 12 */
+/* 16 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
-/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
+/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19);
 
 
 
@@ -384,13 +510,13 @@ function ChangeLogPopup(props) {
 
 
 /***/ }),
-/* 13 */
+/* 17 */
 /***/ ((module) => {
 
 module.exports = JSON.parse('{"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
-/* 14 */
+/* 18 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -398,7 +524,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ChangesUlBugFixes: () => (/* binding */ ChangesUlBugFixes),
 /* harmony export */   ChangesUlFeatures: () => (/* binding */ ChangesUlFeatures)
 /* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 function ChangesUlFeatures(props) {
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.Fragment, null, props.changes.length != 0 && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null,
@@ -425,16 +551,16 @@ function ChangesUlBugFixes(props) {
 
 
 /***/ }),
-/* 15 */
+/* 19 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 
 
 
@@ -469,15 +595,15 @@ function EnablePluginPrompt(props) {
 
 
 /***/ }),
-/* 16 */
+/* 20 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ChangeLogTopBanner)
 /* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 
 
 function ChangeLogTopBanner() {
@@ -504,66 +630,24 @@ function ChangeLogTopBanner() {
 
 
 /***/ }),
-/* 17 */
+/* 21 */,
+/* 22 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ SettingsPopup)
+/* harmony export */   DisHeading: () => (/* binding */ DisHeading)
 /* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
-
-function SettingsPopup(props) {
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
-}
-
-
-/***/ }),
-/* 18 */,
-/* 19 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
-/* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
-
-
-
-function EnablePluginPrompt(props) {
-    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.useState)(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name)), isChecked = _a[0], setIsChecked = _a[1];
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
-            border: '1px solid var(--primary-500)',
-            padding: '1rem',
-            borderRadius: '5px',
-            margin: '1rem 0 1rem 0',
-            display: 'flex',
-            flexDirection: 'column',
-        } },
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-            } },
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("label", { htmlFor: "enablePlugin", className: "title-2yADjX" }, "Enable the plugin"),
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__.Switch, { id: "enablePlugin", checked: isChecked, onChange: function (value) {
-                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.toggle(_config_json__WEBPACK_IMPORTED_MODULE_2__.name);
-                    setIsChecked(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name));
-                } })),
-        !isChecked && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: { margin: '1rem 0 0 0' } },
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("span", { style: {
-                    fontSize: ' 0.8rem',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-danger)',
-                } }, "Plugin is currently disabled!"),
-            ' '))));
-}
+var DisHeading = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    var _a;
+    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
+    return ((asString === null || asString === void 0 ? void 0 : asString.includes('LEGEND')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('errorId')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('h5')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('LABEL')));
+}, { searchExports: true });
 
 
 /***/ })
@@ -630,16 +714,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _botController_botController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _botController_botController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 /* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
 /* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
-/* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
-/* harmony import */ var _utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
-/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9);
-/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(11);
+/* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
+/* harmony import */ var _utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
+/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(14);
+/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(15);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -686,10 +771,11 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var globalKeyboardShortcutsRegisterIds = [];
 (0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__["default"])();
 if (true) {
-    _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].warn("Development Mode!s");
+    _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].warn("Development Mode! | Enabled status: ".concat(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_10__.name)));
     window.zoxMusicBotHelper = {};
     window.zoxMusicBotHelper.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__["default"];
     window.zoxMusicBotHelper.showVersionUpdatedPopup = _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__.showVersionUpdatedPopup;
@@ -698,15 +784,13 @@ var default_1 = /** @class */ (function () {
     function default_1() {
     }
     default_1.prototype.start = function () {
-        var _this = this;
         _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('Plugin enabled!');
-        document.addEventListener('keydown', function () { return _this.keyBindHandler; });
+        document.addEventListener('keydown', this.keyBindHandler);
         this.registerGlobalKeyboardShortcuts();
     };
     default_1.prototype.stop = function () {
-        var _this = this;
         _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('Plugin disabled!');
-        document.removeEventListener('keydown', function () { return _this.keyBindHandler; });
+        document.removeEventListener('keydown', this.keyBindHandler);
         this.unregisterAllGlobalKeyboardShortcuts();
     };
     default_1.prototype.getSettingsPanel = function () {
@@ -739,9 +823,10 @@ var default_1 = /** @class */ (function () {
                 switch (e.code) {
                     // case 'KeyK':
                     //   this.toggleMuteClientSide();
-                    //   break;
+                    //   break;l
                     case 'KeyO':
-                        // this.createFakeAudioPlayer();
+                        _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('ctrl alt o');
+                        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.UI.alert('Settings', _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_5__["default"], null));
                         break;
                     case 'KeyL':
                         // await this.openSetupDialog();
@@ -762,9 +847,9 @@ var default_1 = /** @class */ (function () {
         var toggleMuteClientSideRegisterId = Math.floor(Math.random() * 100000);
         globalKeyboardShortcutsRegisterIds.push(toggleMuteClientSideRegisterId);
         _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_4__["default"].inputEventRegister(toggleMuteClientSideRegisterId, [
-            [0, keycodeMappings.ctrl],
-            [0, keycodeMappings.alt],
-            [0, keycodeMappings.k],
+            [0, keycodeMappings.ctrl, '0:0'],
+            [0, keycodeMappings.alt, '0:0'],
+            [0, keycodeMappings.k, '0:0'],
         ], function (isDown) {
             _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].log("ctrl+alt+k - isDown ".concat(isDown));
             if (isDown) {

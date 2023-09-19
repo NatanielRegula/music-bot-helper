@@ -1,4 +1,5 @@
 import { DisFormLabel } from '../../dis/modules/uiComponents/DisFormLabel';
+import { DisHeading } from '../../dis/modules/uiComponents/DisHeading';
 import {
   DisKeybindRecorder,
   KeyCode,
@@ -27,7 +28,8 @@ export default function SettingsPopup(props: Props) {
         Im a label
       </DisSettingToggle>
 
-      <DisFormLabel>Keybinds</DisFormLabel>
+      <DisHeading>Keybinds</DisHeading>
+
       <DisKeybindRecorder
         defaultValue={keyCodesValue}
         onChange={(newValues) => {
