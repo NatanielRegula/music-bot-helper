@@ -47,6 +47,8 @@ export const Modal = BdApi.Webpack.getModule(
   BdApi.Webpack.Filters.byProps('handleCancel', 'handleSubmit')
 );
 
+export const DisDivider = BdApi.findModuleByProps('Divider').Divider;
+
 export const { Switch, Dialog, ConfirmModal, Modals } = DisUiComponents;
 
 //   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
