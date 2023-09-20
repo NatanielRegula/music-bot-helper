@@ -12,14 +12,23 @@ interface Props {
   disabled?: boolean;
 }
 
-export const DisKeybindRecorder: React.FC<Props> = BdApi.Webpack.getModule(
-  (m: any) => {
-    const asString: string | undefined = m?.toString?.();
-    return (
-      asString?.includes('RECORDING') &&
-      asString?.includes('recordStart') &&
-      asString?.includes('handleComboKeys')
+/**
+ * This module is not being cached because it is not available before the user opens the settings page.
+ *  This is not ideal for performance, but also means that this is only usable inside of settings.
+ */
+export const DisKeybindRecorder = (props: Props) => {
+  const Component: (props: Props) => React.JSX.Element =
+    BdApi.Webpack.getModule(
+      (m: any) => {
+        const asString: string | undefined = m?.toString?.();
+        return (
+          asString?.includes('RECORDING') &&
+          asString?.includes('recordStart') &&
+          asString?.includes('handleComboKeys')
+        );
+      },
+      { searchExports: true }
     );
-  },
-  { searchExports: true }
-);
+  /// @ts-ignore
+  return new Component(props);
+};

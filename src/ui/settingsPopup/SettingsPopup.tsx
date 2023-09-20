@@ -1,18 +1,27 @@
-import { DisFormLabel } from '../../dis/modules/uiComponents/DisFormLabel';
 import { DisHeading } from '../../dis/modules/uiComponents/DisHeading';
 import {
-  DisKeybindRecorder,
   KeyCode,
+  DisKeybindRecorder,
 } from '../../dis/modules/uiComponents/DisKeybindRecorder';
 import { DisSettingToggle } from '../../dis/modules/uiComponents/DisSettingToggle';
-import { React, useState } from '../../utils/bdApi';
+import useSetting from '../../hooks/useSetting';
+import { globalShortcuts } from '../../lib/globalKeyboardShortcuts';
+import { useState, React } from '../../utils/bdApi';
 import Logger from '../../utils/logger';
+import { SETTINGS_KEYS } from '../../utils/settingUtils';
 import EnablePluginPrompt from './components/EnablePluginPrompt';
 
 interface Props {}
 
 export default function SettingsPopup(props: Props) {
-  const [keyCodesValue, setKeyCodesValue] = useState<KeyCode[]>([]);
+  const [keyCodesValue, setKeyCodesValue] = useSetting<KeyCode[]>(
+    SETTINGS_KEYS.keybindMuteAudioBotLocal,
+    [],
+    () => {
+      globalShortcuts.registerGlobalKeyboardShortcuts();
+    }
+  );
+
   const [value, setValue] = useState(false);
 
   return (
@@ -30,6 +39,7 @@ export default function SettingsPopup(props: Props) {
 
       <DisHeading>Keybinds</DisHeading>
 
+      <DisHeading tag="label">Mute the audio bot</DisHeading>
       <DisKeybindRecorder
         defaultValue={keyCodesValue}
         onChange={(newValues) => {

@@ -58,30 +58,45 @@ module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusic
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getCurrentVoiceChannelUsersIds: () => (/* binding */ getCurrentVoiceChannelUsersIds),
-/* harmony export */   getCurrentlyActiveBotId: () => (/* binding */ getCurrentlyActiveBotId),
-/* harmony export */   getMusicBotsInCurrentVoiceChat: () => (/* binding */ getMusicBotsInCurrentVoiceChat)
+/* harmony export */   globalShortcuts: () => (/* binding */ globalShortcuts)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
+/* harmony import */ var _botController_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
 
-function getCurrentVoiceChannelUsersIds() {
-    var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisSelectedChannelStore.getVoiceChannelId());
-    var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
-    return currentVoiceChannelUsersIds;
-}
-function getCurrentlyActiveBotId() {
-    //this will in the future allow to switch between multiple bots in vc
-    //for now it just gives the first form the list
-    var selectedBots = getMusicBotsInCurrentVoiceChat();
-    if (selectedBots.length == 0)
-        return null;
-    return selectedBots[0];
-}
-function getMusicBotsInCurrentVoiceChat() {
-    var currentVoiceChannelUsersIds = getCurrentVoiceChannelUsersIds();
-    var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisUserStore.getUser(userId).bot; });
-    return detectedBotsIds;
-}
+
+
+
+var GlobalShortcuts = /** @class */ (function () {
+    function GlobalShortcuts() {
+        this.registeredKeyboardShortcutsRegisterIds = [];
+    }
+    GlobalShortcuts.prototype.registerGlobalKeyboardShortcuts = function () {
+        this.unregisterAllGlobalKeyboardShortcuts();
+        var toggleMuteClientSideRegisterId = Math.floor(Math.random() * 100000);
+        this.registeredKeyboardShortcutsRegisterIds.push(toggleMuteClientSideRegisterId);
+        _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_0__["default"].inputEventRegister(toggleMuteClientSideRegisterId, (0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.readSettingRaw)(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindMuteAudioBotLocal), function (isDown) {
+            _utils_logger__WEBPACK_IMPORTED_MODULE_1__["default"].log("ctrl+alt+k - isDown ".concat(isDown));
+            if (isDown) {
+                _botController_actions__WEBPACK_IMPORTED_MODULE_3__.botActions.toggleMuteClientSide();
+            }
+        }, {
+            blurred: true,
+            focused: true,
+            keydown: true,
+            keyup: true,
+        });
+    };
+    GlobalShortcuts.prototype.unregisterAllGlobalKeyboardShortcuts = function () {
+        for (var _i = 0, _a = this.registeredKeyboardShortcutsRegisterIds; _i < _a.length; _i++) {
+            var id = _a[_i];
+            _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_0__["default"].inputEventUnregister(id);
+        }
+    };
+    return GlobalShortcuts;
+}());
+var globalShortcuts = new GlobalShortcuts();
 
 
 /***/ }),
@@ -141,9 +156,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
 /* harmony import */ var _dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
 /* harmony import */ var _dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
+/* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
+/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(23);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(12);
+
+
+
 
 
 
@@ -151,16 +172,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SettingsPopup(props) {
-    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.useState)([]), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
-    var _b = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.useState)(false), value = _b[0], setValue = _b[1];
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_5__["default"], null),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement(_dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__.DisSettingToggle, { note: 'trying to write a note is hard', onChange: function (newValue) {
+    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__["default"])(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__.SETTINGS_KEYS.keybindMuteAudioBotLocal, [], function () {
+        _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__.globalShortcuts.registerGlobalKeyboardShortcuts();
+    }), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
+    var _b = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.useState)(false), value = _b[0], setValue = _b[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__.DisSettingToggle, { note: 'trying to write a note is hard', onChange: function (newValue) {
                 setValue(newValue);
             }, value: value }, "Im a label"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, "Keybinds"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_3__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
-                _utils_logger__WEBPACK_IMPORTED_MODULE_4__["default"].info(newValues);
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, "Keybinds"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, { tag: "label" }, "Mute the audio bot"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
+                _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info(newValues);
                 setKeyCodesValue(newValues);
             } })));
 }
@@ -220,13 +244,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
-var DisKeybindRecorder = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    var _a;
-    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
-    return ((asString === null || asString === void 0 ? void 0 : asString.includes('RECORDING')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('recordStart')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('handleComboKeys')));
-}, { searchExports: true });
+/**
+ * This module is not being cached because it is not available before the user opens the settings page.
+ *  This is not ideal for performance, but also means that this is only usable inside of settings.
+ */
+var DisKeybindRecorder = function (props) {
+    var Component = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+        var _a;
+        var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
+        return ((asString === null || asString === void 0 ? void 0 : asString.includes('RECORDING')) &&
+            (asString === null || asString === void 0 ? void 0 : asString.includes('recordStart')) &&
+            (asString === null || asString === void 0 ? void 0 : asString.includes('handleComboKeys')));
+    }, { searchExports: true });
+    /// @ts-ignore
+    return new Component(props);
+};
 
 
 /***/ }),
@@ -630,7 +662,36 @@ function ChangeLogTopBanner() {
 
 
 /***/ }),
-/* 21 */,
+/* 21 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useSetting)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(23);
+
+
+function useSetting(key, defaultValue, onChange) {
+    if (key.length === 0)
+        throw new Error('Setting key cannot be empty!');
+    var state = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__.readSetting)(key, defaultValue));
+    var settingCurrentValue = state[0];
+    var isFirstRender = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
+    (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        (0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__.saveSetting)(key, settingCurrentValue);
+        onChange === null || onChange === void 0 ? void 0 : onChange();
+    }, [settingCurrentValue]);
+    return state;
+}
+
+
+/***/ }),
 /* 22 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -648,6 +709,138 @@ var DisHeading = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.ge
         (asString === null || asString === void 0 ? void 0 : asString.includes('h5')) &&
         (asString === null || asString === void 0 ? void 0 : asString.includes('LABEL')));
 }, { searchExports: true });
+
+
+/***/ }),
+/* 23 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SETTINGS_KEYS: () => (/* binding */ SETTINGS_KEYS),
+/* harmony export */   readSetting: () => (/* binding */ readSetting),
+/* harmony export */   readSettingRaw: () => (/* binding */ readSettingRaw),
+/* harmony export */   saveSetting: () => (/* binding */ saveSetting),
+/* harmony export */   setDefaultValuesSettings: () => (/* binding */ setDefaultValuesSettings)
+/* harmony export */ });
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _keycodeMappings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+
+
+var SETTINGS_KEYS = {
+    keybindMuteAudioBotLocal: 'keybindMuteAudioBotLocal',
+};
+function readSettingRaw(key) {
+    var keyWithPrefix = "settings_".concat(key);
+    var settingValueFromData = _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load(keyWithPrefix);
+    var settingParsed = settingValueFromData != undefined
+        ? JSON.parse(settingValueFromData)
+        : undefined;
+    return settingParsed;
+}
+function readSetting(key, defaultValue) {
+    return readSettingRaw(key) || defaultValue;
+}
+function saveSetting(key, value) {
+    var keyWithPrefix = "settings_".concat(key);
+    _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save(keyWithPrefix, JSON.stringify(value));
+}
+function setDefaultValuesSettings(onlyIfNull) {
+    if (onlyIfNull === void 0) { onlyIfNull = true; }
+    Object.entries(SETTINGS_KEYS).forEach(function (_a) {
+        var _ = _a[0], settingKey = _a[1];
+        var currentValue = readSettingRaw(settingKey);
+        if (currentValue === undefined || onlyIfNull === false) {
+            switch (settingKey) {
+                case SETTINGS_KEYS.keybindMuteAudioBotLocal:
+                    var keycodeMappings = (0,_keycodeMappings__WEBPACK_IMPORTED_MODULE_1__["default"])();
+                    saveSetting(settingKey, [
+                        [0, keycodeMappings.ctrl, '0:0'],
+                        [0, keycodeMappings.alt, '0:0'],
+                        [0, keycodeMappings.k, '0:0'],
+                    ]);
+                    break;
+                default:
+                    break;
+            }
+        }
+    });
+}
+
+
+/***/ }),
+/* 24 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   botActions: () => (/* binding */ botActions)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+/* harmony import */ var _botController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
+
+
+
+
+var BotActions = /** @class */ (function () {
+    function BotActions() {
+        this.toggleMuteClientSide = this.toggleMuteClientSide.bind(this);
+    }
+    ///-----Audio actions / Bot interactions-----///
+    BotActions.prototype.toggleMuteClientSide = function () {
+        var activeBotId = (0,_botController__WEBPACK_IMPORTED_MODULE_3__.getCurrentlyActiveBotId)();
+        if (activeBotId == null)
+            return;
+        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisAudioCtl.toggleLocalMute(activeBotId);
+        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
+        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisMediaInfo.isLocalMute(activeBotId)) {
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
+                forceShow: true,
+            });
+        }
+        else {
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
+                forceShow: true,
+            });
+        }
+    };
+    return BotActions;
+}());
+var botActions = new BotActions();
+
+
+/***/ }),
+/* 25 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCurrentVoiceChannelUsersIds: () => (/* binding */ getCurrentVoiceChannelUsersIds),
+/* harmony export */   getCurrentlyActiveBotId: () => (/* binding */ getCurrentlyActiveBotId),
+/* harmony export */   getMusicBotsInCurrentVoiceChat: () => (/* binding */ getMusicBotsInCurrentVoiceChat)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+
+function getCurrentVoiceChannelUsersIds() {
+    var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisSelectedChannelStore.getVoiceChannelId());
+    var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
+    return currentVoiceChannelUsersIds;
+}
+function getCurrentlyActiveBotId() {
+    //this will in the future allow to switch between multiple bots in vc
+    //for now it just gives the first form the list
+    var selectedBots = getMusicBotsInCurrentVoiceChat();
+    if (selectedBots.length == 0)
+        return null;
+    return selectedBots[0];
+}
+function getMusicBotsInCurrentVoiceChat() {
+    var currentVoiceChannelUsersIds = getCurrentVoiceChannelUsersIds();
+    var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisUserStore.getUser(userId).bot; });
+    return detectedBotsIds;
+}
 
 
 /***/ })
@@ -715,16 +908,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _botController_botController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
-/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
-/* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
-/* harmony import */ var _utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
-/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(14);
-/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(15);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2);
+/* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
+/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
+/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(23);
+/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -769,50 +959,29 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
-
-
-
-var globalKeyboardShortcutsRegisterIds = [];
-(0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__["default"])();
+(0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__["default"])();
 if (true) {
-    _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].warn("Development Mode! | Enabled status: ".concat(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_10__.name)));
+    _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].warn("Development Mode! | Enabled status: ".concat(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_5__.name)));
     window.zoxMusicBotHelper = {};
-    window.zoxMusicBotHelper.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_8__["default"];
-    window.zoxMusicBotHelper.showVersionUpdatedPopup = _utils_versionChecker__WEBPACK_IMPORTED_MODULE_9__.showVersionUpdatedPopup;
+    window.zoxMusicBotHelper.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__["default"];
+    window.zoxMusicBotHelper.showVersionUpdatedPopup = _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__.showVersionUpdatedPopup;
 }
 var default_1 = /** @class */ (function () {
     function default_1() {
     }
     default_1.prototype.start = function () {
-        _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('Plugin enabled!');
+        _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('Plugin enabled!');
+        (0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__.setDefaultValuesSettings)();
         document.addEventListener('keydown', this.keyBindHandler);
-        this.registerGlobalKeyboardShortcuts();
+        _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__.globalShortcuts.registerGlobalKeyboardShortcuts();
     };
     default_1.prototype.stop = function () {
-        _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('Plugin disabled!');
+        _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('Plugin disabled!');
         document.removeEventListener('keydown', this.keyBindHandler);
-        this.unregisterAllGlobalKeyboardShortcuts();
+        _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__.globalShortcuts.unregisterAllGlobalKeyboardShortcuts();
     };
     default_1.prototype.getSettingsPanel = function () {
-        return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_5__["default"], null);
-    };
-    ///-----Audio actions / Bot interactions-----///
-    default_1.prototype.toggleMuteClientSide = function () {
-        var activeBotId = (0,_botController_botController__WEBPACK_IMPORTED_MODULE_1__.getCurrentlyActiveBotId)();
-        if (activeBotId == null)
-            return;
-        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_2__.DisAudioCtl.toggleLocalMute(activeBotId);
-        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_3__.DisUserStore.getUser(activeBotId).username;
-        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_3__.DisMediaInfo.isLocalMute(activeBotId)) {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
-                forceShow: true,
-            });
-        }
-        else {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
-                forceShow: true,
-            });
-        }
+        return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_1__["default"], null);
     };
     ///-----Misc-----///
     default_1.prototype.keyBindHandler = function (e) {
@@ -825,8 +994,8 @@ var default_1 = /** @class */ (function () {
                     //   this.toggleMuteClientSide();
                     //   break;l
                     case 'KeyO':
-                        _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].info('ctrl alt o');
-                        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.UI.alert('Settings', _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+                        _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('ctrl alt o');
+                        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.UI.alert('Settings', _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_1__["default"], null));
                         break;
                     case 'KeyL':
                         // await this.openSetupDialog();
@@ -840,33 +1009,6 @@ var default_1 = /** @class */ (function () {
                 return [2 /*return*/];
             });
         });
-    };
-    default_1.prototype.registerGlobalKeyboardShortcuts = function () {
-        var _this = this;
-        var keycodeMappings = (0,_utils_keycodeMappings__WEBPACK_IMPORTED_MODULE_6__["default"])();
-        var toggleMuteClientSideRegisterId = Math.floor(Math.random() * 100000);
-        globalKeyboardShortcutsRegisterIds.push(toggleMuteClientSideRegisterId);
-        _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_4__["default"].inputEventRegister(toggleMuteClientSideRegisterId, [
-            [0, keycodeMappings.ctrl, '0:0'],
-            [0, keycodeMappings.alt, '0:0'],
-            [0, keycodeMappings.k, '0:0'],
-        ], function (isDown) {
-            _utils_logger__WEBPACK_IMPORTED_MODULE_7__["default"].log("ctrl+alt+k - isDown ".concat(isDown));
-            if (isDown) {
-                _this.toggleMuteClientSide();
-            }
-        }, {
-            blurred: true,
-            focused: true,
-            keydown: true,
-            keyup: true,
-        });
-    };
-    default_1.prototype.unregisterAllGlobalKeyboardShortcuts = function () {
-        for (var _i = 0, globalKeyboardShortcutsRegisterIds_1 = globalKeyboardShortcutsRegisterIds; _i < globalKeyboardShortcutsRegisterIds_1.length; _i++) {
-            var id = globalKeyboardShortcutsRegisterIds_1[_i];
-            _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_4__["default"].inputEventUnregister(id);
-        }
     };
     return default_1;
 }());

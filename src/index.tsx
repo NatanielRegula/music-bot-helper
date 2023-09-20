@@ -1,10 +1,7 @@
 import BdApi, { UI, React } from './utils/bdApi';
-import { getCurrentlyActiveBotId } from './botController/botController';
-import { DisAudioCtl } from './dis/modules/modules';
-import { DisMediaInfo, DisUserStore } from './dis/modules/stores';
-import NativeDisUtils from './dis/nativeModules/discordUtils';
+
 import SettingsPopup from './ui/settingsPopup/SettingsPopup';
-import getKeycodeMappings from './utils/keycodeMappings';
+
 import Logger from './utils/logger';
 import showSettings from './utils/showSettings';
 import checkIfVersionUpdated, {
@@ -12,8 +9,8 @@ import checkIfVersionUpdated, {
 } from './utils/versionChecker';
 
 import config from '../config.json';
-
-let globalKeyboardShortcutsRegisterIds: number[] = [];
+import { setDefaultValuesSettings } from './utils/settingUtils';
+import { globalShortcuts } from './lib/globalKeyboardShortcuts';
 
 checkIfVersionUpdated();
 
@@ -32,40 +29,20 @@ if (process.env.NODE_ENV === 'development') {
 export default class {
   start() {
     Logger.info('Plugin enabled!');
+    setDefaultValuesSettings();
 
     document.addEventListener('keydown', this.keyBindHandler);
-    this.registerGlobalKeyboardShortcuts();
+    globalShortcuts.registerGlobalKeyboardShortcuts();
   }
 
   stop() {
     Logger.info('Plugin disabled!');
     document.removeEventListener('keydown', this.keyBindHandler);
-    this.unregisterAllGlobalKeyboardShortcuts();
+    globalShortcuts.unregisterAllGlobalKeyboardShortcuts();
   }
 
   getSettingsPanel() {
     return <SettingsPopup />;
-  }
-
-  ///-----Audio actions / Bot interactions-----///
-  toggleMuteClientSide() {
-    const activeBotId = getCurrentlyActiveBotId();
-
-    if (activeBotId == null) return;
-
-    DisAudioCtl.toggleLocalMute(activeBotId);
-
-    const botName: string = DisUserStore.getUser(activeBotId).username;
-
-    if (DisMediaInfo.isLocalMute(activeBotId)) {
-      UI.showToast(`⏸️ ${botName} PAUSED (Just for you)`, {
-        forceShow: true,
-      });
-    } else {
-      UI.showToast(`▶️ ${botName} RESUMED (Just for you)`, {
-        forceShow: true,
-      });
-    }
   }
 
   ///-----Misc-----///
@@ -79,6 +56,7 @@ export default class {
       case 'KeyO':
         Logger.info('ctrl alt o');
         UI.alert('Settings', <SettingsPopup />);
+
         break;
       case 'KeyL':
         // await this.openSetupDialog();
@@ -89,40 +67,6 @@ export default class {
 
       default:
         return;
-    }
-  }
-
-  registerGlobalKeyboardShortcuts() {
-    const keycodeMappings = getKeycodeMappings();
-    const toggleMuteClientSideRegisterId = Math.floor(Math.random() * 100000);
-
-    globalKeyboardShortcutsRegisterIds.push(toggleMuteClientSideRegisterId);
-
-    NativeDisUtils.inputEventRegister(
-      toggleMuteClientSideRegisterId,
-      [
-        [0, keycodeMappings.ctrl, '0:0'],
-        [0, keycodeMappings.alt, '0:0'],
-        [0, keycodeMappings.k, '0:0'],
-      ],
-      (isDown: boolean) => {
-        Logger.log(`ctrl+alt+k - isDown ${isDown}`);
-        if (isDown) {
-          this.toggleMuteClientSide();
-        }
-      },
-      {
-        blurred: true,
-        focused: true,
-        keydown: true,
-        keyup: true,
-      }
-    );
-  }
-
-  unregisterAllGlobalKeyboardShortcuts(): void {
-    for (const id of globalKeyboardShortcutsRegisterIds) {
-      NativeDisUtils.inputEventUnregister(id);
     }
   }
 }

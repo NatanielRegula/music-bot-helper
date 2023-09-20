@@ -2,7 +2,7 @@ import {
   DisSelectedChannelStore,
   DisUserStore,
   DisVoiceStateStore,
-} from '../dis/modules/stores';
+} from '../../dis/modules/stores';
 
 export function getCurrentVoiceChannelUsersIds(): Array<string> {
   const voiceStatesForCurrentVoiceChannelObject =
