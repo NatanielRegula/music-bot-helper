@@ -12,7 +12,9 @@ type LoggerType = {
   name: string;
 };
 
-const Logger: LoggerType = BdApi.findModuleByProps('logger').logger;
+const Logger: LoggerType = BdApi.Webpack.getModule(
+  BdApi.Webpack.Filters.byProps('logger')
+).logger;
 
 Logger.name = config.name;
 

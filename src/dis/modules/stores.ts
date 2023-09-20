@@ -1,12 +1,14 @@
 import BdApi from '../../utils/bdApi';
 
-export const DisVoiceStateStore = BdApi.findModuleByProps(
-  'getVoiceStateForUser',
-  'getVoiceStatesForChannel'
+export const DisVoiceStateStore = BdApi.Webpack.getModule(
+  BdApi.Webpack.Filters.byProps(
+    'getVoiceStateForUser',
+    'getVoiceStatesForChannel'
+  )
 );
 
-export const DisSelectedChannelStore = BdApi.findModuleByProps(
-  'getLastSelectedChannelId'
+export const DisSelectedChannelStore = BdApi.Webpack.getModule(
+  BdApi.Webpack.Filters.byProps('getLastSelectedChannelId')
 );
 
 type UserInfo = {
@@ -67,9 +69,8 @@ type UserStore = {
 };
 
 //guild info
-export const DisUserStore: UserStore = BdApi.findModuleByProps(
-  'getCurrentUser',
-  'getUser'
+export const DisUserStore: UserStore = BdApi.Webpack.getModule(
+  BdApi.Webpack.Filters.byProps('getCurrentUser', 'getUser')
 );
 
 /**Types are not exhaustive, only used properties are included */
@@ -77,5 +78,6 @@ type MediaInfo = {
   isLocalMute: (userId: string) => boolean;
 };
 
-export const DisMediaInfo: MediaInfo =
-  BdApi.findModuleByProps('getOutputVolume');
+export const DisMediaInfo: MediaInfo = BdApi.Webpack.getModule(
+  BdApi.Webpack.Filters.byProps('getOutputVolume')
+);
