@@ -58,12 +58,288 @@ module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusic
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SettingsPopup)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var _dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+/* harmony import */ var _dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
+/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(10);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(17);
+
+
+
+
+
+
+
+
+
+function SettingsPopup(props) {
+    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__["default"])(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__.SETTINGS_KEYS.keybindMuteAudioBotLocal, [], function () {
+        _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__.globalShortcuts.registerGlobalKeyboardShortcuts();
+    }), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
+    var _b = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.useState)(false), value = _b[0], setValue = _b[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__.DisSettingToggle, { note: 'trying to write a note is hard', onChange: function (newValue) {
+                setValue(newValue);
+            }, value: value }, "Im a label"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, "Keybinds"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, { tag: "label" }, "Mute the audio bot"),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
+                _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info(newValues);
+                setKeyCodesValue(newValues);
+            } })));
+}
+
+
+/***/ }),
+/* 4 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisHeading: () => (/* binding */ DisHeading)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisHeading = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    var _a;
+    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
+    return ((asString === null || asString === void 0 ? void 0 : asString.includes('LEGEND')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('errorId')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('h5')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('LABEL')));
+}, { searchExports: true });
+
+
+/***/ }),
+/* 5 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisKeybindRecorder: () => (/* binding */ DisKeybindRecorder)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+/**
+ * This module is not available before the user opens the settings page.
+ *  This is not ideal for performance, but also means that this is only usable inside of settings.
+ */
+var DisKeybindRecorder = function () {
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null, "Module not loaded, you have to navigate here through settings ;/"));
+};
+(function () {
+    return __awaiter(this, void 0, void 0, function () {
+        var module;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.waitForModule(function (m) {
+                        var _a;
+                        var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
+                        return ((asString === null || asString === void 0 ? void 0 : asString.includes('RECORDING')) &&
+                            (asString === null || asString === void 0 ? void 0 : asString.includes('recordStart')) &&
+                            (asString === null || asString === void 0 ? void 0 : asString.includes('handleComboKeys')));
+                    }, { searchExports: true })];
+                case 1:
+                    module = _a.sent();
+                    DisKeybindRecorder = module;
+                    return [2 /*return*/];
+            }
+        });
+    });
+})();
+
+
+/***/ }),
+/* 6 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisSettingToggle: () => (/* binding */ DisSettingToggle)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisSettingToggle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    var _a;
+    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
+    return ((asString === null || asString === void 0 ? void 0 : asString.includes('note')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('onChange')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('value')) &&
+        !(asString === null || asString === void 0 ? void 0 : asString.includes('hideDeviceSelector')));
+}, { searchExports: true });
+
+
+/***/ }),
+/* 7 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useSetting)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+
+
+function useSetting(key, defaultValue, onChange) {
+    if (key.length === 0)
+        throw new Error('Setting key cannot be empty!');
+    var state = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__.readSetting)(key, defaultValue));
+    var settingCurrentValue = state[0];
+    var isFirstRender = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
+    (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        (0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__.saveSetting)(key, settingCurrentValue);
+        onChange === null || onChange === void 0 ? void 0 : onChange();
+    }, [settingCurrentValue]);
+    return state;
+}
+
+
+/***/ }),
+/* 8 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SETTINGS_KEYS: () => (/* binding */ SETTINGS_KEYS),
+/* harmony export */   readSetting: () => (/* binding */ readSetting),
+/* harmony export */   readSettingRaw: () => (/* binding */ readSettingRaw),
+/* harmony export */   saveSetting: () => (/* binding */ saveSetting),
+/* harmony export */   setDefaultValuesSettings: () => (/* binding */ setDefaultValuesSettings)
+/* harmony export */ });
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _keycodeMappings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
+
+
+var SETTINGS_KEYS = {
+    keybindMuteAudioBotLocal: 'keybindMuteAudioBotLocal',
+};
+function readSettingRaw(key) {
+    var keyWithPrefix = "settings_".concat(key);
+    var settingValueFromData = _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load(keyWithPrefix);
+    var settingParsed = settingValueFromData != undefined
+        ? JSON.parse(settingValueFromData)
+        : undefined;
+    return settingParsed;
+}
+function readSetting(key, defaultValue) {
+    return readSettingRaw(key) || defaultValue;
+}
+function saveSetting(key, value) {
+    var keyWithPrefix = "settings_".concat(key);
+    _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save(keyWithPrefix, JSON.stringify(value));
+}
+function setDefaultValuesSettings(onlyIfNull) {
+    if (onlyIfNull === void 0) { onlyIfNull = true; }
+    Object.entries(SETTINGS_KEYS).forEach(function (_a) {
+        var _ = _a[0], settingKey = _a[1];
+        var currentValue = readSettingRaw(settingKey);
+        if (currentValue === undefined || onlyIfNull === false) {
+            switch (settingKey) {
+                case SETTINGS_KEYS.keybindMuteAudioBotLocal:
+                    var keycodeMappings = (0,_keycodeMappings__WEBPACK_IMPORTED_MODULE_1__["default"])();
+                    saveSetting(settingKey, [
+                        [0, keycodeMappings.ctrl, '0:0'],
+                        [0, keycodeMappings.alt, '0:0'],
+                        [0, keycodeMappings.k, '0:0'],
+                    ]);
+                    break;
+                default:
+                    break;
+            }
+        }
+    });
+}
+
+
+/***/ }),
+/* 9 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var linuxKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0x25; }, {
+    searchExports: true,
+});
+var windowsKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0xa2; }, {
+    searchExports: true,
+});
+var macKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0xe0; }, {
+    searchExports: true,
+});
+function getKeycodeMappings() {
+    return window.DiscordNative.process.platform === 'linux'
+        ? linuxKeycodeMappings
+        : window.DiscordNative.process.platform === 'win32'
+            ? windowsKeycodeMappings
+            : macKeycodeMappings;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getKeycodeMappings);
+
+
+/***/ }),
+/* 10 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   globalShortcuts: () => (/* binding */ globalShortcuts)
 /* harmony export */ });
-/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
-/* harmony import */ var _botController_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
+/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _botController_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
 
 
 
@@ -100,41 +376,7 @@ var globalShortcuts = new GlobalShortcuts();
 
 
 /***/ }),
-/* 4 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DisMediaInfo: () => (/* binding */ DisMediaInfo),
-/* harmony export */   DisSelectedChannelStore: () => (/* binding */ DisSelectedChannelStore),
-/* harmony export */   DisUserStore: () => (/* binding */ DisUserStore),
-/* harmony export */   DisVoiceStateStore: () => (/* binding */ DisVoiceStateStore)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-var DisVoiceStateStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getVoiceStateForUser', 'getVoiceStatesForChannel');
-var DisSelectedChannelStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getLastSelectedChannelId');
-//guild info
-var DisUserStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getCurrentUser', 'getUser');
-var DisMediaInfo = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('getOutputVolume');
-
-
-/***/ }),
-/* 5 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DisAudioCtl: () => (/* binding */ DisAudioCtl)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-//audio info
-var DisAudioCtl = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('toggleLocalMute', 'setLocalVolume');
-
-
-/***/ }),
-/* 6 */
+/* 11 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -146,143 +388,7 @@ var NativeDisUtils = window.DiscordNative.nativeModules.requireModule('discord_u
 
 
 /***/ }),
-/* 7 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ SettingsPopup)
-/* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
-/* harmony import */ var _dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-/* harmony import */ var _dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
-/* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
-/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(23);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(12);
-
-
-
-
-
-
-
-
-
-function SettingsPopup(props) {
-    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__["default"])(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__.SETTINGS_KEYS.keybindMuteAudioBotLocal, [], function () {
-        _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__.globalShortcuts.registerGlobalKeyboardShortcuts();
-    }), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
-    var _b = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.useState)(false), value = _b[0], setValue = _b[1];
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_8__["default"], null),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__.DisSettingToggle, { note: 'trying to write a note is hard', onChange: function (newValue) {
-                setValue(newValue);
-            }, value: value }, "Im a label"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, "Keybinds"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, { tag: "label" }, "Mute the audio bot"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
-                _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info(newValues);
-                setKeyCodesValue(newValues);
-            } })));
-}
-
-
-/***/ }),
-/* 8 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal),
-/* harmony export */   ConfirmationModal: () => (/* binding */ ConfirmationModal),
-/* harmony export */   Dialog: () => (/* binding */ Dialog),
-/* harmony export */   DisUiComponents: () => (/* binding */ DisUiComponents),
-/* harmony export */   Modal: () => (/* binding */ Modal),
-/* harmony export */   Modals: () => (/* binding */ Modals),
-/* harmony export */   Switch: () => (/* binding */ Switch),
-/* harmony export */   closeModal: () => (/* binding */ closeModal),
-/* harmony export */   openModal: () => (/* binding */ openModal)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('AnimatedAvatar');
-// type openModalType = (
-// child: (props: {
-//   onClose?: () => void;
-//   transitionState?: number | null;
-// }) => React.JSX.Element
-// ) => void;
-var openModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    return typeof m === 'function' &&
-        (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback')) &&
-        (m === null || m === void 0 ? void 0 : m.toString().includes('Layer'));
-}, { searchExports: true });
-var closeModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    return typeof m === 'function' && (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback()'));
-}, { searchExports: true });
-var ConfirmationModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { var _a, _b; return (_b = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m)) === null || _b === void 0 ? void 0 : _b.includes('.confirmButtonColor'); }, { searchExports: true });
-var Modal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('handleCancel', 'handleSubmit');
-var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmModal = DisUiComponents.ConfirmModal, Modals = DisUiComponents.Modals;
-//   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
-// function closeLastModal() {
-//   const lastModal = ModalsApi.useModalsStore.getState().default[0];
-//   if (!lastModal) return;
-//   ModalsApi.closeModal(lastModal.key);
-// }
-
-
-/***/ }),
-/* 9 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DisKeybindRecorder: () => (/* binding */ DisKeybindRecorder)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-/**
- * This module is not being cached because it is not available before the user opens the settings page.
- *  This is not ideal for performance, but also means that this is only usable inside of settings.
- */
-var DisKeybindRecorder = function (props) {
-    var Component = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-        var _a;
-        var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
-        return ((asString === null || asString === void 0 ? void 0 : asString.includes('RECORDING')) &&
-            (asString === null || asString === void 0 ? void 0 : asString.includes('recordStart')) &&
-            (asString === null || asString === void 0 ? void 0 : asString.includes('handleComboKeys')));
-    }, { searchExports: true });
-    /// @ts-ignore
-    return new Component(props);
-};
-
-
-/***/ }),
-/* 10 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DisSettingToggle: () => (/* binding */ DisSettingToggle)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-var DisSettingToggle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    var _a;
-    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
-    return ((asString === null || asString === void 0 ? void 0 : asString.includes('note')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('onChange')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('value')) &&
-        !(asString === null || asString === void 0 ? void 0 : asString.includes('hideDeviceSelector')));
-}, { searchExports: true });
-
-
-/***/ }),
-/* 11 */
+/* 12 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -293,20 +399,129 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 
 
-var Logger = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('logger').logger;
+var Logger = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('logger')).logger;
 Logger.name = _config_json__WEBPACK_IMPORTED_MODULE_1__.name;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logger);
 
 
 /***/ }),
-/* 12 */
+/* 13 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   botActions: () => (/* binding */ botActions)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+/* harmony import */ var _botController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
+
+
+
+
+var BotActions = /** @class */ (function () {
+    function BotActions() {
+        this.toggleMuteClientSide = this.toggleMuteClientSide.bind(this);
+    }
+    ///-----Audio actions / Bot interactions-----///
+    BotActions.prototype.toggleMuteClientSide = function () {
+        var activeBotId = (0,_botController__WEBPACK_IMPORTED_MODULE_3__.getCurrentlyActiveBotId)();
+        if (activeBotId == null)
+            return;
+        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisAudioCtl.toggleLocalMute(activeBotId);
+        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
+        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisMediaInfo.isLocalMute(activeBotId)) {
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
+                forceShow: true,
+            });
+        }
+        else {
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
+                forceShow: true,
+            });
+        }
+    };
+    return BotActions;
+}());
+var botActions = new BotActions();
+
+
+/***/ }),
+/* 14 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisAudioCtl: () => (/* binding */ DisAudioCtl)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+//audio info
+var DisAudioCtl = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('toggleLocalMute', 'setLocalVolume'));
+
+
+/***/ }),
+/* 15 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisMediaInfo: () => (/* binding */ DisMediaInfo),
+/* harmony export */   DisSelectedChannelStore: () => (/* binding */ DisSelectedChannelStore),
+/* harmony export */   DisUserStore: () => (/* binding */ DisUserStore),
+/* harmony export */   DisVoiceStateStore: () => (/* binding */ DisVoiceStateStore)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisVoiceStateStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('getVoiceStateForUser', 'getVoiceStatesForChannel'));
+var DisSelectedChannelStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('getLastSelectedChannelId'));
+//guild info
+var DisUserStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('getCurrentUser', 'getUser'));
+var DisMediaInfo = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('getOutputVolume'));
+
+
+/***/ }),
+/* 16 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCurrentVoiceChannelUsersIds: () => (/* binding */ getCurrentVoiceChannelUsersIds),
+/* harmony export */   getCurrentlyActiveBotId: () => (/* binding */ getCurrentlyActiveBotId),
+/* harmony export */   getMusicBotsInCurrentVoiceChat: () => (/* binding */ getMusicBotsInCurrentVoiceChat)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+
+function getCurrentVoiceChannelUsersIds() {
+    var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisSelectedChannelStore.getVoiceChannelId());
+    var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
+    return currentVoiceChannelUsersIds;
+}
+function getCurrentlyActiveBotId() {
+    //this will in the future allow to switch between multiple bots in vc
+    //for now it just gives the first form the list
+    var selectedBots = getMusicBotsInCurrentVoiceChat();
+    if (selectedBots.length == 0)
+        return null;
+    return selectedBots[0];
+}
+function getMusicBotsInCurrentVoiceChat() {
+    var currentVoiceChannelUsersIds = getCurrentVoiceChannelUsersIds();
+    var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisUserStore.getUser(userId).bot; });
+    return detectedBotsIds;
+}
+
+
+/***/ }),
+/* 17 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 
@@ -343,36 +558,51 @@ function EnablePluginPrompt(props) {
 
 
 /***/ }),
-/* 13 */
+/* 18 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal),
+/* harmony export */   ConfirmationModal: () => (/* binding */ ConfirmationModal),
+/* harmony export */   Dialog: () => (/* binding */ Dialog),
+/* harmony export */   DisUiComponents: () => (/* binding */ DisUiComponents),
+/* harmony export */   Modal: () => (/* binding */ Modal),
+/* harmony export */   Modals: () => (/* binding */ Modals),
+/* harmony export */   Switch: () => (/* binding */ Switch),
+/* harmony export */   closeModal: () => (/* binding */ closeModal),
+/* harmony export */   openModal: () => (/* binding */ openModal)
 /* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
-var linuxKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0x25; }, {
-    searchExports: true,
-});
-var windowsKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0xa2; }, {
-    searchExports: true,
-});
-var macKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0xe0; }, {
-    searchExports: true,
-});
-function getKeycodeMappings() {
-    return window.DiscordNative.process.platform === 'linux'
-        ? linuxKeycodeMappings
-        : window.DiscordNative.process.platform === 'win32'
-            ? windowsKeycodeMappings
-            : macKeycodeMappings;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getKeycodeMappings);
+var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('AnimatedAvatar'));
+// type openModalType = (
+// child: (props: {
+//   onClose?: () => void;
+//   transitionState?: number | null;
+// }) => React.JSX.Element
+// ) => void;
+var openModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    return typeof m === 'function' &&
+        (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback')) &&
+        (m === null || m === void 0 ? void 0 : m.toString().includes('Layer'));
+}, { searchExports: true });
+var closeModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    return typeof m === 'function' && (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback()'));
+}, { searchExports: true });
+var ConfirmationModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { var _a, _b; return (_b = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m)) === null || _b === void 0 ? void 0 : _b.includes('.confirmButtonColor'); }, { searchExports: true });
+var Modal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('handleCancel', 'handleSubmit'));
+var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmModal = DisUiComponents.ConfirmModal, Modals = DisUiComponents.Modals;
+//   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
+// function closeLastModal() {
+//   const lastModal = ModalsApi.useModalsStore.getState().default[0];
+//   if (!lastModal) return;
+//   ModalsApi.closeModal(lastModal.key);
+// }
 
 
 /***/ }),
-/* 14 */
+/* 19 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -380,7 +610,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ showSettings)
 /* harmony export */ });
 /* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
 
 
 function showModal() {
@@ -467,7 +697,7 @@ function TestChild(props) {
 
 
 /***/ }),
-/* 15 */
+/* 20 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -476,10 +706,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   showVersionUpdatedPopup: () => (/* binding */ showVersionUpdatedPopup)
 /* harmony export */ });
 /* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
-/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20);
+/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
+/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(25);
 
 
 
@@ -498,7 +728,7 @@ function showVersionUpdatedPopup() {
 
 
 /***/ }),
-/* 16 */
+/* 21 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -506,9 +736,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
-/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19);
+/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
+/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
 
 
 
@@ -542,13 +772,13 @@ function ChangeLogPopup(props) {
 
 
 /***/ }),
-/* 17 */
+/* 22 */
 /***/ ((module) => {
 
 module.exports = JSON.parse('{"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
-/* 18 */
+/* 23 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -583,14 +813,14 @@ function ChangesUlBugFixes(props) {
 
 
 /***/ }),
-/* 19 */
+/* 24 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 
@@ -627,7 +857,7 @@ function EnablePluginPrompt(props) {
 
 
 /***/ }),
-/* 20 */
+/* 25 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -658,188 +888,6 @@ function ChangeLogTopBanner() {
                     color: 'var(--text-normal)',
                 } }, "Current Version: ".concat(_config_json__WEBPACK_IMPORTED_MODULE_1__.version))),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", null, "".concat(_config_json__WEBPACK_IMPORTED_MODULE_1__.name))));
-}
-
-
-/***/ }),
-/* 21 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ useSetting)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(23);
-
-
-function useSetting(key, defaultValue, onChange) {
-    if (key.length === 0)
-        throw new Error('Setting key cannot be empty!');
-    var state = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__.readSetting)(key, defaultValue));
-    var settingCurrentValue = state[0];
-    var isFirstRender = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
-    (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
-            return;
-        }
-        (0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__.saveSetting)(key, settingCurrentValue);
-        onChange === null || onChange === void 0 ? void 0 : onChange();
-    }, [settingCurrentValue]);
-    return state;
-}
-
-
-/***/ }),
-/* 22 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DisHeading: () => (/* binding */ DisHeading)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-var DisHeading = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    var _a;
-    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
-    return ((asString === null || asString === void 0 ? void 0 : asString.includes('LEGEND')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('errorId')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('h5')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('LABEL')));
-}, { searchExports: true });
-
-
-/***/ }),
-/* 23 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   SETTINGS_KEYS: () => (/* binding */ SETTINGS_KEYS),
-/* harmony export */   readSetting: () => (/* binding */ readSetting),
-/* harmony export */   readSettingRaw: () => (/* binding */ readSettingRaw),
-/* harmony export */   saveSetting: () => (/* binding */ saveSetting),
-/* harmony export */   setDefaultValuesSettings: () => (/* binding */ setDefaultValuesSettings)
-/* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _keycodeMappings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
-
-
-var SETTINGS_KEYS = {
-    keybindMuteAudioBotLocal: 'keybindMuteAudioBotLocal',
-};
-function readSettingRaw(key) {
-    var keyWithPrefix = "settings_".concat(key);
-    var settingValueFromData = _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load(keyWithPrefix);
-    var settingParsed = settingValueFromData != undefined
-        ? JSON.parse(settingValueFromData)
-        : undefined;
-    return settingParsed;
-}
-function readSetting(key, defaultValue) {
-    return readSettingRaw(key) || defaultValue;
-}
-function saveSetting(key, value) {
-    var keyWithPrefix = "settings_".concat(key);
-    _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save(keyWithPrefix, JSON.stringify(value));
-}
-function setDefaultValuesSettings(onlyIfNull) {
-    if (onlyIfNull === void 0) { onlyIfNull = true; }
-    Object.entries(SETTINGS_KEYS).forEach(function (_a) {
-        var _ = _a[0], settingKey = _a[1];
-        var currentValue = readSettingRaw(settingKey);
-        if (currentValue === undefined || onlyIfNull === false) {
-            switch (settingKey) {
-                case SETTINGS_KEYS.keybindMuteAudioBotLocal:
-                    var keycodeMappings = (0,_keycodeMappings__WEBPACK_IMPORTED_MODULE_1__["default"])();
-                    saveSetting(settingKey, [
-                        [0, keycodeMappings.ctrl, '0:0'],
-                        [0, keycodeMappings.alt, '0:0'],
-                        [0, keycodeMappings.k, '0:0'],
-                    ]);
-                    break;
-                default:
-                    break;
-            }
-        }
-    });
-}
-
-
-/***/ }),
-/* 24 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   botActions: () => (/* binding */ botActions)
-/* harmony export */ });
-/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var _botController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
-
-
-
-
-var BotActions = /** @class */ (function () {
-    function BotActions() {
-        this.toggleMuteClientSide = this.toggleMuteClientSide.bind(this);
-    }
-    ///-----Audio actions / Bot interactions-----///
-    BotActions.prototype.toggleMuteClientSide = function () {
-        var activeBotId = (0,_botController__WEBPACK_IMPORTED_MODULE_3__.getCurrentlyActiveBotId)();
-        if (activeBotId == null)
-            return;
-        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisAudioCtl.toggleLocalMute(activeBotId);
-        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
-        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisMediaInfo.isLocalMute(activeBotId)) {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
-                forceShow: true,
-            });
-        }
-        else {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
-                forceShow: true,
-            });
-        }
-    };
-    return BotActions;
-}());
-var botActions = new BotActions();
-
-
-/***/ }),
-/* 25 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getCurrentVoiceChannelUsersIds: () => (/* binding */ getCurrentVoiceChannelUsersIds),
-/* harmony export */   getCurrentlyActiveBotId: () => (/* binding */ getCurrentlyActiveBotId),
-/* harmony export */   getMusicBotsInCurrentVoiceChat: () => (/* binding */ getMusicBotsInCurrentVoiceChat)
-/* harmony export */ });
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-
-function getCurrentVoiceChannelUsersIds() {
-    var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisSelectedChannelStore.getVoiceChannelId());
-    var currentVoiceChannelUsersIds = Object.keys(voiceStatesForCurrentVoiceChannelObject).map(function (key) { return voiceStatesForCurrentVoiceChannelObject[key].userId; });
-    return currentVoiceChannelUsersIds;
-}
-function getCurrentlyActiveBotId() {
-    //this will in the future allow to switch between multiple bots in vc
-    //for now it just gives the first form the list
-    var selectedBots = getMusicBotsInCurrentVoiceChat();
-    if (selectedBots.length == 0)
-        return null;
-    return selectedBots[0];
-}
-function getMusicBotsInCurrentVoiceChat() {
-    var currentVoiceChannelUsersIds = getCurrentVoiceChannelUsersIds();
-    var detectedBotsIds = currentVoiceChannelUsersIds.filter(function (userId) { return _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisUserStore.getUser(userId).bot; });
-    return detectedBotsIds;
 }
 
 
@@ -908,13 +956,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
-/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
-/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15);
+/* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
+/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19);
+/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(23);
-/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8);
+/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(10);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {

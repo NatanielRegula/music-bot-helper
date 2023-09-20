@@ -1,4 +1,5 @@
-import BdApi from '../../../utils/bdApi';
+import BdApi, { React } from '../../../utils/bdApi';
+import Logger from '../../../utils/logger';
 
 /** looks like this [0, 69, '0:0'] */
 export type KeyCode = Array<number | string>;
@@ -13,22 +14,27 @@ interface Props {
 }
 
 /**
- * This module is not being cached because it is not available before the user opens the settings page.
+ * This module is not available before the user opens the settings page.
  *  This is not ideal for performance, but also means that this is only usable inside of settings.
  */
-export const DisKeybindRecorder = (props: Props) => {
-  const Component: (props: Props) => React.JSX.Element =
-    BdApi.Webpack.getModule(
-      (m: any) => {
-        const asString: string | undefined = m?.toString?.();
-        return (
-          asString?.includes('RECORDING') &&
-          asString?.includes('recordStart') &&
-          asString?.includes('handleComboKeys')
-        );
-      },
-      { searchExports: true }
-    );
-  /// @ts-ignore
-  return new Component(props);
+export let DisKeybindRecorder: (props: Props) => React.JSX.Element = () => {
+  return (
+    <div>Module not loaded, you have to navigate here through settings ;/</div>
+  );
 };
+
+(async function () {
+  const module = await BdApi.Webpack.waitForModule(
+    (m: any) => {
+      const asString: string | undefined = m?.toString?.();
+      return (
+        asString?.includes('RECORDING') &&
+        asString?.includes('recordStart') &&
+        asString?.includes('handleComboKeys')
+      );
+    },
+    { searchExports: true }
+  );
+
+  DisKeybindRecorder = module;
+})();
