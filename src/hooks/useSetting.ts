@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from '../utils/bdApi';
 import { SettingsKeys, readSetting, saveSetting } from '../utils/settingUtils';
 
+interface Props<T> {
+  key: SettingsKeys;
+  defaultValue?: T;
+  onChange?: () => void;
+}
+
 export default function useSetting<T>(
   key: SettingsKeys,
-  defaultValue?: T,
-  onChange?: () => void
+  { defaultValue, onChange }: { defaultValue?: T; onChange?: () => void }
 ) {
   if (key.length === 0) throw new Error('Setting key cannot be empty!');
 

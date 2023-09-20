@@ -16,9 +16,10 @@ interface Props {}
 export default function SettingsPopup(props: Props) {
   const [keyCodesValue, setKeyCodesValue] = useSetting<KeyCode[]>(
     SETTINGS_KEYS.keybindMuteAudioBotLocal,
-    [],
-    () => {
-      globalShortcuts.registerGlobalKeyboardShortcuts();
+    {
+      onChange: () => {
+        globalShortcuts.registerGlobalKeyboardShortcuts();
+      },
     }
   );
 

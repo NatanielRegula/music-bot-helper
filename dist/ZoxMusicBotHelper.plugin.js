@@ -79,8 +79,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SettingsPopup(props) {
-    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__["default"])(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__.SETTINGS_KEYS.keybindMuteAudioBotLocal, [], function () {
-        _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__.globalShortcuts.registerGlobalKeyboardShortcuts();
+    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__["default"])(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__.SETTINGS_KEYS.keybindMuteAudioBotLocal, {
+        onChange: function () {
+            _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__.globalShortcuts.registerGlobalKeyboardShortcuts();
+        },
     }), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
     var _b = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.useState)(false), value = _b[0], setValue = _b[1];
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
@@ -224,7 +226,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 
 
-function useSetting(key, defaultValue, onChange) {
+function useSetting(key, _a) {
+    var defaultValue = _a.defaultValue, onChange = _a.onChange;
     if (key.length === 0)
         throw new Error('Setting key cannot be empty!');
     var state = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__.readSetting)(key, defaultValue));
