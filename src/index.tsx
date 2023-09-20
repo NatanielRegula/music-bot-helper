@@ -29,15 +29,23 @@ if (process.env.NODE_ENV === 'development') {
 export default class {
   start() {
     Logger.info('Plugin enabled!');
+
     setDefaultValuesSettings();
 
-    document.addEventListener('keydown', this.keyBindHandler);
+    if (process.env.NODE_ENV === 'development') {
+      document.addEventListener('keydown', this.keyBindHandler);
+    }
+
     globalShortcuts.registerGlobalKeyboardShortcuts();
   }
 
   stop() {
     Logger.info('Plugin disabled!');
-    document.removeEventListener('keydown', this.keyBindHandler);
+
+    if (process.env.NODE_ENV === 'development') {
+      document.removeEventListener('keydown', this.keyBindHandler);
+    }
+
     globalShortcuts.unregisterAllGlobalKeyboardShortcuts();
   }
 

@@ -1023,12 +1023,16 @@ var default_1 = /** @class */ (function () {
     default_1.prototype.start = function () {
         _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('Plugin enabled!');
         (0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__.setDefaultValuesSettings)();
-        document.addEventListener('keydown', this.keyBindHandler);
+        if (true) {
+            document.addEventListener('keydown', this.keyBindHandler);
+        }
         _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__.globalShortcuts.registerGlobalKeyboardShortcuts();
     };
     default_1.prototype.stop = function () {
         _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('Plugin disabled!');
-        document.removeEventListener('keydown', this.keyBindHandler);
+        if (true) {
+            document.removeEventListener('keydown', this.keyBindHandler);
+        }
         _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__.globalShortcuts.unregisterAllGlobalKeyboardShortcuts();
     };
     default_1.prototype.getSettingsPanel = function () {
