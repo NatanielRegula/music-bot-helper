@@ -1,4 +1,11 @@
 {
+    "0.0.8": {
+        "title": "0.0.8",
+        "fixed": [],
+        "feature": [
+            "Adds a way to change the default keybinds form the plugin's settings panel."
+        ]
+    },
     "0.0.7": {
         "title": "0.0.7",
         "fixed": [

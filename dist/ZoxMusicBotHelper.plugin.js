@@ -2,7 +2,7 @@
  * @name ZoxMusicBotHelper
  * @description zoxMusicBotHelper allows you to control a music bot that's in your vc.
  * @author NR
- * @version 0.0.7
+ * @version 0.0.8
  * @donate paypal.me/NatanielRegula
  * @source https://github.com/NatanielRegula/music-bot-helper/
  */
@@ -50,7 +50,7 @@ var useState = React.useState, useEffect = React.useEffect, useMemo = React.useM
 /* 2 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.7","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
+module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.8","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
 
 /***/ }),
 /* 3 */
@@ -62,14 +62,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
 /* harmony import */ var _dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
-/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(10);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(17);
-
+/* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
+/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
 
 
 
@@ -79,23 +77,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SettingsPopup(props) {
-    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_3__["default"])(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_7__.SETTINGS_KEYS.keybindMuteAudioBotLocal, {
+    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_2__["default"])(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__.SETTINGS_KEYS.keybindMuteAudioBotLocal, {
         onChange: function () {
-            _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_4__.globalShortcuts.registerGlobalKeyboardShortcuts();
+            _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_3__.globalShortcuts.registerGlobalKeyboardShortcuts();
         },
     }), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
-    var _b = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.useState)(false), value = _b[0], setValue = _b[1];
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement("div", { className: "colorStandard-1Xxp1s size12-12FL_s" },
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_8__["default"], null),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_2__.DisSettingToggle, { note: 'trying to write a note is hard', onChange: function (newValue) {
-                setValue(newValue);
-            }, value: value }, "Im a label"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, "Keybinds"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, { tag: "label" }, "Mute the audio bot"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_5__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
-                _utils_logger__WEBPACK_IMPORTED_MODULE_6__["default"].info(newValues);
-                setKeyCodesValue(newValues);
-            } })));
+    var _b = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.useState)(false), value = _b[0], setValue = _b[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", { className: " colorStandard-1Xxp1s size12-12FL_s" },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_7__["default"], null),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", { style: { paddingTop: '1rem' } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, { tag: "h1" }, "Keybinds"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", null,
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, "Mute the active audio bot"),
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
+                        _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].info(newValues);
+                        setKeyCodesValue(newValues);
+                    } }),
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", { className: "divider-3nqZNm dividerDefault-wIfHHD" })))));
 }
 
 
@@ -195,26 +193,7 @@ var DisKeybindRecorder = function () {
 
 
 /***/ }),
-/* 6 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DisSettingToggle: () => (/* binding */ DisSettingToggle)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-var DisSettingToggle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    var _a;
-    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
-    return ((asString === null || asString === void 0 ? void 0 : asString.includes('note')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('onChange')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('value')) &&
-        !(asString === null || asString === void 0 ? void 0 : asString.includes('hideDeviceSelector')));
-}, { searchExports: true });
-
-
-/***/ }),
+/* 6 */,
 /* 7 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -569,6 +548,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal),
 /* harmony export */   ConfirmationModal: () => (/* binding */ ConfirmationModal),
 /* harmony export */   Dialog: () => (/* binding */ Dialog),
+/* harmony export */   DisDivider: () => (/* binding */ DisDivider),
 /* harmony export */   DisUiComponents: () => (/* binding */ DisUiComponents),
 /* harmony export */   Modal: () => (/* binding */ Modal),
 /* harmony export */   Modals: () => (/* binding */ Modals),
@@ -595,6 +575,7 @@ var closeModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.ge
 }, { searchExports: true });
 var ConfirmationModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { var _a, _b; return (_b = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m)) === null || _b === void 0 ? void 0 : _b.includes('.confirmButtonColor'); }, { searchExports: true });
 var Modal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('handleCancel', 'handleSubmit'));
+var DisDivider = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('Divider').Divider;
 var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmModal = DisUiComponents.ConfirmModal, Modals = DisUiComponents.Modals;
 //   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
 // function closeLastModal() {
@@ -778,7 +759,7 @@ function ChangeLogPopup(props) {
 /* 22 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
+module.exports = JSON.parse('{"0.0.8":{"title":"0.0.8","fixed":[],"feature":["Adds a way to change the default keybinds form the plugin\'s settings panel."]},"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
 /* 23 */

@@ -26,9 +26,9 @@ export default function SettingsPopup(props: Props) {
   const [value, setValue] = useState(false);
 
   return (
-    <div className="colorStandard-1Xxp1s size12-12FL_s">
+    <div className=" colorStandard-1Xxp1s size12-12FL_s">
       <EnablePluginPrompt />
-      <DisSettingToggle
+      {/* <DisSettingToggle
         note={'trying to write a note is hard'}
         onChange={(newValue: boolean) => {
           setValue(newValue);
@@ -36,18 +36,23 @@ export default function SettingsPopup(props: Props) {
         value={value}
       >
         Im a label
-      </DisSettingToggle>
+      </DisSettingToggle> */}
 
-      <DisHeading>Keybinds</DisHeading>
+      <div style={{ paddingTop: '1rem' }}>
+        <DisHeading tag="h1">Keybinds</DisHeading>
 
-      <DisHeading tag="label">Mute the audio bot</DisHeading>
-      <DisKeybindRecorder
-        defaultValue={keyCodesValue}
-        onChange={(newValues) => {
-          Logger.info(newValues);
-          setKeyCodesValue(newValues);
-        }}
-      />
+        <div>
+          <DisHeading>Mute the active audio bot</DisHeading>
+          <DisKeybindRecorder
+            defaultValue={keyCodesValue}
+            onChange={(newValues) => {
+              Logger.info(newValues);
+              setKeyCodesValue(newValues);
+            }}
+          />
+          <div className="divider-3nqZNm dividerDefault-wIfHHD"></div>
+        </div>
+      </div>
     </div>
   );
 }
