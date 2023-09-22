@@ -1,4 +1,13 @@
 {
+    "0.0.9": {
+        "title": "0.0.9",
+        "fixed": [],
+        "feature": [
+            "Adds \"Increase the music bot's volume\" keybind.",
+            "Adds \"Decrease the music bot's volume\" keybind.",
+            "Adds a setting that if enabled causes ZoxMusicBotHelper to display native desktop notification alongside the in-app toasts when actions are registered. See plugin settings \"Experimental\" section."
+        ]
+    },
     "0.0.8": {
         "title": "0.0.8",
         "fixed": [],
