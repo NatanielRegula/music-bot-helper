@@ -9,7 +9,7 @@ type ObjectValues<T> = T[keyof T];
 
 export type SettingsKeys = ObjectValues<typeof SETTINGS_KEYS>;
 
-export function readSettingRaw<T>(key: SettingsKeys): T | void {
+export function readSettingRaw<T>(key: SettingsKeys): T | null {
   const keyWithPrefix = `settings_${key}`;
 
   const settingValueFromData: string | undefined = Data.load(keyWithPrefix);
