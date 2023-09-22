@@ -1,4 +1,4 @@
-import { DisAudioCtl } from '../../dis/modules/modules';
+import { DisMediaEngineController } from '../../dis/modules/modules';
 import { DisMediaEngineStore, DisUserStore } from '../../dis/modules/stores';
 import { UI } from '../../utils/bdApi';
 import { getCurrentlyActiveBotId } from './botController';
@@ -10,7 +10,7 @@ class BotActions {
 
     if (activeBotId == null) return;
 
-    DisAudioCtl.toggleLocalMute(activeBotId);
+    DisMediaEngineController.toggleLocalMute(activeBotId);
 
     const botName: string = DisUserStore.getUser(activeBotId).username;
 
