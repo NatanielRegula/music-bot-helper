@@ -3,7 +3,36 @@ import { DisMediaEngineStore, DisUserStore } from '../../dis/modules/stores';
 import { UI } from '../../utils/bdApi';
 import { getCurrentlyActiveBotId } from './botController';
 
+import config from '../../../config.json';
+import { SETTINGS_KEYS, readSettingRaw } from '../../utils/settingUtils';
+
 class BotActions {
+  private getEmojiSpeakerVolume(volume: number): string {
+    if (volume <= 20) {
+      return '🔈';
+    }
+    if (volume <= 100) {
+      return '🔉';
+    }
+    if (volume <= 200) {
+      return '🔊';
+    }
+  }
+
+  private showNotification(notificationText: string, tag: string): void {
+    UI.showToast(notificationText, {
+      forceShow: true,
+    });
+
+    if (
+      readSettingRaw<boolean>(
+        SETTINGS_KEYS.shouldShowNativeDesktopNotifications
+      )!
+    ) {
+      new Notification(notificationText, { tag: tag });
+    }
+  }
+
   ///-----Audio actions / Bot interactions-----///
   toggleMuteClientSide() {
     const activeBotId = getCurrentlyActiveBotId();
@@ -15,25 +44,15 @@ class BotActions {
     const botName: string = DisUserStore.getUser(activeBotId).username;
 
     if (DisMediaEngineStore.isLocalMute(activeBotId)) {
-      UI.showToast(`⏸️ ${botName} PAUSED (Just for you)`, {
-        forceShow: true,
-      });
+      this.showNotification(
+        `⏸️ ${botName} PAUSED (Just for you)`,
+        `bd-${config.name}-audioChange`
+      );
     } else {
-      UI.showToast(`▶️ ${botName} RESUMED (Just for you)`, {
-        forceShow: true,
-      });
-    }
-  }
-
-  private getEmojiSpeakerVolume(volume: number): string {
-    if (volume <= 20) {
-      return '🔈';
-    }
-    if (volume <= 100) {
-      return '🔉';
-    }
-    if (volume <= 200) {
-      return '🔊';
+      this.showNotification(
+        `▶️ ${botName} RESUMED (Just for you)`,
+        `bd-${config.name}-audioChange`
+      );
     }
   }
 
@@ -51,14 +70,11 @@ class BotActions {
 
     const botName: string = DisUserStore.getUser(activeBotId).username;
 
-    UI.showToast(
-      `${this.getEmojiSpeakerVolume(
-        newVolume
-      )} ${botName} VOLUME ${newVolume}%`,
-      {
-        forceShow: true,
-      }
-    );
+    const notificationText = `${this.getEmojiSpeakerVolume(
+      newVolume
+    )} ${botName} VOLUME ${newVolume}%`;
+
+    this.showNotification(notificationText, `bd-${config.name}-audioChange`);
   }
 
   increaseVolumeBy(difference: number) {

@@ -5,6 +5,8 @@ export const SETTINGS_KEYS = {
   keybindMuteAudioBotLocal: 'keybindMuteAudioBotLocal',
   keybindIncreaseVolume: 'keybindIncreaseVolume',
   keybindDecreaseVolume: 'keybindDecreaseVolume',
+
+  shouldShowNativeDesktopNotifications: 'shouldShowNativeDesktopNotifications',
 } as const;
 
 type ObjectValues<T> = T[keyof T];
@@ -61,6 +63,9 @@ export function setDefaultValuesSettings(onlyIfNull = true): void {
             [0, keycodeMappings.alt, '0:0'],
             [0, keycodeMappings['-'], '0:0'],
           ]);
+          break;
+        case SETTINGS_KEYS.shouldShowNativeDesktopNotifications:
+          saveSetting(settingKey, false);
           break;
 
         default:

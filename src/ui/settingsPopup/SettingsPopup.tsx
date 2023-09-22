@@ -1,34 +1,17 @@
+import { React } from '../../utils/bdApi';
+
 import { DisHeading } from '../../dis/modules/uiComponents/DisHeading';
-import {
-  KeyCode,
-  DisKeybindRecorder,
-} from '../../dis/modules/uiComponents/DisKeybindRecorder';
-import { DisSettingToggle } from '../../dis/modules/uiComponents/DisSettingToggle';
-import useSetting from '../../hooks/useSetting';
-import { globalShortcuts } from '../../lib/globalKeyboardShortcuts';
-import { useState, React } from '../../utils/bdApi';
-import Logger from '../../utils/logger';
 import { SETTINGS_KEYS } from '../../utils/settingUtils';
 import EnablePluginPrompt from './components/EnablePluginPrompt';
 import KeybindRecorderSetting from './components/KeybindRecorderSetting';
+import ToggleSetting from './components/ToggleSetting';
 
 interface Props {}
 
 export default function SettingsPopup(props: Props) {
-  const [value, setValue] = useState(false);
-
   return (
     <div className=" colorStandard-1Xxp1s size12-12FL_s">
       <EnablePluginPrompt />
-      {/* <DisSettingToggle
-        note={'trying to write a note is hard'}
-        onChange={(newValue: boolean) => {
-          setValue(newValue);
-        }}
-        value={value}
-      >
-        Im a label
-      </DisSettingToggle> */}
 
       <div style={{ paddingTop: '1rem' }}>
         <DisHeading tag="h1">Keybinds</DisHeading>
@@ -47,6 +30,20 @@ export default function SettingsPopup(props: Props) {
           <KeybindRecorderSetting
             settingKey={SETTINGS_KEYS.keybindDecreaseVolume}
             label={"Decrease the music bot's volume"}
+          />
+        </div>
+      </div>
+
+      <div style={{ paddingTop: '1rem' }}>
+        <DisHeading tag="h1">Experimental</DisHeading>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <ToggleSetting
+            settingKey={SETTINGS_KEYS.shouldShowNativeDesktopNotifications}
+            label={'Show Native Desktop Notifications'}
+            note={
+              'If enabled notifications such as volume changes will be displayed using your systems native notification in addition to the "Toasts" within the application.'
+            }
           />
         </div>
       </div>

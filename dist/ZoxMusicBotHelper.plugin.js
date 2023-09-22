@@ -60,26 +60,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ SettingsPopup)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
-/* harmony import */ var _components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(25);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
+/* harmony import */ var _components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
+/* harmony import */ var _components_ToggleSetting__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(27);
+
 
 
 
 
 
 function SettingsPopup(props) {
-    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.useState)(false), value = _a[0], setValue = _a[1];
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { className: " colorStandard-1Xxp1s size12-12FL_s" },
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: { paddingTop: '1rem' } },
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, { tag: "h1" }, "Keybinds"),
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '20px' } },
-                _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindMuteAudioBotLocal, label: 'Mute the active audio bot' }),
-                _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindIncreaseVolume, label: "Increase the music bot's volume" }),
-                _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindDecreaseVolume, label: "Decrease the music bot's volume" })))));
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: " colorStandard-1Xxp1s size12-12FL_s" },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { paddingTop: '1rem' } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_1__.DisHeading, { tag: "h1" }, "Keybinds"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '20px' } },
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindMuteAudioBotLocal, label: 'Mute the active audio bot' }),
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindIncreaseVolume, label: "Increase the music bot's volume" }),
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindDecreaseVolume, label: "Decrease the music bot's volume" }))),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { paddingTop: '1rem' } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_1__.DisHeading, { tag: "h1" }, "Experimental"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '20px' } },
+                _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_ToggleSetting__WEBPACK_IMPORTED_MODULE_5__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.shouldShowNativeDesktopNotifications, label: 'Show Native Desktop Notifications', note: 'If enabled notifications such as volume changes will be displayed using your systems native notification in addition to the "Toasts" within the application.' })))));
 }
 
 
@@ -105,6 +110,237 @@ var DisHeading = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.ge
 
 /***/ }),
 /* 5 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SETTINGS_KEYS: () => (/* binding */ SETTINGS_KEYS),
+/* harmony export */   readSetting: () => (/* binding */ readSetting),
+/* harmony export */   readSettingRaw: () => (/* binding */ readSettingRaw),
+/* harmony export */   saveSetting: () => (/* binding */ saveSetting),
+/* harmony export */   setDefaultValuesSettings: () => (/* binding */ setDefaultValuesSettings)
+/* harmony export */ });
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _keycodeMappings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+
+
+var SETTINGS_KEYS = {
+    keybindMuteAudioBotLocal: 'keybindMuteAudioBotLocal',
+    keybindIncreaseVolume: 'keybindIncreaseVolume',
+    keybindDecreaseVolume: 'keybindDecreaseVolume',
+    shouldShowNativeDesktopNotifications: 'shouldShowNativeDesktopNotifications',
+};
+function readSettingRaw(key) {
+    var keyWithPrefix = "settings_".concat(key);
+    var settingValueFromData = _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load(keyWithPrefix);
+    var settingParsed = settingValueFromData != undefined
+        ? JSON.parse(settingValueFromData)
+        : undefined;
+    return settingParsed;
+}
+function readSetting(key, defaultValue) {
+    return readSettingRaw(key) || defaultValue;
+}
+function saveSetting(key, value) {
+    var keyWithPrefix = "settings_".concat(key);
+    _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save(keyWithPrefix, JSON.stringify(value));
+}
+function setDefaultValuesSettings(onlyIfNull) {
+    if (onlyIfNull === void 0) { onlyIfNull = true; }
+    Object.entries(SETTINGS_KEYS).forEach(function (_a) {
+        var _ = _a[0], settingKey = _a[1];
+        var currentValue = readSettingRaw(settingKey);
+        var keycodeMappings = (0,_keycodeMappings__WEBPACK_IMPORTED_MODULE_1__["default"])();
+        if (currentValue === undefined || onlyIfNull === false) {
+            switch (settingKey) {
+                case SETTINGS_KEYS.keybindMuteAudioBotLocal:
+                    saveSetting(settingKey, [
+                        [0, keycodeMappings.ctrl, '0:0'],
+                        [0, keycodeMappings.alt, '0:0'],
+                        [0, keycodeMappings.k, '0:0'],
+                    ]);
+                    break;
+                case SETTINGS_KEYS.keybindIncreaseVolume:
+                    saveSetting(settingKey, [
+                        [0, keycodeMappings.ctrl, '0:0'],
+                        [0, keycodeMappings.alt, '0:0'],
+                        [0, keycodeMappings['='], '0:0'],
+                    ]);
+                    break;
+                case SETTINGS_KEYS.keybindDecreaseVolume:
+                    saveSetting(settingKey, [
+                        [0, keycodeMappings.ctrl, '0:0'],
+                        [0, keycodeMappings.alt, '0:0'],
+                        [0, keycodeMappings['-'], '0:0'],
+                    ]);
+                    break;
+                case SETTINGS_KEYS.shouldShowNativeDesktopNotifications:
+                    saveSetting(settingKey, false);
+                    break;
+                default:
+                    break;
+            }
+        }
+    });
+}
+
+
+/***/ }),
+/* 6 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var linuxKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0x25; }, {
+    searchExports: true,
+});
+var windowsKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0xa2; }, {
+    searchExports: true,
+});
+var macKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0xe0; }, {
+    searchExports: true,
+});
+function getKeycodeMappings() {
+    return window.DiscordNative.process.platform === 'linux'
+        ? linuxKeycodeMappings
+        : window.DiscordNative.process.platform === 'win32'
+            ? windowsKeycodeMappings
+            : macKeycodeMappings;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getKeycodeMappings);
+
+
+/***/ }),
+/* 7 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+
+
+
+function EnablePluginPrompt(props) {
+    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.useState)(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name)), isChecked = _a[0], setIsChecked = _a[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
+            border: '1px solid var(--primary-500)',
+            padding: '1rem',
+            borderRadius: '5px',
+            margin: '1rem 0 1rem 0',
+            display: 'flex',
+            flexDirection: 'column',
+        } },
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+            } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("label", { htmlFor: "enablePlugin", className: "title-2yADjX" }, "Enable the plugin"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__.Switch, { id: "enablePlugin", checked: isChecked, onChange: function (value) {
+                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.toggle(_config_json__WEBPACK_IMPORTED_MODULE_2__.name);
+                    setIsChecked(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name));
+                } })),
+        !isChecked && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: { margin: '1rem 0 0 0' } },
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("span", { style: {
+                    fontSize: ' 0.8rem',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-danger)',
+                } }, "Plugin is currently disabled!"),
+            ' '))));
+}
+
+
+/***/ }),
+/* 8 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal),
+/* harmony export */   ConfirmationModal: () => (/* binding */ ConfirmationModal),
+/* harmony export */   Dialog: () => (/* binding */ Dialog),
+/* harmony export */   DisDivider: () => (/* binding */ DisDivider),
+/* harmony export */   DisUiComponents: () => (/* binding */ DisUiComponents),
+/* harmony export */   Modal: () => (/* binding */ Modal),
+/* harmony export */   Modals: () => (/* binding */ Modals),
+/* harmony export */   Switch: () => (/* binding */ Switch),
+/* harmony export */   closeModal: () => (/* binding */ closeModal),
+/* harmony export */   openModal: () => (/* binding */ openModal)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('AnimatedAvatar'));
+// type openModalType = (
+// child: (props: {
+//   onClose?: () => void;
+//   transitionState?: number | null;
+// }) => React.JSX.Element
+// ) => void;
+var openModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    return typeof m === 'function' &&
+        (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback')) &&
+        (m === null || m === void 0 ? void 0 : m.toString().includes('Layer'));
+}, { searchExports: true });
+var closeModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    return typeof m === 'function' && (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback()'));
+}, { searchExports: true });
+var ConfirmationModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { var _a, _b; return (_b = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m)) === null || _b === void 0 ? void 0 : _b.includes('.confirmButtonColor'); }, { searchExports: true });
+var Modal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('handleCancel', 'handleSubmit'));
+var DisDivider = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('Divider').Divider;
+var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmModal = DisUiComponents.ConfirmModal, Modals = DisUiComponents.Modals;
+//   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
+// function closeLastModal() {
+//   const lastModal = ModalsApi.useModalsStore.getState().default[0];
+//   if (!lastModal) return;
+//   ModalsApi.closeModal(lastModal.key);
+// }
+
+
+/***/ }),
+/* 9 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ KeybindRecorderSetting)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var _dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
+/* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
+/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1);
+
+
+
+
+
+function KeybindRecorderSetting(props) {
+    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_2__["default"])(props.settingKey, {
+        onChange: function () {
+            var _a;
+            _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_3__.globalShortcuts.registerGlobalKeyboardShortcuts();
+            (_a = props.onChange) === null || _a === void 0 ? void 0 : _a.call(props);
+        },
+    }), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", null,
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, props.label),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
+                setKeyCodesValue(newValues);
+            } }),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", { className: "divider-3nqZNm dividerDefault-wIfHHD" })));
+}
+
+
+/***/ }),
+/* 10 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -179,7 +415,7 @@ var DisKeybindRecorder = function () {
 
 
 /***/ }),
-/* 6 */
+/* 11 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -187,7 +423,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ useSetting)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 
 
 function useSetting(key, _a) {
@@ -210,118 +446,16 @@ function useSetting(key, _a) {
 
 
 /***/ }),
-/* 7 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   SETTINGS_KEYS: () => (/* binding */ SETTINGS_KEYS),
-/* harmony export */   readSetting: () => (/* binding */ readSetting),
-/* harmony export */   readSettingRaw: () => (/* binding */ readSettingRaw),
-/* harmony export */   saveSetting: () => (/* binding */ saveSetting),
-/* harmony export */   setDefaultValuesSettings: () => (/* binding */ setDefaultValuesSettings)
-/* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _keycodeMappings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-
-
-var SETTINGS_KEYS = {
-    keybindMuteAudioBotLocal: 'keybindMuteAudioBotLocal',
-    keybindIncreaseVolume: 'keybindIncreaseVolume',
-    keybindDecreaseVolume: 'keybindDecreaseVolume',
-};
-function readSettingRaw(key) {
-    var keyWithPrefix = "settings_".concat(key);
-    var settingValueFromData = _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.load(keyWithPrefix);
-    var settingParsed = settingValueFromData != undefined
-        ? JSON.parse(settingValueFromData)
-        : undefined;
-    return settingParsed;
-}
-function readSetting(key, defaultValue) {
-    return readSettingRaw(key) || defaultValue;
-}
-function saveSetting(key, value) {
-    var keyWithPrefix = "settings_".concat(key);
-    _bdApi__WEBPACK_IMPORTED_MODULE_0__.Data.save(keyWithPrefix, JSON.stringify(value));
-}
-function setDefaultValuesSettings(onlyIfNull) {
-    if (onlyIfNull === void 0) { onlyIfNull = true; }
-    Object.entries(SETTINGS_KEYS).forEach(function (_a) {
-        var _ = _a[0], settingKey = _a[1];
-        var currentValue = readSettingRaw(settingKey);
-        var keycodeMappings = (0,_keycodeMappings__WEBPACK_IMPORTED_MODULE_1__["default"])();
-        if (currentValue === undefined || onlyIfNull === false) {
-            switch (settingKey) {
-                case SETTINGS_KEYS.keybindMuteAudioBotLocal:
-                    saveSetting(settingKey, [
-                        [0, keycodeMappings.ctrl, '0:0'],
-                        [0, keycodeMappings.alt, '0:0'],
-                        [0, keycodeMappings.k, '0:0'],
-                    ]);
-                    break;
-                case SETTINGS_KEYS.keybindIncreaseVolume:
-                    saveSetting(settingKey, [
-                        [0, keycodeMappings.ctrl, '0:0'],
-                        [0, keycodeMappings.alt, '0:0'],
-                        [0, keycodeMappings['='], '0:0'],
-                    ]);
-                    break;
-                case SETTINGS_KEYS.keybindDecreaseVolume:
-                    saveSetting(settingKey, [
-                        [0, keycodeMappings.ctrl, '0:0'],
-                        [0, keycodeMappings.alt, '0:0'],
-                        [0, keycodeMappings['-'], '0:0'],
-                    ]);
-                    break;
-                default:
-                    break;
-            }
-        }
-    });
-}
-
-
-/***/ }),
-/* 8 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-var linuxKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0x25; }, {
-    searchExports: true,
-});
-var windowsKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0xa2; }, {
-    searchExports: true,
-});
-var macKeycodeMappings = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { return m.ctrl === 0xe0; }, {
-    searchExports: true,
-});
-function getKeycodeMappings() {
-    return window.DiscordNative.process.platform === 'linux'
-        ? linuxKeycodeMappings
-        : window.DiscordNative.process.platform === 'win32'
-            ? windowsKeycodeMappings
-            : macKeycodeMappings;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getKeycodeMappings);
-
-
-/***/ }),
-/* 9 */
+/* 12 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   globalShortcuts: () => (/* binding */ globalShortcuts)
 /* harmony export */ });
-/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _botController_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
+/* harmony import */ var _dis_nativeModules_discordUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+/* harmony import */ var _botController_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 
 
 
@@ -361,7 +495,7 @@ var globalShortcuts = new GlobalShortcuts();
 
 
 /***/ }),
-/* 10 */
+/* 13 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -373,17 +507,21 @@ var NativeDisUtils = window.DiscordNative.nativeModules.requireModule('discord_u
 
 
 /***/ }),
-/* 11 */
+/* 14 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   botActions: () => (/* binding */ botActions)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+/* harmony import */ var _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(16);
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var _botController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
+/* harmony import */ var _botController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5);
+
+
 
 
 
@@ -391,24 +529,6 @@ __webpack_require__.r(__webpack_exports__);
 var BotActions = /** @class */ (function () {
     function BotActions() {
     }
-    ///-----Audio actions / Bot interactions-----///
-    BotActions.prototype.toggleMuteClientSide = function () {
-        var activeBotId = (0,_botController__WEBPACK_IMPORTED_MODULE_3__.getCurrentlyActiveBotId)();
-        if (activeBotId == null)
-            return;
-        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisMediaEngineController.toggleLocalMute(activeBotId);
-        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
-        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisMediaEngineStore.isLocalMute(activeBotId)) {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), {
-                forceShow: true,
-            });
-        }
-        else {
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), {
-                forceShow: true,
-            });
-        }
-    };
     BotActions.prototype.getEmojiSpeakerVolume = function (volume) {
         if (volume <= 20) {
             return '🔈';
@@ -420,6 +540,28 @@ var BotActions = /** @class */ (function () {
             return '🔊';
         }
     };
+    BotActions.prototype.showNotification = function (notificationText, tag) {
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast(notificationText, {
+            forceShow: true,
+        });
+        if ((0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_5__.readSettingRaw)(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_5__.SETTINGS_KEYS.shouldShowNativeDesktopNotifications)) {
+            new Notification(notificationText, { tag: tag });
+        }
+    };
+    ///-----Audio actions / Bot interactions-----///
+    BotActions.prototype.toggleMuteClientSide = function () {
+        var activeBotId = (0,_botController__WEBPACK_IMPORTED_MODULE_3__.getCurrentlyActiveBotId)();
+        if (activeBotId == null)
+            return;
+        _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisMediaEngineController.toggleLocalMute(activeBotId);
+        var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
+        if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisMediaEngineStore.isLocalMute(activeBotId)) {
+            this.showNotification("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"));
+        }
+        else {
+            this.showNotification("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"));
+        }
+    };
     BotActions.prototype.changeVolumeBy = function (difference) {
         var activeBotId = (0,_botController__WEBPACK_IMPORTED_MODULE_3__.getCurrentlyActiveBotId)();
         if (activeBotId == null)
@@ -429,9 +571,8 @@ var BotActions = /** @class */ (function () {
         var newVolume = Math.min(Math.max(currentVolume + difference, 0), 200);
         _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisMediaEngineController.setLocalVolume(activeBotId, newVolume);
         var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("".concat(this.getEmojiSpeakerVolume(newVolume), " ").concat(botName, " VOLUME ").concat(newVolume, "%"), {
-            forceShow: true,
-        });
+        var notificationText = "".concat(this.getEmojiSpeakerVolume(newVolume), " ").concat(botName, " VOLUME ").concat(newVolume, "%");
+        this.showNotification(notificationText, "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"));
     };
     BotActions.prototype.increaseVolumeBy = function (difference) {
         this.changeVolumeBy(difference);
@@ -445,7 +586,7 @@ var botActions = new BotActions();
 
 
 /***/ }),
-/* 12 */
+/* 15 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -459,7 +600,7 @@ var DisMediaEngineController = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["defaul
 
 
 /***/ }),
-/* 13 */
+/* 16 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -479,7 +620,7 @@ var DisMediaEngineStore = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].W
 
 
 /***/ }),
-/* 14 */
+/* 17 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -488,7 +629,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getCurrentlyActiveBotId: () => (/* binding */ getCurrentlyActiveBotId),
 /* harmony export */   getMusicBotsInCurrentVoiceChat: () => (/* binding */ getMusicBotsInCurrentVoiceChat)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 
 function getCurrentVoiceChannelUsersIds() {
     var voiceStatesForCurrentVoiceChannelObject = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisVoiceStateStore.getVoiceStatesForChannel(_dis_modules_stores__WEBPACK_IMPORTED_MODULE_0__.DisSelectedChannelStore.getVoiceChannelId());
@@ -511,7 +652,7 @@ function getMusicBotsInCurrentVoiceChat() {
 
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -528,97 +669,7 @@ Logger.name = _config_json__WEBPACK_IMPORTED_MODULE_1__.name;
 
 
 /***/ }),
-/* 16 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
-/* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-
-
-
-function EnablePluginPrompt(props) {
-    var _a = (0,_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.useState)(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name)), isChecked = _a[0], setIsChecked = _a[1];
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
-            border: '1px solid var(--primary-500)',
-            padding: '1rem',
-            borderRadius: '5px',
-            margin: '1rem 0 1rem 0',
-            display: 'flex',
-            flexDirection: 'column',
-        } },
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: {
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-            } },
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("label", { htmlFor: "enablePlugin", className: "title-2yADjX" }, "Enable the plugin"),
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement(_dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__.Switch, { id: "enablePlugin", checked: isChecked, onChange: function (value) {
-                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.toggle(_config_json__WEBPACK_IMPORTED_MODULE_2__.name);
-                    setIsChecked(_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_2__.name));
-                } })),
-        !isChecked && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("div", { style: { margin: '1rem 0 0 0' } },
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__.React.createElement("span", { style: {
-                    fontSize: ' 0.8rem',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-danger)',
-                } }, "Plugin is currently disabled!"),
-            ' '))));
-}
-
-
-/***/ }),
-/* 17 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal),
-/* harmony export */   ConfirmationModal: () => (/* binding */ ConfirmationModal),
-/* harmony export */   Dialog: () => (/* binding */ Dialog),
-/* harmony export */   DisDivider: () => (/* binding */ DisDivider),
-/* harmony export */   DisUiComponents: () => (/* binding */ DisUiComponents),
-/* harmony export */   Modal: () => (/* binding */ Modal),
-/* harmony export */   Modals: () => (/* binding */ Modals),
-/* harmony export */   Switch: () => (/* binding */ Switch),
-/* harmony export */   closeModal: () => (/* binding */ closeModal),
-/* harmony export */   openModal: () => (/* binding */ openModal)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('AnimatedAvatar'));
-// type openModalType = (
-// child: (props: {
-//   onClose?: () => void;
-//   transitionState?: number | null;
-// }) => React.JSX.Element
-// ) => void;
-var openModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    return typeof m === 'function' &&
-        (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback')) &&
-        (m === null || m === void 0 ? void 0 : m.toString().includes('Layer'));
-}, { searchExports: true });
-var closeModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
-    return typeof m === 'function' && (m === null || m === void 0 ? void 0 : m.toString().includes('onCloseCallback()'));
-}, { searchExports: true });
-var ConfirmationModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { var _a, _b; return (_b = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m)) === null || _b === void 0 ? void 0 : _b.includes('.confirmButtonColor'); }, { searchExports: true });
-var Modal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('handleCancel', 'handleSubmit'));
-var DisDivider = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('Divider').Divider;
-var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmModal = DisUiComponents.ConfirmModal, Modals = DisUiComponents.Modals;
-//   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
-// function closeLastModal() {
-//   const lastModal = ModalsApi.useModalsStore.getState().default[0];
-//   if (!lastModal) return;
-//   ModalsApi.closeModal(lastModal.key);
-// }
-
-
-/***/ }),
-/* 18 */
+/* 19 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -626,7 +677,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ showSettings)
 /* harmony export */ });
 /* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 
 
 function showModal() {
@@ -713,7 +764,7 @@ function TestChild(props) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -722,10 +773,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   showVersionUpdatedPopup: () => (/* binding */ showVersionUpdatedPopup)
 /* harmony export */ });
 /* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
-/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(24);
+/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
+/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(25);
 
 
 
@@ -744,7 +795,7 @@ function showVersionUpdatedPopup() {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -752,9 +803,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21);
-/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23);
+/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
+/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
 
 
 
@@ -788,13 +839,13 @@ function ChangeLogPopup(props) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ ((module) => {
 
 module.exports = JSON.parse('{"0.0.8":{"title":"0.0.8","fixed":[],"feature":["Adds a way to change the default keybinds form the plugin\'s settings panel."]},"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -829,14 +880,14 @@ function ChangesUlBugFixes(props) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EnablePluginPrompt)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
+/* harmony import */ var _dis_modules_uiComponents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 
@@ -873,7 +924,7 @@ function EnablePluginPrompt(props) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -908,37 +959,51 @@ function ChangeLogTopBanner() {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ KeybindRecorderSetting)
+/* harmony export */   DisSettingToggle: () => (/* binding */ DisSettingToggle)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var _dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisSettingToggle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
+    var _a;
+    var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
+    return ((asString === null || asString === void 0 ? void 0 : asString.includes('note')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('onChange')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('value')) &&
+        !(asString === null || asString === void 0 ? void 0 : asString.includes('hideDeviceSelector')));
+}, { searchExports: true });
+
+
+/***/ }),
+/* 27 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ToggleSetting)
+/* harmony export */ });
+/* harmony import */ var _dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26);
+/* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 
 
 
-
-
-function KeybindRecorderSetting(props) {
-    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_2__["default"])(props.settingKey, {
+function ToggleSetting(props) {
+    var _a = (0,_hooks_useSetting__WEBPACK_IMPORTED_MODULE_1__["default"])(props.settingKey, {
         onChange: function () {
             var _a;
-            _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_3__.globalShortcuts.registerGlobalKeyboardShortcuts();
             (_a = props.onChange) === null || _a === void 0 ? void 0 : _a.call(props);
         },
-    }), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", null,
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, props.label),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
-                setKeyCodesValue(newValues);
-            } }),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", { className: "divider-3nqZNm dividerDefault-wIfHHD" })));
+    }), value = _a[0], setValue = _a[1];
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.React.createElement("div", null,
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.React.createElement(_dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_0__.DisSettingToggle, { note: props.note, onChange: function (newValue) {
+                setValue(newValue);
+            }, value: value }, props.label),
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.React.createElement("div", { className: "divider-3nqZNm dividerDefault-wIfHHD" })));
 }
 
 
@@ -1008,12 +1073,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
-/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
-/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(19);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
+/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19);
+/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2);
-/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
-/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9);
+/* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5);
+/* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(12);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
