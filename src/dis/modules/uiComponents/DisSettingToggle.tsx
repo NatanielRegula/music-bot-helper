@@ -4,7 +4,7 @@ import BdApi from '../../../utils/bdApi';
 export type KeyCode = Array<number | string>;
 
 interface Props {
-  note: string;
+  note?: string;
 
   onChange: (newValue: boolean) => void;
 
