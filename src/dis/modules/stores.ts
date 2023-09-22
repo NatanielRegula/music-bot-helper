@@ -76,6 +76,7 @@ export const DisUserStore: UserStore = BdApi.Webpack.getModule(
 /**Types are not exhaustive, only used properties are included */
 type MediaEngineStore = {
   isLocalMute: (userId: string) => boolean;
+  getLocalVolume: (userId: string) => number;
 };
 
 export const DisMediaEngineStore: MediaEngineStore = BdApi.Webpack.getModule(
