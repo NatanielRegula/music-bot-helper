@@ -530,6 +530,9 @@ var BotActions = /** @class */ (function () {
     function BotActions() {
     }
     BotActions.prototype.getEmojiSpeakerVolume = function (volume) {
+        if (volume == 0) {
+            return '🔇';
+        }
         if (volume <= 20) {
             return '🔈';
         }
@@ -540,15 +543,16 @@ var BotActions = /** @class */ (function () {
             return '🔊';
         }
     };
-    BotActions.prototype.showNotification = function (notificationText, tag, botId, avatar) {
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast(notificationText, {
+    BotActions.prototype.showNotification = function (toastIcon, notificationText, tag, botName, botId, avatar) {
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("".concat(toastIcon, " ").concat(botName, " ").concat(notificationText), {
             forceShow: true,
         });
         if ((0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_5__.readSettingRaw)(_utils_settingUtils__WEBPACK_IMPORTED_MODULE_5__.SETTINGS_KEYS.shouldShowNativeDesktopNotifications)) {
-            new Notification(notificationText, {
+            new Notification("".concat(botName, " | ZoxMusicBotHelper"), {
                 tag: tag,
                 silent: true,
                 icon: "https://cdn.discordapp.com/avatars/".concat(botId, "/").concat(avatar, ".webp?size=24"),
+                body: "".concat(toastIcon, " ").concat(notificationText),
             });
         }
     };
@@ -562,10 +566,10 @@ var BotActions = /** @class */ (function () {
         var botName = botUserStore.username;
         var botAvatar = botUserStore.avatar;
         if (_dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisMediaEngineStore.isLocalMute(activeBotId)) {
-            this.showNotification("\u23F8\uFE0F ".concat(botName, " PAUSED (Just for you)"), "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"), activeBotId, botAvatar);
+            this.showNotification("\u23F8\uFE0F", "PAUSED (Just for you)", "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"), botName, activeBotId, botAvatar);
         }
         else {
-            this.showNotification("\u25B6\uFE0F ".concat(botName, " RESUMED (Just for you)"), "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"), activeBotId, botAvatar);
+            this.showNotification("\u25B6\uFE0F", "RESUMED (Just for you)", "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"), botName, activeBotId, botAvatar);
         }
     };
     BotActions.prototype.changeVolumeBy = function (difference) {
@@ -579,8 +583,11 @@ var BotActions = /** @class */ (function () {
         var botUserStore = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId);
         var botName = botUserStore.username;
         var botAvatar = botUserStore.avatar;
-        var notificationText = "".concat(this.getEmojiSpeakerVolume(newVolume), " ").concat(botName, " VOLUME ").concat(newVolume, "%");
-        this.showNotification(notificationText, "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"), activeBotId, botAvatar);
+        // const notificationText = `${this.getEmojiSpeakerVolume(
+        //   newVolume
+        // )} ${botName} VOLUME ${Math.floor(newVolume)}%`;
+        var notificationText = "VOLUME ".concat(Math.floor(newVolume), "%");
+        this.showNotification(this.getEmojiSpeakerVolume(newVolume), notificationText, "bd-".concat(_config_json__WEBPACK_IMPORTED_MODULE_4__.name, "-audioChange"), botName, activeBotId, botAvatar);
     };
     BotActions.prototype.increaseVolumeBy = function (difference) {
         this.changeVolumeBy(difference);
