@@ -29,7 +29,7 @@ class BotActions {
         SETTINGS_KEYS.shouldShowNativeDesktopNotifications
       )!
     ) {
-      new Notification(notificationText, { tag: tag });
+      new Notification(notificationText, { tag: tag, silent: true });
     }
   }
 
