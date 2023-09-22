@@ -2,7 +2,7 @@
  * @name ZoxMusicBotHelper
  * @description zoxMusicBotHelper allows you to control a music bot that's in your vc.
  * @author NR
- * @version 0.0.8
+ * @version 0.0.9
  * @donate paypal.me/NatanielRegula
  * @source https://github.com/NatanielRegula/music-bot-helper/
  */
@@ -50,7 +50,7 @@ var useState = React.useState, useEffect = React.useEffect, useMemo = React.useM
 /* 2 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.8","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
+module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.9","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
 
 /***/ }),
 /* 3 */
