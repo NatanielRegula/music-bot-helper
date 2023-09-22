@@ -429,7 +429,7 @@ var BotActions = /** @class */ (function () {
         var newVolume = Math.min(Math.max(currentVolume + difference, 0), 200);
         _dis_modules_modules__WEBPACK_IMPORTED_MODULE_0__.DisMediaEngineController.setLocalVolume(activeBotId, newVolume);
         var botName = _dis_modules_stores__WEBPACK_IMPORTED_MODULE_1__.DisUserStore.getUser(activeBotId).username;
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("".concat(this.getEmojiSpeakerVolume(newVolume), " ").concat(botName, " volume ").concat(newVolume), {
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__.UI.showToast("".concat(this.getEmojiSpeakerVolume(newVolume), " ").concat(botName, " VOLUME ").concat(newVolume, "%"), {
             forceShow: true,
         });
     };

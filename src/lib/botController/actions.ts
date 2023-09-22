@@ -52,7 +52,9 @@ class BotActions {
     const botName: string = DisUserStore.getUser(activeBotId).username;
 
     UI.showToast(
-      `${this.getEmojiSpeakerVolume(newVolume)} ${botName} volume ${newVolume}`,
+      `${this.getEmojiSpeakerVolume(
+        newVolume
+      )} ${botName} VOLUME ${newVolume}%`,
       {
         forceShow: true,
       }
