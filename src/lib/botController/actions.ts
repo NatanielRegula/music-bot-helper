@@ -19,7 +19,12 @@ class BotActions {
     }
   }
 
-  private showNotification(notificationText: string, tag: string): void {
+  private showNotification(
+    notificationText: string,
+    tag: string,
+    botId: string,
+    avatar: string
+  ): void {
     UI.showToast(notificationText, {
       forceShow: true,
     });
@@ -29,7 +34,11 @@ class BotActions {
         SETTINGS_KEYS.shouldShowNativeDesktopNotifications
       )!
     ) {
-      new Notification(notificationText, { tag: tag, silent: true });
+      new Notification(notificationText, {
+        tag: tag,
+        silent: true,
+        icon: `https://cdn.discordapp.com/avatars/${botId}/${avatar}.webp?size=24`,
+      });
     }
   }
 
@@ -41,17 +50,23 @@ class BotActions {
 
     DisMediaEngineController.toggleLocalMute(activeBotId);
 
-    const botName: string = DisUserStore.getUser(activeBotId).username;
+    const botUserStore = DisUserStore.getUser(activeBotId);
+    const botName: string = botUserStore.username;
+    const botAvatar: string = botUserStore.avatar;
 
     if (DisMediaEngineStore.isLocalMute(activeBotId)) {
       this.showNotification(
         `⏸️ ${botName} PAUSED (Just for you)`,
-        `bd-${config.name}-audioChange`
+        `bd-${config.name}-audioChange`,
+        activeBotId,
+        botAvatar
       );
     } else {
       this.showNotification(
         `▶️ ${botName} RESUMED (Just for you)`,
-        `bd-${config.name}-audioChange`
+        `bd-${config.name}-audioChange`,
+        activeBotId,
+        botAvatar
       );
     }
   }
@@ -68,13 +83,20 @@ class BotActions {
 
     DisMediaEngineController.setLocalVolume(activeBotId, newVolume);
 
-    const botName: string = DisUserStore.getUser(activeBotId).username;
+    const botUserStore = DisUserStore.getUser(activeBotId);
+    const botName: string = botUserStore.username;
+    const botAvatar: string = botUserStore.avatar;
 
     const notificationText = `${this.getEmojiSpeakerVolume(
       newVolume
     )} ${botName} VOLUME ${newVolume}%`;
 
-    this.showNotification(notificationText, `bd-${config.name}-audioChange`);
+    this.showNotification(
+      notificationText,
+      `bd-${config.name}-audioChange`,
+      activeBotId,
+      botAvatar
+    );
   }
 
   increaseVolumeBy(difference: number) {
