@@ -1,3 +1,4 @@
+import { KeyCode } from '../dis/modules/uiComponents/DisKeybindRecorder';
 import NativeDisUtils from '../dis/nativeModules/discordUtils';
 import Logger from '../utils/logger';
 import { SETTINGS_KEYS, readSettingRaw } from '../utils/settingUtils';
@@ -6,21 +7,17 @@ import { botActions } from './botController/actions';
 class GlobalShortcuts {
   registeredKeyboardShortcutsRegisterIds: number[] = [];
 
-  registerGlobalKeyboardShortcuts() {
-    this.unregisterAllGlobalKeyboardShortcuts();
-    const toggleMuteClientSideRegisterId = Math.floor(Math.random() * 100000);
+  registerKeyboardShortcut(keybind: KeyCode[], action: () => void) {
+    const keybindId = Math.floor(Math.random() * 100000);
 
-    this.registeredKeyboardShortcutsRegisterIds.push(
-      toggleMuteClientSideRegisterId
-    );
+    this.registeredKeyboardShortcutsRegisterIds.push(keybindId);
 
     NativeDisUtils.inputEventRegister(
-      toggleMuteClientSideRegisterId,
-      readSettingRaw(SETTINGS_KEYS.keybindMuteAudioBotLocal),
+      keybindId,
+      keybind,
       (isDown: boolean) => {
-        Logger.log(`ctrl+alt+k - isDown ${isDown}`);
         if (isDown) {
-          botActions.toggleMuteClientSide();
+          action();
         }
       },
       {
@@ -29,6 +26,25 @@ class GlobalShortcuts {
         keydown: true,
         keyup: true,
       }
+    );
+  }
+
+  registerGlobalKeyboardShortcuts() {
+    this.unregisterAllGlobalKeyboardShortcuts();
+
+    this.registerKeyboardShortcut(
+      readSettingRaw<KeyCode[]>(SETTINGS_KEYS.keybindMuteAudioBotLocal)!,
+      () => botActions.toggleMuteClientSide()
+    );
+
+    this.registerKeyboardShortcut(
+      readSettingRaw<KeyCode[]>(SETTINGS_KEYS.keybindIncreaseVolume)!,
+      () => botActions.increaseVolumeBy(10)
+    );
+
+    this.registerKeyboardShortcut(
+      readSettingRaw<KeyCode[]>(SETTINGS_KEYS.keybindDecreaseVolume)!,
+      () => botActions.decreaseVolumeBy(10)
     );
   }
 

@@ -24,6 +24,48 @@ class BotActions {
       });
     }
   }
+
+  private getEmojiSpeakerVolume(volume: number): string {
+    if (volume <= 20) {
+      return '🔈';
+    }
+    if (volume <= 100) {
+      return '🔉';
+    }
+    if (volume <= 200) {
+      return '🔊';
+    }
+  }
+
+  private changeVolumeBy(difference: number) {
+    const activeBotId = getCurrentlyActiveBotId();
+
+    if (activeBotId == null) return;
+
+    const currentVolume = DisMediaEngineStore.getLocalVolume(activeBotId);
+
+    // clamped value max 200, min 0
+    const newVolume = Math.min(Math.max(currentVolume + difference, 0), 200);
+
+    DisMediaEngineController.setLocalVolume(activeBotId, newVolume);
+
+    const botName: string = DisUserStore.getUser(activeBotId).username;
+
+    UI.showToast(
+      `${this.getEmojiSpeakerVolume(newVolume)} ${botName} volume ${newVolume}`,
+      {
+        forceShow: true,
+      }
+    );
+  }
+
+  increaseVolumeBy(difference: number) {
+    this.changeVolumeBy(difference);
+  }
+
+  decreaseVolumeBy(difference: number) {
+    this.changeVolumeBy(difference * -1);
+  }
 }
 
 export const botActions = new BotActions();
