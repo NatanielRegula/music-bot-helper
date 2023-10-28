@@ -1,12 +1,7 @@
 import BdApi from '../../../utils/bdApi';
 
-/** looks like this [0, 69, '0:0'] */
-export type KeyCode = Array<number | string>;
-
 interface Props {
-  note?: string;
-
-  onChange: (newValue: boolean) => void;
+  value: boolean;
 
   /** false by default */
   disabled?: boolean;
@@ -22,10 +17,13 @@ interface Props {
    */
   tooltipNote?: string;
 
-  value: boolean;
+  onChange: (newValue: boolean) => void;
 
   className?: string;
+
   style?: React.CSSProperties;
+
+  note?: string;
 
   /** label of the setting */
   children: React.JSX.Element | string;
@@ -36,10 +34,16 @@ export const DisSettingToggle: (props: Props) => React.JSX.Element =
     (m: any) => {
       const asString = m?.toString?.();
       return (
-        asString?.includes('note') &&
-        asString?.includes('onChange') &&
         asString?.includes('value') &&
-        !asString?.includes('hideDeviceSelector')
+        asString?.includes('disabled') &&
+        asString?.includes('hideBorder') &&
+        asString?.includes('tooltipNote') &&
+        asString?.includes('onChange') &&
+        asString?.includes('className') &&
+        asString?.includes('style') &&
+        asString?.includes('note') &&
+        !asString?.includes('hideDeviceSelector') &&
+        !asString?.includes('audioSubsystem')
       );
     },
     { searchExports: true }

@@ -708,10 +708,16 @@ __webpack_require__.r(__webpack_exports__);
 var DisSettingToggle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
     var _a;
     var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
-    return ((asString === null || asString === void 0 ? void 0 : asString.includes('note')) &&
+    return ((asString === null || asString === void 0 ? void 0 : asString.includes('value')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('disabled')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('hideBorder')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('tooltipNote')) &&
         (asString === null || asString === void 0 ? void 0 : asString.includes('onChange')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('value')) &&
-        !(asString === null || asString === void 0 ? void 0 : asString.includes('hideDeviceSelector')));
+        (asString === null || asString === void 0 ? void 0 : asString.includes('className')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('style')) &&
+        (asString === null || asString === void 0 ? void 0 : asString.includes('note')) &&
+        !(asString === null || asString === void 0 ? void 0 : asString.includes('hideDeviceSelector')) &&
+        !(asString === null || asString === void 0 ? void 0 : asString.includes('audioSubsystem')));
 }, { searchExports: true });
 
 
