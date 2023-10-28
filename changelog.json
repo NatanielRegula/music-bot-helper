@@ -1,4 +1,11 @@
 {
+    "0.1.0": {
+        "title": "0.1.0",
+        "fixed": [
+            "Fixed bugs in plugin settings caused by internal changes in Dis**d itself."
+        ],
+        "feature": []
+    },
     "0.0.9": {
         "title": "0.0.9",
         "fixed": [],

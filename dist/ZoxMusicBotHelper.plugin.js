@@ -2,7 +2,7 @@
  * @name ZoxMusicBotHelper
  * @description zoxMusicBotHelper allows you to control a music bot that's in your vc.
  * @author NR
- * @version 0.0.9
+ * @version 0.1.0
  * @donate paypal.me/NatanielRegula
  * @source https://github.com/NatanielRegula/music-bot-helper/
  */
@@ -50,7 +50,7 @@ var useState = React.useState, useEffect = React.useEffect, useMemo = React.useM
 /* 2 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.0.9","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
+module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.1.0","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
 
 /***/ }),
 /* 3 */
@@ -65,8 +65,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
 /* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
 /* harmony import */ var _components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _components_ToggleSetting__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(19);
-/* harmony import */ var _dis_modules_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(28);
+/* harmony import */ var _components_ToggleSetting__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(18);
+/* harmony import */ var _dis_modules_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(20);
 
 
 
@@ -79,7 +79,7 @@ function SettingsPopup(props) {
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { paddingTop: '1rem' } },
             _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_1__.DisHeading, { tag: "h1" }, "Keybinds"),
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("p", { style: { color: 'var(--text-danger)' } }, "Warning: The below value for a keybind might say [object Undefined], it is a bug in discord"),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("p", { style: { color: 'var(--text-danger)' } }, "Warning: The below value for a keybind might say [object Undefined], it is caused by a bug in BD and has to be fixed on their end."),
             _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '20px' } },
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindMuteAudioBotLocal, label: 'Mute the active audio bot' }),
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindIncreaseVolume, label: "Increase the music bot's volume" }),
@@ -675,26 +675,9 @@ function getMusicBotsInCurrentVoiceChat() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-
-
-var Logger = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('logger')).logger;
-Logger.name = _config_json__WEBPACK_IMPORTED_MODULE_1__.name;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logger);
-
-
-/***/ }),
-/* 19 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ToggleSetting)
 /* harmony export */ });
-/* harmony import */ var _dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+/* harmony import */ var _dis_modules_uiComponents_DisSettingToggle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
 /* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 
@@ -716,7 +699,7 @@ function ToggleSetting(props) {
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -742,7 +725,39 @@ var DisSettingToggle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webp
 
 
 /***/ }),
+/* 20 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DisCssClassesColor: () => (/* binding */ DisCssClassesColor),
+/* harmony export */   DisCssClassesSize: () => (/* binding */ DisCssClassesSize)
+/* harmony export */ });
+/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var DisCssClassesColor = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('colorStandard', 'colorBrand'));
+var DisCssClassesSize = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('size10', 'size12'));
+
+
+/***/ }),
 /* 21 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+
+
+var Logger = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('logger')).logger;
+Logger.name = _config_json__WEBPACK_IMPORTED_MODULE_1__.name;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logger);
+
+
+/***/ }),
+/* 22 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -837,7 +852,7 @@ function TestChild(props) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -846,10 +861,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   showVersionUpdatedPopup: () => (/* binding */ showVersionUpdatedPopup)
 /* harmony export */ });
 /* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
+/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23);
-/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(27);
+/* harmony import */ var _ui_changeLogPopup_ChangeLogPopup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
+/* harmony import */ var _ui_changeLogPopup_ChangeLogTopBanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28);
 
 
 
@@ -868,7 +883,7 @@ function showVersionUpdatedPopup() {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -876,10 +891,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
-/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(25);
-/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(26);
-/* harmony import */ var _dis_modules_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28);
+/* harmony import */ var _changelog_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
+/* harmony import */ var _components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(26);
+/* harmony import */ var _components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(27);
+/* harmony import */ var _dis_modules_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20);
 
 
 
@@ -914,13 +929,13 @@ function ChangeLogPopup(props) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"0.0.9":{"title":"0.0.9","fixed":[],"feature":["Adds \\"Increase the music bot\'s volume\\" keybind.","Adds \\"Decrease the music bot\'s volume\\" keybind.","Adds a setting that if enabled causes ZoxMusicBotHelper to display native desktop notification alongside the in-app toasts when actions are registered. See plugin settings \\"Experimental\\" section."]},"0.0.8":{"title":"0.0.8","fixed":[],"feature":["Adds a way to change the default keybinds form the plugin\'s settings panel."]},"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
+module.exports = JSON.parse('{"0.1.0":{"title":"0.1.0","fixed":["Fixed bugs in plugin settings caused by internal changes in Dis**d itself."],"feature":[]},"0.0.9":{"title":"0.0.9","fixed":[],"feature":["Adds \\"Increase the music bot\'s volume\\" keybind.","Adds \\"Decrease the music bot\'s volume\\" keybind.","Adds a setting that if enabled causes ZoxMusicBotHelper to display native desktop notification alongside the in-app toasts when actions are registered. See plugin settings \\"Experimental\\" section."]},"0.0.8":{"title":"0.0.8","fixed":[],"feature":["Adds a way to change the default keybinds form the plugin\'s settings panel."]},"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -955,7 +970,7 @@ function ChangesUlBugFixes(props) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -999,7 +1014,7 @@ function EnablePluginPrompt(props) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1031,21 +1046,6 @@ function ChangeLogTopBanner() {
                 } }, "Current Version: ".concat(_config_json__WEBPACK_IMPORTED_MODULE_1__.version))),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", null, "".concat(_config_json__WEBPACK_IMPORTED_MODULE_1__.name))));
 }
-
-
-/***/ }),
-/* 28 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DisCssClassesColor: () => (/* binding */ DisCssClassesColor),
-/* harmony export */   DisCssClassesSize: () => (/* binding */ DisCssClassesSize)
-/* harmony export */ });
-/* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-var DisCssClassesColor = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('colorStandard', 'colorBrand'));
-var DisCssClassesSize = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('size10', 'size12'));
 
 
 /***/ })
@@ -1114,9 +1114,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _ui_settingsPopup_SettingsPopup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
-/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
-/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22);
+/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
+/* harmony import */ var _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22);
+/* harmony import */ var _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23);
 /* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2);
 /* harmony import */ var _utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5);
 /* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(12);
@@ -1165,28 +1165,19 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 (0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__["default"])();
-if (true) {
-    _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].warn("Development Mode! | Enabled status: ".concat(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_5__.name)));
-    window.zoxMusicBotHelper = {};
-    window.zoxMusicBotHelper.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__["default"];
-    window.zoxMusicBotHelper.showVersionUpdatedPopup = _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__.showVersionUpdatedPopup;
-}
+if (false) {}
 var default_1 = /** @class */ (function () {
     function default_1() {
     }
     default_1.prototype.start = function () {
         _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('Plugin enabled!');
         (0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__.setDefaultValuesSettings)();
-        if (true) {
-            document.addEventListener('keydown', this.keyBindHandler);
-        }
+        if (false) {}
         _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__.globalShortcuts.registerGlobalKeyboardShortcuts();
     };
     default_1.prototype.stop = function () {
         _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('Plugin disabled!');
-        if (true) {
-            document.removeEventListener('keydown', this.keyBindHandler);
-        }
+        if (false) {}
         _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__.globalShortcuts.unregisterAllGlobalKeyboardShortcuts();
     };
     default_1.prototype.getSettingsPanel = function () {

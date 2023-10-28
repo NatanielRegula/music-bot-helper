@@ -21,7 +21,7 @@ export default function SettingsPopup(props: Props) {
 
         <p style={{ color: 'var(--text-danger)' }}>
           Warning: The below value for a keybind might say [object Undefined],
-          it is a bug in discord
+          it is caused by a bug in BD and has to be fixed on their end.
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
