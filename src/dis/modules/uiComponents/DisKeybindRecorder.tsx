@@ -1,5 +1,4 @@
 import BdApi, { React } from '../../../utils/bdApi';
-import Logger from '../../../utils/logger';
 
 /** looks like this [0, 69, '0:0'] */
 export type KeyCode = Array<number | string>;

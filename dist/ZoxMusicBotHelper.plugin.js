@@ -320,8 +320,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hooks_useSetting__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
 /* harmony import */ var _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1);
-/* harmony import */ var _utils_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(18);
-
 
 
 
@@ -335,7 +333,6 @@ function KeybindRecorderSetting(props) {
             (_a = props.onChange) === null || _a === void 0 ? void 0 : _a.call(props);
         },
     }), keyCodesValue = _a[0], setKeyCodesValue = _a[1];
-    _utils_logger__WEBPACK_IMPORTED_MODULE_5__["default"].log(keyCodesValue);
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement("div", null,
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_0__.DisHeading, null, props.label),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_4__.React.createElement(_dis_modules_uiComponents_DisKeybindRecorder__WEBPACK_IMPORTED_MODULE_1__.DisKeybindRecorder, { defaultValue: keyCodesValue, onChange: function (newValues) {
