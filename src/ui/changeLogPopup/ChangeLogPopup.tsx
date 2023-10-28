@@ -11,7 +11,7 @@ interface Props {
 function ChangeLogPopup(props: Props) {
   return (
     <div
-      className={`${DisCssClassesColor.colorStandard} ${DisCssClassesSize.size12}`}
+      className={`${DisCssClassesColor.colorStandard} ${DisCssClassesSize.size16}`}
     >
       <EnablePluginPrompt />
       <div className="content-FDHp32">

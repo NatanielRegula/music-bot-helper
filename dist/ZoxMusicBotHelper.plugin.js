@@ -75,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SettingsPopup(props) {
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "".concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_6__.DisCssClassesColor.colorStandard, " ").concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_6__.DisCssClassesSize.size12) },
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "".concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_6__.DisCssClassesColor.colorStandard, " ").concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_6__.DisCssClassesSize.size16) },
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { paddingTop: '1rem' } },
             _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_1__.DisHeading, { tag: "h1" }, "Keybinds"),
@@ -886,7 +886,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ChangeLogPopup(props) {
-    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "".concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_4__.DisCssClassesColor.colorStandard, " ").concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_4__.DisCssClassesSize.size12) },
+    return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "".concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_4__.DisCssClassesColor.colorStandard, " ").concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_4__.DisCssClassesSize.size16) },
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "content-FDHp32" }, Object.entries(_changelog_json__WEBPACK_IMPORTED_MODULE_1__).map(function (_a) {
             var key = _a[0], value = _a[1];
