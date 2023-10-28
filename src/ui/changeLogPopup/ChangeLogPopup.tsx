@@ -2,6 +2,7 @@ import { React } from '../../utils/bdApi';
 import changeLog from '../../../changelog.json';
 import { ChangesUlBugFixes, ChangesUlFeatures } from './components/ChangesUl';
 import EnablePluginPrompt from './components/EnablePluginPrompt';
+import { DisCssClassesColor, DisCssClassesSize } from '../../dis/modules/css';
 
 interface Props {
   newVersion: string;
@@ -9,7 +10,9 @@ interface Props {
 
 function ChangeLogPopup(props: Props) {
   return (
-    <div className="colorStandard-1Xxp1s size12-12FL_s">
+    <div
+      className={`${DisCssClassesColor.colorStandard} ${DisCssClassesSize.size12}`}
+    >
       <EnablePluginPrompt />
       <div className="content-FDHp32">
         {Object.entries(changeLog).map(([key, value]) => {

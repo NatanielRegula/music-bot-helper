@@ -5,16 +5,24 @@ import { SETTINGS_KEYS } from '../../utils/settingUtils';
 import EnablePluginPrompt from './components/EnablePluginPrompt';
 import KeybindRecorderSetting from './components/KeybindRecorderSetting';
 import ToggleSetting from './components/ToggleSetting';
+import { DisCssClassesColor, DisCssClassesSize } from '../../dis/modules/css';
 
 interface Props {}
 
 export default function SettingsPopup(props: Props) {
   return (
-    <div className=" colorStandard-1Xxp1s size12-12FL_s">
+    <div
+      className={`${DisCssClassesColor.colorStandard} ${DisCssClassesSize.size12}`}
+    >
       <EnablePluginPrompt />
 
       <div style={{ paddingTop: '1rem' }}>
         <DisHeading tag="h1">Keybinds</DisHeading>
+
+        <p style={{ color: 'var(--text-danger)' }}>
+          Warning: The below value for a keybind might say [object Undefined],
+          it is a bug in discord
+        </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <KeybindRecorderSetting
