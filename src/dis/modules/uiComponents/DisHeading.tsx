@@ -38,10 +38,10 @@ export const DisHeading: (props: Props) => React.JSX.Element =
     (m: any) => {
       const asString = m?.toString?.();
       return (
-        asString?.includes('LEGEND') &&
+        asString?.includes('legend') &&
         asString?.includes('errorId') &&
         asString?.includes('h5') &&
-        asString?.includes('LABEL')
+        asString?.includes('label')
       );
     },
     { searchExports: true }

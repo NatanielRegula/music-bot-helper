@@ -1,4 +1,15 @@
 {
+    "0.1.1": {
+        "title": "0.1.1",
+        "fixed": [
+            "Fixed bugs in plugin settings caused by internal changes in Dis**d itself.",
+            "Fixed visual bugs in version changelog popup caused by internal changes in Dis**d itself."
+        ],
+        "feature": [
+            "Updated the warning in the plugin settings popup to reflect more details.",
+            "Create a custom logger implementation (plugin internals | does not affect the end users)"
+        ]
+    },
     "0.1.0": {
         "title": "0.1.0",
         "fixed": [

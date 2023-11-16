@@ -18,7 +18,7 @@ export function ChangesUlFeatures(props: Props) {
           >
             &#91;Features&#93;
           </span>
-          <ul style={{ margin: '.3rem 0px 0 1.5rem' }}>
+          <ul style={{ margin: '.3rem 0px 0 1.5rem', listStyle: 'unset' }}>
             {props.changes.map((change) => {
               return <li key={change}>{change}</li>;
             })}
@@ -43,7 +43,7 @@ export function ChangesUlBugFixes(props: Props) {
           >
             &#91;Bug fixes&#93;
           </span>
-          <ul style={{ margin: '.3rem 0px 0 1.5rem' }}>
+          <ul style={{ margin: '.3rem 0px 0 1.5rem', listStyle: 'unset' }}>
             {props.changes.map((change) => {
               return <li key={change}>{change}</li>;
             })}

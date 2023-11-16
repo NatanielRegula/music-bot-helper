@@ -2,7 +2,7 @@
  * @name ZoxMusicBotHelper
  * @description zoxMusicBotHelper allows you to control a music bot that's in your vc.
  * @author NR
- * @version 0.1.0
+ * @version 0.1.1
  * @donate paypal.me/NatanielRegula
  * @source https://github.com/NatanielRegula/music-bot-helper/
  */
@@ -50,7 +50,7 @@ var useState = React.useState, useEffect = React.useEffect, useMemo = React.useM
 /* 2 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.1.0","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
+module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.1.1","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
 
 /***/ }),
 /* 3 */
@@ -79,7 +79,7 @@ function SettingsPopup(props) {
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { paddingTop: '1rem' } },
             _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_1__.DisHeading, { tag: "h1" }, "Keybinds"),
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("p", { style: { color: 'var(--text-danger)' } }, "Warning: The below value for a keybind might say [object Undefined], it is caused by a bug in BD and has to be fixed on their end."),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("p", { style: { color: 'var(--text-danger)' } }, "Warning: The below value for a keybind might say [object Undefined], it is caused by a bug in BD v1.9.5. To fix this update BD to the latest version."),
             _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '20px' } },
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindMuteAudioBotLocal, label: 'Mute the active audio bot' }),
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindIncreaseVolume, label: "Increase the music bot's volume" }),
@@ -104,10 +104,10 @@ __webpack_require__.r(__webpack_exports__);
 var DisHeading = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) {
     var _a;
     var asString = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m);
-    return ((asString === null || asString === void 0 ? void 0 : asString.includes('LEGEND')) &&
+    return ((asString === null || asString === void 0 ? void 0 : asString.includes('legend')) &&
         (asString === null || asString === void 0 ? void 0 : asString.includes('errorId')) &&
         (asString === null || asString === void 0 ? void 0 : asString.includes('h5')) &&
-        (asString === null || asString === void 0 ? void 0 : asString.includes('LABEL')));
+        (asString === null || asString === void 0 ? void 0 : asString.includes('label')));
 }, { searchExports: true });
 
 
@@ -731,12 +731,14 @@ var DisSettingToggle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webp
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DisCssClassesColor: () => (/* binding */ DisCssClassesColor),
-/* harmony export */   DisCssClassesSize: () => (/* binding */ DisCssClassesSize)
+/* harmony export */   DisCssClassesSize: () => (/* binding */ DisCssClassesSize),
+/* harmony export */   DisCssTextStyle: () => (/* binding */ DisCssTextStyle)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 var DisCssClassesColor = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('colorStandard', 'colorBrand'));
 var DisCssClassesSize = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('size10', 'size12'));
+var DisCssTextStyle = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('heading-md/semibold', 'heading-sm/semibold', 'heading-xxl/extrabold'));
 
 
 /***/ }),
@@ -745,14 +747,57 @@ var DisCssClassesSize = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Web
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LOG_LEVEL: () => (/* binding */ LOG_LEVEL),
+/* harmony export */   LoggerConstructor: () => (/* binding */ LoggerConstructor),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 
+var LOG_LEVEL = {
+    error: 'ERROR',
+    info: 'INFO',
+    log: 'LOG',
+    warn: 'WARN',
+    verbose: 'VERBOSE',
+    trace: 'TRACE',
+};
+var LoggerConstructor = /** @class */ (function () {
+    function LoggerConstructor(name) {
+        this.name = name;
+    }
+    LoggerConstructor.prototype.formatIntro = function (level) {
+        var coloredName = "\u001B[1m\u001B[95m[".concat(level, "] [").concat(this.name, "]\u001B[0m");
+        return "".concat(coloredName);
+    };
+    LoggerConstructor.prototype.error = function (error) {
+        console.error(this.formatIntro(LOG_LEVEL.error), error);
+    };
+    LoggerConstructor.prototype.info = function (info) {
+        console.info(this.formatIntro(LOG_LEVEL.info), info);
+    };
+    LoggerConstructor.prototype.log = function (log) {
+        console.log(this.formatIntro(LOG_LEVEL.log), log);
+    };
+    LoggerConstructor.prototype.warn = function (warning) {
+        console.warn(this.formatIntro(LOG_LEVEL.warn), warning);
+    };
+    LoggerConstructor.prototype.verbose = function (log) {
+        console.log(this.formatIntro(LOG_LEVEL.verbose), log);
+    };
+    LoggerConstructor.prototype.trace = function (trace) {
+        console.trace(this.formatIntro(LOG_LEVEL.trace), trace);
+    };
+    LoggerConstructor.prototype.time = function (log, timeSubject) {
+        var coloredName = "\u001B[32m[".concat(this.name, "]\u001B[0m");
+        console.time("".concat(coloredName, " ").concat(log));
+        timeSubject();
+        console.timeEnd("".concat(coloredName, " ").concat(log));
+    };
+    return LoggerConstructor;
+}());
 
-var Logger = _bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('logger')).logger;
-Logger.name = _config_json__WEBPACK_IMPORTED_MODULE_1__.name;
+var Logger = new LoggerConstructor(_config_json__WEBPACK_IMPORTED_MODULE_0__.name);
+// Logger.name = config.name;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logger);
 
 
@@ -903,7 +948,7 @@ __webpack_require__.r(__webpack_exports__);
 function ChangeLogPopup(props) {
     return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "".concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_4__.DisCssClassesColor.colorStandard, " ").concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_4__.DisCssClassesSize.size16) },
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { className: "content-FDHp32" }, Object.entries(_changelog_json__WEBPACK_IMPORTED_MODULE_1__).map(function (_a) {
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", null, Object.entries(_changelog_json__WEBPACK_IMPORTED_MODULE_1__).map(function (_a) {
             var key = _a[0], value = _a[1];
             return (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { key: key, style: {
                     padding: '1rem',
@@ -919,8 +964,8 @@ function ChangeLogPopup(props) {
                         justifyContent: 'space-between',
                         alignItems: 'flex-start',
                     } },
-                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { className: "defaultColor-1EVLSt heading-lg-semibold-14ouVv" }, value.title),
-                    value.title === props.newVersion && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { className: "defaultColor-1EVLSt" }, "New"))),
+                    _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", { className: "".concat(_dis_modules_css__WEBPACK_IMPORTED_MODULE_4__.DisCssTextStyle['heading-lg/semibold']) }, value.title),
+                    value.title === props.newVersion && _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("span", null, "New")),
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__.ChangesUlFeatures, { changes: value.feature }),
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_ChangesUl__WEBPACK_IMPORTED_MODULE_2__.ChangesUlBugFixes, { changes: value.fixed })));
         }))));
@@ -932,7 +977,7 @@ function ChangeLogPopup(props) {
 /* 25 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"0.1.0":{"title":"0.1.0","fixed":["Fixed bugs in plugin settings caused by internal changes in Dis**d itself."],"feature":[]},"0.0.9":{"title":"0.0.9","fixed":[],"feature":["Adds \\"Increase the music bot\'s volume\\" keybind.","Adds \\"Decrease the music bot\'s volume\\" keybind.","Adds a setting that if enabled causes ZoxMusicBotHelper to display native desktop notification alongside the in-app toasts when actions are registered. See plugin settings \\"Experimental\\" section."]},"0.0.8":{"title":"0.0.8","fixed":[],"feature":["Adds a way to change the default keybinds form the plugin\'s settings panel."]},"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
+module.exports = JSON.parse('{"0.1.1":{"title":"0.1.1","fixed":["Fixed bugs in plugin settings caused by internal changes in Dis**d itself.","Fixed visual bugs in version changelog popup caused by internal changes in Dis**d itself."],"feature":["Updated the warning in the plugin settings popup to reflect more details.","Create a custom logger implementation (plugin internals | does not affect the end users)"]},"0.1.0":{"title":"0.1.0","fixed":["Fixed bugs in plugin settings caused by internal changes in Dis**d itself."],"feature":[]},"0.0.9":{"title":"0.0.9","fixed":[],"feature":["Adds \\"Increase the music bot\'s volume\\" keybind.","Adds \\"Decrease the music bot\'s volume\\" keybind.","Adds a setting that if enabled causes ZoxMusicBotHelper to display native desktop notification alongside the in-app toasts when actions are registered. See plugin settings \\"Experimental\\" section."]},"0.0.8":{"title":"0.0.8","fixed":[],"feature":["Adds a way to change the default keybinds form the plugin\'s settings panel."]},"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
 /* 26 */
@@ -952,7 +997,7 @@ function ChangesUlFeatures(props) {
                 fontWeight: 600,
                 textTransform: 'uppercase',
             } }, "[Features]"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 0 1.5rem' } }, props.changes.map(function (change) {
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 0 1.5rem', listStyle: 'unset' } }, props.changes.map(function (change) {
             return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", { key: change }, change);
         }))))));
 }
@@ -963,7 +1008,7 @@ function ChangesUlBugFixes(props) {
                 fontWeight: 600,
                 textTransform: 'uppercase',
             } }, "[Bug fixes]"),
-        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 0 1.5rem' } }, props.changes.map(function (change) {
+        _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("ul", { style: { margin: '.3rem 0px 0 1.5rem', listStyle: 'unset' } }, props.changes.map(function (change) {
             return _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("li", { key: change }, change);
         }))))));
 }

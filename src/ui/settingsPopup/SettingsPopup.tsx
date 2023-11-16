@@ -21,7 +21,8 @@ export default function SettingsPopup(props: Props) {
 
         <p style={{ color: 'var(--text-danger)' }}>
           Warning: The below value for a keybind might say [object Undefined],
-          it is caused by a bug in BD and has to be fixed on their end.
+          it is caused by a bug in BD v1.9.5. To fix this update BD to the
+          latest version.
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
