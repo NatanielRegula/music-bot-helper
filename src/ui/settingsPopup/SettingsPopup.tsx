@@ -1,4 +1,4 @@
-import { React } from '../../utils/bdApi';
+import BdApi, { React } from '../../utils/bdApi';
 
 import { DisHeading } from '../../dis/modules/uiComponents/DisHeading';
 import { SETTINGS_KEYS } from '../../utils/settingUtils';
@@ -19,11 +19,13 @@ export default function SettingsPopup(props: Props) {
       <div style={{ paddingTop: '1rem' }}>
         <DisHeading tag="h1">Keybinds</DisHeading>
 
-        <p style={{ color: 'var(--text-danger)' }}>
-          Warning: The below value for a keybind might say [object Undefined],
-          it is caused by a bug in BD v1.9.5. To fix this update BD to the
-          latest version.
-        </p>
+        {BdApi.version === '1.9.5' && (
+          <p style={{ color: 'var(--text-danger)' }}>
+            Warning: The below value for a keybind might say [object Undefined],
+            it is caused by a bug in BD v1.9.5 (Your currently installed
+            version). To fix this update BD to the latest version.
+          </p>
+        )}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <KeybindRecorderSetting

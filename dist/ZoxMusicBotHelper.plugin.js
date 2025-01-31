@@ -2,7 +2,7 @@
  * @name ZoxMusicBotHelper
  * @description zoxMusicBotHelper allows you to control a music bot that's in your vc.
  * @author NR
- * @version 0.1.1
+ * @version 0.1.3
  * @donate paypal.me/NatanielRegula
  * @source https://github.com/NatanielRegula/music-bot-helper/
  */
@@ -50,7 +50,7 @@ var useState = React.useState, useEffect = React.useEffect, useMemo = React.useM
 /* 2 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.1.1","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
+module.exports = JSON.parse('{"name":"ZoxMusicBotHelper","description":"zoxMusicBotHelper allows you to control a music bot that\'s in your vc.","author":"NR","version":"0.1.3","donate":"paypal.me/NatanielRegula","source":"https://github.com/NatanielRegula/music-bot-helper/"}');
 
 /***/ }),
 /* 3 */
@@ -79,7 +79,7 @@ function SettingsPopup(props) {
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_EnablePluginPrompt__WEBPACK_IMPORTED_MODULE_3__["default"], null),
         _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { paddingTop: '1rem' } },
             _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_dis_modules_uiComponents_DisHeading__WEBPACK_IMPORTED_MODULE_1__.DisHeading, { tag: "h1" }, "Keybinds"),
-            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("p", { style: { color: 'var(--text-danger)' } }, "Warning: The below value for a keybind might say [object Undefined], it is caused by a bug in BD v1.9.5. To fix this update BD to the latest version."),
+            _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].version === '1.9.5' && (_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("p", { style: { color: 'var(--text-danger)' } }, "Warning: The below value for a keybind might say [object Undefined], it is caused by a bug in BD v1.9.5 (Your currently installed version). To fix this update BD to the latest version.")),
             _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '20px' } },
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindMuteAudioBotLocal, label: 'Mute the active audio bot' }),
                 _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__.React.createElement(_components_KeybindRecorderSetting__WEBPACK_IMPORTED_MODULE_4__["default"], { settingKey: _utils_settingUtils__WEBPACK_IMPORTED_MODULE_2__.SETTINGS_KEYS.keybindIncreaseVolume, label: "Increase the music bot's volume" }),
@@ -267,20 +267,16 @@ function EnablePluginPrompt(props) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal),
 /* harmony export */   ConfirmationModal: () => (/* binding */ ConfirmationModal),
 /* harmony export */   Dialog: () => (/* binding */ Dialog),
 /* harmony export */   DisDivider: () => (/* binding */ DisDivider),
-/* harmony export */   DisUiComponents: () => (/* binding */ DisUiComponents),
 /* harmony export */   Modal: () => (/* binding */ Modal),
-/* harmony export */   Modals: () => (/* binding */ Modals),
 /* harmony export */   Switch: () => (/* binding */ Switch),
 /* harmony export */   closeModal: () => (/* binding */ closeModal),
 /* harmony export */   openModal: () => (/* binding */ openModal)
 /* harmony export */ });
 /* harmony import */ var _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
-var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('AnimatedAvatar'));
 // type openModalType = (
 // child: (props: {
 //   onClose?: () => void;
@@ -298,13 +294,12 @@ var closeModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.ge
 var ConfirmationModal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(function (m) { var _a, _b; return (_b = (_a = m === null || m === void 0 ? void 0 : m.toString) === null || _a === void 0 ? void 0 : _a.call(m)) === null || _b === void 0 ? void 0 : _b.includes('.confirmButtonColor'); }, { searchExports: true });
 var Modal = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getModule(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.Filters.byProps('handleCancel', 'handleSubmit'));
 var DisDivider = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].findModuleByProps('Divider').Divider;
-var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog, ConfirmModal = DisUiComponents.ConfirmModal, Modals = DisUiComponents.Modals;
-//   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
-// function closeLastModal() {
-//   const lastModal = ModalsApi.useModalsStore.getState().default[0];
-//   if (!lastModal) return;
-//   ModalsApi.closeModal(lastModal.key);
-// }
+// export const Switch = BdApi.Webpack.getModule
+var DisUiComponents = _utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Webpack.getMangled(/ConfirmModal:\(\)=>.{1,3}.ConfirmModal/, {
+    Switch: function (x) { var _a; return (_a = x.toString) === null || _a === void 0 ? void 0 : _a.call(x).includes('REDESIGN_INPUT_CONTROL_SELECTED'); },
+    Dialog: function (x) { var _a; return (_a = x.toString) === null || _a === void 0 ? void 0 : _a.call(x).includes('role:"dialog",tabIndex:-1'); },
+}, { all: true });
+var Switch = DisUiComponents.Switch, Dialog = DisUiComponents.Dialog;
 
 
 /***/ }),
@@ -977,7 +972,7 @@ function ChangeLogPopup(props) {
 /* 25 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"0.1.1":{"title":"0.1.1","fixed":["Fixed bugs in plugin settings caused by internal changes in Dis**d itself.","Fixed visual bugs in version changelog popup caused by internal changes in Dis**d itself."],"feature":["Updated the warning in the plugin settings popup to reflect more details.","Create a custom logger implementation (plugin internals | does not affect the end users)"]},"0.1.0":{"title":"0.1.0","fixed":["Fixed bugs in plugin settings caused by internal changes in Dis**d itself."],"feature":[]},"0.0.9":{"title":"0.0.9","fixed":[],"feature":["Adds \\"Increase the music bot\'s volume\\" keybind.","Adds \\"Decrease the music bot\'s volume\\" keybind.","Adds a setting that if enabled causes ZoxMusicBotHelper to display native desktop notification alongside the in-app toasts when actions are registered. See plugin settings \\"Experimental\\" section."]},"0.0.8":{"title":"0.0.8","fixed":[],"feature":["Adds a way to change the default keybinds form the plugin\'s settings panel."]},"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
+module.exports = JSON.parse('{"0.1.3":{"title":"0.1.3","fixed":["Fix plugin crash (Di**rd updates)"],"feature":[]},"0.1.2":{"title":"0.1.2","fixed":[],"feature":["Warning in the plugin settings will now only be display to users running BD version 1.9.5 (the affected version)."]},"0.1.1":{"title":"0.1.1","fixed":["Fixed bugs in plugin settings caused by internal changes in Dis**d itself.","Fixed visual bugs in version changelog popup caused by internal changes in Dis**d itself."],"feature":["Updated the warning in the plugin settings popup to reflect more details.","Create a custom logger implementation (plugin internals | does not affect the end users)"]},"0.1.0":{"title":"0.1.0","fixed":["Fixed bugs in plugin settings caused by internal changes in Dis**d itself."],"feature":[]},"0.0.9":{"title":"0.0.9","fixed":[],"feature":["Adds \\"Increase the music bot\'s volume\\" keybind.","Adds \\"Decrease the music bot\'s volume\\" keybind.","Adds a setting that if enabled causes ZoxMusicBotHelper to display native desktop notification alongside the in-app toasts when actions are registered. See plugin settings \\"Experimental\\" section."]},"0.0.8":{"title":"0.0.8","fixed":[],"feature":["Adds a way to change the default keybinds form the plugin\'s settings panel."]},"0.0.7":{"title":"0.0.7","fixed":["Fixed meta data not being included properly."],"feature":["Added source and donate links to meta"]},"0.0.6":{"title":"0.0.6","fixed":[],"feature":["Adds changelog back."]},"0.0.5":{"title":"0.0.5","fixed":[],"feature":["New version with new codebase."]},"0.0.4":{"title":"0.0.4","fixed":[],"feature":["feature toast messages."]},"0.0.3":{"title":"0.0.3","fixed":["Fixed bugs"],"feature":[]},"0.0.2":{"title":"0.0.2","fixed":[],"feature":["Added toast message when bot muted or unmuted with the keybind"]}}');
 
 /***/ }),
 /* 26 */
@@ -1210,19 +1205,28 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 (0,_utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__["default"])();
-if (false) {}
+if (true) {
+    _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].warn("Development Mode! | Enabled status: ".concat(_utils_bdApi__WEBPACK_IMPORTED_MODULE_0__["default"].Plugins.isEnabled(_config_json__WEBPACK_IMPORTED_MODULE_5__.name)));
+    window.zoxMusicBotHelper = {};
+    window.zoxMusicBotHelper.showSettings = _utils_showSettings__WEBPACK_IMPORTED_MODULE_3__["default"];
+    window.zoxMusicBotHelper.showVersionUpdatedPopup = _utils_versionChecker__WEBPACK_IMPORTED_MODULE_4__.showVersionUpdatedPopup;
+}
 var default_1 = /** @class */ (function () {
     function default_1() {
     }
     default_1.prototype.start = function () {
         _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('Plugin enabled!');
         (0,_utils_settingUtils__WEBPACK_IMPORTED_MODULE_6__.setDefaultValuesSettings)();
-        if (false) {}
+        if (true) {
+            document.addEventListener('keydown', this.keyBindHandler);
+        }
         _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__.globalShortcuts.registerGlobalKeyboardShortcuts();
     };
     default_1.prototype.stop = function () {
         _utils_logger__WEBPACK_IMPORTED_MODULE_2__["default"].info('Plugin disabled!');
-        if (false) {}
+        if (true) {
+            document.removeEventListener('keydown', this.keyBindHandler);
+        }
         _lib_globalKeyboardShortcuts__WEBPACK_IMPORTED_MODULE_7__.globalShortcuts.unregisterAllGlobalKeyboardShortcuts();
     };
     default_1.prototype.getSettingsPanel = function () {
