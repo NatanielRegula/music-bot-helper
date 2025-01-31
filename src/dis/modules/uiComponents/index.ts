@@ -1,9 +1,5 @@
 import BdApi from '../../../utils/bdApi';
 
-export const DisUiComponents = BdApi.Webpack.getModule(
-  BdApi.Webpack.Filters.byProps('AnimatedAvatar')
-);
-
 // get ModalActions() {
 // return {
 //         openModal: _webpackmodules__WEBPACK_IMPORTED_MODULE_1__["default"].getModule(m => typeof(m) === "function" && m?.toString().includes("onCloseCallback") && m?.toString().includes("Layer"), {searchExports: true}),
@@ -49,14 +45,17 @@ export const Modal = BdApi.Webpack.getModule(
 
 export const DisDivider = BdApi.findModuleByProps('Divider').Divider;
 
-export const { Switch, Dialog, ConfirmModal, Modals } = DisUiComponents;
+// export const Switch = BdApi.Webpack.getModule
 
-//   const ModalsApi = BdApi.findModuleByProps("useModalsStore", "closeModal");
+const DisUiComponents = BdApi.Webpack.getMangled(
+  /ConfirmModal:\(\)=>.{1,3}.ConfirmModal/,
+  {
+    Switch: (x: unknown) =>
+      x.toString?.().includes('REDESIGN_INPUT_CONTROL_SELECTED'),
+    Dialog: (x: unknown) =>
+      x.toString?.().includes('role:"dialog",tabIndex:-1'),
+  },
+  { all: true }
+);
 
-// function closeLastModal() {
-//   const lastModal = ModalsApi.useModalsStore.getState().default[0];
-
-//   if (!lastModal) return;
-
-//   ModalsApi.closeModal(lastModal.key);
-// }
+export const { Switch, Dialog } = DisUiComponents;

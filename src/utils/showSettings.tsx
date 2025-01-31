@@ -1,14 +1,5 @@
-import BdApi, { Data, React } from './bdApi';
-import Logger from './logger';
-import config from '../../config.json';
-import {
-  ConfirmModal,
-  ConfirmationModal,
-  Dialog,
-  Modal,
-  Modals,
-  openModal,
-} from '../dis/modules/uiComponents';
+import { React } from './bdApi';
+import { openModal } from '../dis/modules/uiComponents';
 
 function showModal() {
   //   openModal(({onClose:() => {}}) => {
